@@ -1,6 +1,6 @@
 CREATE DATABASE OnlineRetailStore;
 USE OnlineRetailStore;
--- Created cutomer table--
+-- Creating cutomer table--
 CREATE TABLE customer(
 	CustID INT NOT NULL auto_increment,
     CustName VARCHAR(90),
