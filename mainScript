@@ -1,3 +1,29 @@
+-- from faker import Faker
+-- import random
+
+-- fake = Faker()
+
+-- def generate_tuple():
+--     cust_name = fake.name()
+--     phone_number = fake.phone_number()
+--     email_address = fake.email()
+--     cust_addr = fake.address()
+--     saved_payment_method = random.choice(['Visa', 'Mastercard', 'PayPal'])
+--     cust_membership = random.choice(['Silver', 'Gold', 'Platinum'])
+--     return (cust_name, phone_number, email_address, cust_addr, saved_payment_method, cust_membership)
+
+-- tuples = [generate_tuple() for i in range(100)]
+
+-- for t in tuples:
+--     print("('{}', '{}', '{}', '{}', '{}', '{}'),".format(*t))
+
+
+
+
+
+
+
+
 CREATE DATABASE OnlineRetailStore;
 USE OnlineRetailStore;
 -- Creating cutomer table--
