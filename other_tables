@@ -1,0 +1,270 @@
+create database OnlineRetailStore;
+use OnlineRetailStore;
+
+drop table Orders;
+
+CREATE TABLE Product (
+  ProductID INT PRIMARY KEY,
+  ProductName VARCHAR(255) NOT NULL,
+  ProductBrand VARCHAR(255) NOT NULL,
+  ProductReviews INT,
+  ProductDescription TEXT,
+  ProductPrice DECIMAL(10,2) NOT NULL
+);
+create table coupons(
+	coupon_id INT NOT NULL auto_increment primary key,
+    coupon_discount INT NOT NULL,
+    expiry_date date NOT NULL
+    );
+
+create table Order_details(
+	tracking_id INT NOT NULL primary key,
+    shipper_name varchar(80) NOT NULL,
+    location varchar(90) NOT NULL,
+    expected_delivery_date date NOT NULL
+    );
+create table Orders(
+	order_id INT NOT NULL auto_increment primary key,
+    order_date_time datetime default now(),
+    delivery_address varchar(90) NOT NULL,
+    order_status varchar(50) NOT NULL,
+    order_amount INT NOT NULL,
+    payment_mode varchar(50) NOT NULL,
+    coupon_id INT,
+    tracking_id INT NOT NULL,
+    foreign key(coupon_id) references coupons(coupon_id),
+    foreign key(tracking_id) references Order_details(tracking_id)
+    );
+insert into Orders values(1,"abcd","xyz",123,"asd",NULL,123);
+insert into Order_details values(123,"sdfgh","esrdtfyghu",'2022-12-01');
+    
+create table Seller(
+	seller_id INT NOT NULL auto_increment primary key,
+    seller_name varchar(70) NOT NULL,
+    seller_address varchar(90) NOT NULL
+    );
+    
+
+    
+create table Cart(
+	item_no INT NOT NULL auto_increment,
+    ProductID INT NOT NULL,
+    product_name varchar(255) NOT NULL,
+    product_quantity INT NOT NULL,
+    cost INT NOT NULL,
+    foreign key(ProductID) references Product(ProductID)
+    );
+
+create table WishList(
+	item_no INT NOT NULL,
+    ProductID INT NOT NULL,
+    product_name varchar(255) NOT NULL,
+    foreign key(ProductID) references Product(ProductID)
+    );
+    
+    
+    
+    
+    
+    
+    
+insert into Seller(seller_name,seller_address) values('Crystal Murray', '7318 West Brooks Apt. 514
+Mcmahonland, DE 09309'),
+('Derek Roman', '00883 Hendrix Mission Apt. 316
+West Davidview, PR 53806'),
+('Cody Leon', '5574 Wagner Mission Apt. 067
+Bakerberg, IL 60094'),
+('Kendra Arroyo', '157 Kyle Field
+West Danielle, IA 71349'),
+('Kenneth Johnson', '2843 Butler Extensions Suite 952
+Thomasville, TN 92987'),
+('William Jackson', '8322 Branch Viaduct
+Lestertown, MT 85244'),
+('Allison Jones', '877 Morgan Radial Suite 568
+Lake Michele, WA 95810'),
+('Alyssa Mitchell', '069 Sarah Gardens Suite 991
+East Roberta, WI 40539'),
+('Patricia Mccullough', '667 Robin Coves
+East Marie, NC 92814'),
+('Ryan Ramirez', '8784 Sweeney Rapid Suite 058
+Lake Jamesport, AK 42824'),
+('Melissa Perez', '5426 Brianna Gateway Apt. 563
+Hollandfurt, MH 20298'),
+('Mike Sanchez', 'Unit 6900 Box 3390
+DPO AE 87534'),
+('Jordan Shea', 'PSC 4503, Box 6397
+APO AA 83404'),
+('John Rogers', '4951 Bryant Trafficway Suite 811
+North Bradleyfurt, AK 67620'),
+('William Potts', '6604 David Ferry
+Perezshire, NJ 58871'),
+('Wyatt Noble', 'USS Turner
+FPO AP 50724'),
+('Catherine Braun', '23235 Angela Manors
+Patelton, SC 61186'),
+('Sandra Gilbert', '158 Collier Crossroad Apt. 060
+Jillbury, GU 47776'),
+('Mario Randolph', '2287 Moore Crossroad
+Mccoystad, ND 94686'),
+('Jody Lowery', '2055 Allen View Suite 516
+Jacksonport, NJ 91294'),
+('Christopher Thompson', '0808 Jason Loaf
+East Jeffreyfurt, AR 72696'),
+('Robert Rodriguez', '913 Dunn Mountains
+South Christopherton, ME 54454'),
+('Susan Rodriguez', '21033 Angela Common
+Tranfurt, UT 32612'),
+('Stephanie Park', '194 Peterson Passage
+North Justin, VI 27100'),
+('Helen Mcdowell', 'PSC 9047, Box 3239
+APO AA 19627'),
+('Patricia Carter', '70855 Poole Parkways
+East Meganburgh, VA 21099'),
+('Kyle Allen', 'PSC 6470, Box 8364
+APO AE 53395'),
+('Todd Washington', '69085 Melissa Rapids Suite 213
+Stanleyfurt, MS 81624'),
+('Micheal Koch', '6089 Estrada Stravenue Suite 923
+South Charlesstad, ND 43838'),
+('Benjamin Kaufman', '72538 Samuel Islands Suite 157
+Woodardstad, CA 53244'),
+('Amy Mcmillan', '7154 Wilson Circle Apt. 225
+Normaville, WV 96477'),
+('Sheri Jackson', '305 Candace Neck
+Adamsberg, WI 49106'),
+('Ethan Maldonado', '63167 Jacqueline Creek
+Lake Richard, PW 49217'),
+('John Rodgers', '8226 Daniel Summit
+West Rachelland, VA 12175'),
+('Mrs. Kimberly Phillips', '427 Rose Ways Apt. 415
+Sharonmouth, AL 59316'),
+('Kristie Hughes', '758 Shaw Islands Apt. 752
+West Nicole, MS 14402'),
+('Marissa Jimenez', '660 Jackie Vista
+South Deborahview, WA 55364'),
+('Carmen Thomas', '5241 Madeline Cliffs Suite 974
+Jonesfort, MS 12182'),
+('Joseph Green', '613 Tony Garden Apt. 913
+Johnsonport, AS 97393'),
+('Anthony Cooper PhD', '77943 Aaron Island Apt. 753
+Katelynmouth, GA 57972'),
+('Elizabeth Ortiz', '509 Archer Field Suite 834
+North Kevinburgh, AZ 06561'),
+('Andrew Newman', '024 Jennifer Radial Suite 241
+Mistyville, MA 43356'),
+('Peter Hall', '9455 Michael Roads
+South Barbara, WI 37046'),
+('Cheryl Griffin', '924 Theresa Greens Apt. 847
+Brianville, AK 40402'),
+('James Thomas', 'USCGC Haley
+FPO AA 76596'),
+('Lisa Lopez', '272 Bradley Mill
+Brownmouth, ME 14705'),
+('Angela Kelley', '153 Lauren Alley Suite 181
+Port Timothy, AS 12684'),
+('James Wade', '55674 Benson Square
+South Gloria, FL 75795'),
+('John Barnes', '445 Case Canyon
+North Tracy, SD 20681'),
+('Dennis Mccormick', '285 Miranda Points
+West Caitlyn, OK 98244'),
+('Audrey Gonzales', '78582 Amanda Green
+New Robertbury, FL 72148'),
+('Jacob Harris DDS', '134 Melissa Stravenue
+East James, OK 09852'),
+('Mrs. Margaret Myers', '931 Laura Dam Apt. 371
+Maxtown, IN 83008'),
+('Daniel Berry', '4779 Donna Crest Suite 343
+Port Travis, LA 68827'),
+('Christopher Walton', '22553 Donna Way Suite 658
+Webbberg, ID 29291'),
+('David Salas', '4521 Edgar Wells Apt. 577
+Karenton, AL 06432'),
+('Shelly Lewis', 'USNS Wong
+FPO AP 05165'),
+('Amy Griffith', '56407 Kristin Terrace Suite 866
+Hamptonstad, HI 84947'),
+('Renee Crawford', '1018 Craig Prairie
+Thomasville, PW 89895'),
+('Jennifer Lane', '4964 Lisa Parkway
+Davidmouth, NJ 67263'),
+('Denise Hernandez', '406 Dale Plains Apt. 018
+North Lisahaven, CO 12417'),
+('Susan Patel', '603 Montes Road
+West Kylechester, IA 09693'),
+('Timothy Martin', '523 Medina Circles
+Port Maryhaven, MN 66313'),
+('Kenneth May', '732 Morris Loaf Apt. 009
+Garnerfort, VA 48720'),
+('Mrs. Erica Peterson', 'Unit 6767 Box 7248
+DPO AA 32485'),
+('Frank Thomas', '64068 Hendricks Heights Apt. 402
+Gonzalezville, GA 95692'),
+('Seth Carter', '22303 Dennis Villages Suite 653
+Sharptown, WI 86115'),
+('Gregory Ho', '750 Thompson Streets
+Howellshire, VA 76793'),
+('Juan Arias', '1087 Jerome Mall
+Manningside, PW 39575'),
+('Adrian Holland', '768 Chad Harbor
+East Destinyville, OH 05480'),
+('Emily Shields', '3206 Michael Valleys Suite 917
+North Angelaberg, MH 81438'),
+('Anita Wilson', '3264 Joshua Stream Suite 011
+North Derek, WY 26188'),
+('Mrs. Misty Hendricks', '8584 Schmitt Hollow Apt. 300
+Port Sarah, VI 21789'),
+('Alexis Lyons', '86964 Todd Court
+West Matthewmouth, NE 08262'),
+('Vanessa Kelly', '756 Timothy Estate
+Donnaport, SD 43964'),
+('John Jimenez', '039 Waller Junction Apt. 271
+North Pamelaside, IL 31170'),
+('Elizabeth Fox', '0622 Donna Loaf
+North Paige, TX 75610'),
+('Shawn Andersen', '7257 Claudia Forges Suite 478
+Port Kathleenton, KY 44683'),
+('Elaine Combs', '36923 Alexander Village
+Carrstad, OR 15199'),
+('Elizabeth Pierce', '22422 Michael Place
+Port Jaclynhaven, OR 81509'),
+('Patricia Walls', '271 Shelton Heights
+North Melissa, OH 86150'),
+('Nancy Johnson', '9464 Mccormick Drive
+South Tracey, SC 94888'),
+('Kenneth Evans', '90255 Fox Lodge Suite 339
+Lake Donald, OH 38268'),
+('James Martin', '9673 Wilson Place
+Ashleychester, TX 45791'),
+('Michael Anderson', '273 Scott Cove Apt. 449
+West Joseph, GA 16216'),
+('Eric Rodriguez', 'USS Rodriguez
+FPO AE 73431'),
+('Jessica White', '9795 Jared Flat Suite 980
+New Brittanyside, IL 76485'),
+('Marvin Ho', '7860 Jackson Manor Suite 090
+Parsonsland, AK 32610'),
+('Paul Yu', '703 Morris Center Suite 873
+North Rodneyport, NM 90364'),
+('Donna Jones', '55979 Tammy Course
+Brownhaven, GU 64445'),
+('Desiree Stewart', '21403 Christopher Highway
+Longstad, DE 72199'),
+('Nicholas Poole', '775 Dustin Well Apt. 614
+Nguyenborough, MI 60712'),
+('Alyssa Mendoza', '32512 Jacqueline Garden Apt. 654
+Peterport, MI 09681'),
+('Kimberly Miller', '918 Joseph Extensions
+Nicoleton, NM 73166'),
+('Michele Ford', '0964 Colleen Prairie Apt. 359
+Littlechester, AZ 12084'),
+('Nicolas Guerrero', '54299 Aaron Ways Suite 643
+Port Mariaview, CO 06949'),
+('Dennis Wilson', '05057 Alicia Camp
+South Joseph, PR 71604'),
+('Anna Salazar', '359 Jackson Tunnel Suite 229
+North Barbara, AS 63017'),
+('Jack Paul', 'USCGC Zuniga
+FPO AA 14499'),
+('Lisa Dorsey', '2479 Zavala Spur
+New Tiffanymouth, CT 85222');
