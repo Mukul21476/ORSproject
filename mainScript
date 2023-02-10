@@ -388,3 +388,20 @@ VALUES ('Mallory Cain', 'Customer Service'),
 ('Amber Knight MD', 'Financial Management'),
 ('Ashley Campbell', 'Data Analysis'),
 ('Michelle Miller', 'Financial Management');
+
+
+-- creating product category--
+
+CREATE TABLE productCategory(
+	CategoryID INT auto_increment PRIMARY KEY,
+    CategoryName VARCHAR(70) NOT NULL
+);
+
+INSERT INTO productCategory(CategoryName)
+VALUES('Electronics'),
+ ('Food & Beverage'),
+ ('Home & Garden'),
+ ('Sports & Outdoors'),
+ ('Music & Musical Instruments'),
+ ('Health & Wellness'),
+ ('Toys & Games');
