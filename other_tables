@@ -17,12 +17,6 @@ create table coupons(
     expiry_date date NOT NULL
     );
 
-create table Order_details(
-	tracking_id INT NOT NULL primary key,
-    shipper_name varchar(80) NOT NULL,
-    location varchar(90) NOT NULL,
-    expected_delivery_date date NOT NULL
-    );
 create table Orders(
 	order_id INT NOT NULL auto_increment primary key,
     order_date_time datetime default now(),
@@ -35,9 +29,222 @@ create table Orders(
     foreign key(coupon_id) references coupons(coupon_id),
     foreign key(tracking_id) references Order_details(tracking_id)
     );
-insert into Orders values(1,"abcd","xyz",123,"asd",NULL,123);
+insert into Orders(delivery_address,order_status,order_amount,payment_mode,tracking_id) values
+('73496 Brown Curve Suite 991
+South Allisontown, GU 19447', 'Delivered', '53.71', 'Visa', '26'),
+('3308 Wilson Pine Suite 075
+Davidview, MA 62104', 'Delivered', '3.24', 'Visa', '84'),
+('59732 Dean Knoll
+West Tammytown, WI 51793', 'Payment Complete', '492.09', 'PayPal', '83'),
+('3343 Henderson Springs Suite 350
+New Christinebury, OH 94731', 'Delivered', '187.59', 'Visa', '64'),
+('425 Dorsey Tunnel Suite 844
+Denisebury, ME 58233', 'Dispatched', '284.04', 'Visa', '73'),
+('4769 Lindsey Ports Suite 584
+New Gregory, KS 08321', 'Payment Complete', '230.86', 'Mastercard', '41'),
+('27036 Ferguson Stream Suite 775
+South Alexander, OH 39832', 'Dispatched', '400.02', 'PayPal', '22'),
+('37910 Joseph Haven Apt. 090
+Lake Allisonside, FM 16561', 'Payment Complete', '463.59', 'Mastercard', '12'),
+('PSC 0408, Box 1681
+APO AP 10852', 'Delivered', '356.69', 'PayPal', '69'),
+('74401 Hodges Way
+West Jennifer, PR 13378', 'Dispatched', '19.14', 'Mastercard', '17'),
+('6552 Michael Ramp Suite 873
+East Monique, NH 77401', 'Dispatched', '200.91', 'Visa', '73'),
+('1930 Leslie Drive Apt. 344
+Kimberlystad, GU 06269', 'Payment Complete', '460.34', 'Visa', '26'),
+('73203 Morris Overpass Apt. 912
+Carlsonhaven, MA 52296', 'Dispatched', '16.73', 'PayPal', '14'),
+('351 Deborah Plain
+South Patrick, AS 50817', 'Dispatched', '40.70', 'PayPal', '25'),
+('8904 Rachel Tunnel Suite 105
+Port Vanessa, MI 21428', 'Delivered', '383.91', 'PayPal', '97'),
+('642 Campbell Centers
+Whitestad, KY 36195', 'Payment Complete', '421.86', 'Mastercard', '40'),
+('8127 Tony Garden
+Aliceshire, ND 42109', 'Payment Complete', '190.32', 'Visa', '76'),
+('4776 Miller Trail Apt. 509
+South Chelseabury, MH 88586', 'Delivered', '235.58', 'Mastercard', '20'),
+('320 Mckee Ferry
+South Cameron, WI 31160', 'Payment Complete', '197.72', 'Mastercard', '13'),
+('8941 Davis Locks Apt. 990
+East Rebecca, NM 86781', 'Delivered', '432.39', 'PayPal', '15'),
+('PSC 4731, Box 1487
+APO AA 82902', 'Payment Complete', '280.89', 'PayPal', '36'),
+('72365 Phillip Field
+Brettchester, KS 86376', 'Delivered', '276.00', 'PayPal', '32'),
+('USS Moore
+FPO AE 80572', 'Delivered', '399.41', 'PayPal', '55'),
+('926 Stephanie Island
+Tonyhaven, PW 82388', 'Payment Complete', '214.67', 'PayPal', '28'),
+('1013 Hubbard Road Apt. 920
+Carlsonton, AL 65140', 'Payment Complete', '214.18', 'Visa', '39'),
+('165 West Unions
+West Nicole, SD 43236', 'Payment Complete', '139.09', 'Visa', '57'),
+('2953 Jones Spring
+Brownberg, RI 86558', 'Dispatched', '207.89', 'Visa', '90'),
+('693 Jeffrey Courts
+Port Jessica, CT 03817', 'Delivered', '491.05', 'PayPal', '21'),
+('9005 Kelly Tunnel Apt. 072
+West Chrisberg, WI 39007', 'Payment Complete', '131.58', 'PayPal', '8'),
+('97316 Oneal Motorway Apt. 524
+South Angelaburgh, IA 48699', 'Dispatched', '496.30', 'PayPal', '80'),
+('60237 Quinn Ferry Apt. 934
+East John, SC 38298', 'Payment Complete', '140.94', 'Visa', '52'),
+('7566 Todd Square
+South Jasmine, MO 15814', 'Delivered', '431.37', 'PayPal', '89'),
+('13803 Carrie Summit
+New Sarahton, NM 82763', 'Delivered', '210.93', 'Visa', '92'),
+('1613 Gloria Cape Apt. 295
+Westland, WV 94437', 'Payment Complete', '348.62', 'PayPal', '87'),
+('PSC 7957, Box 5521
+APO AP 78982', 'Dispatched', '437.05', 'PayPal', '74'),
+('0129 King Highway Suite 876
+Vegamouth, OK 81159', 'Dispatched', '5.30', 'PayPal', '65'),
+('657 Christina Avenue Suite 305
+Smithmouth, MO 69894', 'Dispatched', '300.82', 'Mastercard', '5'),
+('21154 Timothy Well Apt. 097
+Port Marissa, PA 03377', 'Delivered', '484.48', 'Mastercard', '55'),
+('25014 Donna Viaduct Apt. 008
+South Darrell, NV 38695', 'Dispatched', '403.80', 'Mastercard', '66'),
+('32494 Mark Plain Suite 266
+Lake Kelli, MN 08978', 'Payment Complete', '143.10', 'Mastercard', '13'),
+('7523 Teresa Rapids
+South Kathy, FL 61034', 'Payment Complete', '11.37', 'Visa', '41'),
+('5077 Jeffrey Greens Apt. 968
+Garnertown, AL 49074', 'Dispatched', '495.84', 'PayPal', '99'),
+('PSC 1056, Box 5531
+APO AE 90941', 'Payment Complete', '161.57', 'PayPal', '18'),
+('7540 Kelly Ways
+North Miranda, OH 23165', 'Dispatched', '250.74', 'Visa', '62'),
+('64819 Gomez Hills Suite 628
+East Jamesside, GU 00611', 'Dispatched', '392.48', 'PayPal', '29'),
+('49081 Jonathan Radial Suite 388
+Jenniferland, KY 66533', 'Payment Complete', '170.06', 'Mastercard', '47'),
+('8914 Kelli Flats
+Andersonberg, MH 49188', 'Payment Complete', '417.76', 'Mastercard', '65'),
+('4206 Thomas Cliff
+Raymondside, AL 70338', 'Dispatched', '415.66', 'Mastercard', '32'),
+('638 Sanders Avenue
+North Erikaburgh, WI 15945', 'Dispatched', '91.54', 'Visa', '92'),
+('63219 Micheal Harbor
+South Susanside, OR 61780', 'Payment Complete', '454.71', 'Visa', '44'),
+('112 Nelson Tunnel
+Craigchester, KS 18548', 'Dispatched', '373.42', 'Visa', '53'),
+('9498 Jamie Dam
+Eileenberg, MT 44045', 'Delivered', '453.61', 'Mastercard', '81'),
+('503 Jose Village
+Dustinchester, VA 76686', 'Delivered', '334.19', 'Visa', '11'),
+('22734 Forbes Route
+Lake Margaret, WV 00823', 'Dispatched', '419.60', 'PayPal', '27'),
+('582 Andrew Harbor
+Port Melanieborough, CA 19194', 'Payment Complete', '186.98', 'Mastercard', '64'),
+('0549 Desiree Villages
+Brianfort, TX 88853', 'Delivered', '186.33', 'Visa', '22'),
+('544 Rivera Brooks
+Port Eric, MT 41216', 'Dispatched', '160.99', 'Mastercard', '80'),
+('82829 Howard Track
+South Christopher, LA 14623', 'Delivered', '261.85', 'PayPal', '54'),
+('PSC 4131, Box 3543
+APO AP 12497', 'Payment Complete', '222.59', 'Mastercard', '76'),
+('224 Mendoza Summit
+Huangport, VT 90509', 'Delivered', '406.48', 'Mastercard', '51'),
+('137 Catherine Lights
+Port Jessica, MP 08651', 'Delivered', '218.29', 'Mastercard', '47'),
+('78085 Robert Fall
+Nicholasville, WY 62121', 'Payment Complete', '459.00', 'Mastercard', '33'),
+('676 Perkins Mall
+Thompsonmouth, NE 68836', 'Dispatched', '351.24', 'Visa', '10'),
+('0369 Charles Manors Apt. 685
+Whitechester, AR 59415', 'Payment Complete', '331.41', 'PayPal', '46'),
+('49537 Buck Trafficway
+East Russellburgh, MT 95763', 'Dispatched', '294.99', 'PayPal', '74'),
+('698 Fowler Ports
+Knightburgh, ND 34425', 'Dispatched', '307.25', 'PayPal', '81'),
+('20500 Bishop Corner Apt. 323
+New Johnnyhaven, KS 58079', 'Payment Complete', '216.67', 'Mastercard', '23'),
+('790 Stephen Mountain
+Reneeberg, MP 20339', 'Dispatched', '289.80', 'Mastercard', '99'),
+('379 Brian Turnpike
+East Tarahaven, CT 94434', 'Dispatched', '85.80', 'Mastercard', '42'),
+('809 Joseph Fields Suite 099
+New Jason, MH 06498', 'Delivered', '40.07', 'Visa', '70'),
+('8902 Fuentes Port
+North Sherry, AS 34418', 'Delivered', '257.26', 'Mastercard', '2'),
+('5677 Sharp Overpass
+East Anthonychester, CA 67089', 'Delivered', '367.94', 'PayPal', '82'),
+('595 Williams Mountain Suite 637
+Graymouth, PA 07857', 'Delivered', '315.19', 'PayPal', '33'),
+('USCGC Farmer
+FPO AP 99131', 'Payment Complete', '429.34', 'Mastercard', '15'),
+('238 Tammy Spring Suite 272
+South Christopherfort, NE 12048', 'Dispatched', '230.51', 'Visa', '72'),
+('8953 Diana Inlet
+Ryanland, MN 84167', 'Dispatched', '115.62', 'Visa', '79'),
+('USNS Newman
+FPO AP 68885', 'Delivered', '7.92', 'Visa', '65'),
+('USNV Mercado
+FPO AE 68659', 'Delivered', '210.44', 'PayPal', '64'),
+('86954 Gallagher Crossroad
+Benjaminton, OH 24606', 'Dispatched', '309.91', 'Mastercard', '56'),
+('476 Angela Ports Apt. 692
+Adammouth, SC 85608', 'Delivered', '302.61', 'Mastercard', '5'),
+('473 Juan Loop Suite 304
+Lake Kylemouth, VA 48187', 'Dispatched', '94.86', 'PayPal', '81'),
+('8429 Charlene Throughway
+Brownside, PR 00823', 'Dispatched', '211.25', 'PayPal', '65'),
+('135 Sean Avenue
+Port Feliciaburgh, SD 07654', 'Delivered', '371.52', 'PayPal', '31'),
+('25980 Munoz Garden
+Robertton, TX 88019', 'Payment Complete', '466.95', 'PayPal', '14'),
+('009 Patricia Plains
+East Robert, FM 62583', 'Delivered', '74.96', 'PayPal', '76'),
+('76980 Moore Port
+Scottburgh, ME 14749', 'Dispatched', '302.62', 'Mastercard', '38'),
+('4002 David Drive
+Amyberg, VT 51666', 'Delivered', '2.38', 'Visa', '91'),
+('4914 Jordan Junctions
+East Amber, MP 78088', 'Dispatched', '283.41', 'PayPal', '58'),
+('054 Cook Haven
+Port Billy, MO 75838', 'Payment Complete', '120.48', 'PayPal', '78'),
+('1371 Molly Forges
+Jesseview, WV 18402', 'Dispatched', '356.72', 'Mastercard', '32'),
+('20651 Joshua Village
+Rebeccamouth, NY 81799', 'Delivered', '125.25', 'Visa', '37'),
+('4769 Ramirez Via
+Meredithbury, CT 50118', 'Payment Complete', '382.04', 'PayPal', '76'),
+('756 Michael Garden
+Richardfort, PW 87436', 'Delivered', '41.61', 'PayPal', '93'),
+('PSC 5456, Box 6982
+APO AA 27967', 'Payment Complete', '309.01', 'PayPal', '58'),
+('89306 Nicole Road Suite 049
+West Alvin, AS 08993', 'Dispatched', '57.34', 'Mastercard', '26'),
+('7389 Margaret Point
+West Kaitlin, AS 92321', 'Payment Complete', '16.44', 'Mastercard', '56'),
+('04004 Katrina Squares Suite 830
+Ashleyville, CO 79862', 'Delivered', '46.57', 'Visa', '97'),
+('21294 Peterson Point
+Ericville, WV 41302', 'Delivered', '438.21', 'PayPal', '67'),
+('11573 Brown Junctions Apt. 586
+New Michelle, GA 31881', 'Dispatched', '52.66', 'Visa', '24'),
+('0246 James Orchard
+South Karenside, UT 08007', 'Payment Complete', '441.52', 'PayPal', '49');
+
+
+
+
+create table Order_details(
+	tracking_id INT NOT NULL primary key,
+    shipper_name varchar(80) NOT NULL,
+    location varchar(90) NOT NULL,
+    expected_delivery_date date NOT NULL
+    );
 insert into Order_details values(123,"sdfgh","esrdtfyghu",'2022-12-01');
     
+    
+drop table orders;
+
 create table Seller(
 	seller_id INT NOT NULL auto_increment primary key,
     seller_name varchar(70) NOT NULL,
@@ -47,13 +254,114 @@ create table Seller(
 
     
 create table Cart(
-	item_no INT NOT NULL auto_increment,
     ProductID INT NOT NULL,
     product_name varchar(255) NOT NULL,
     product_quantity INT NOT NULL,
-    cost INT NOT NULL,
+    cost decimal(10,2) NOT NULL,
     foreign key(ProductID) references Product(ProductID)
     );
+    
+insert into Cart(productid,product_name,product_quantity,cost) values
+('13', 'ThielGroup', '2', '17.54'),
+('92', 'Kerluke,ToyandCummerata', '2', '150.33'),
+('70', 'Bogisich,BeattyandHirthe', '6', '361.97'),
+('55', 'WittingInc', '11', '472.24'),
+('39', 'SengerGroup', '5', '443.60'),
+('79', 'Ritchie-Marquardt', '10', '328.19'),
+('92', 'Kerluke,ToyandCummerata', '1', '5.15'),
+('85', 'RippinGroup', '1', '387.81'),
+('33', 'Lowe-Fadel', '2', '440.14'),
+('88', 'Swaniawski,NienowandStanton', '3', '227.61'),
+('55', 'WittingInc', '5', '76.70'),
+('19', 'Mayert-Glover', '8', '334.73'),
+('47', 'Harris,WaelchiandMcCullough', '6', '17.40'),
+('42', 'Kassulke-Pfeffer', '9', '176.69'),
+('34', 'Hodkiewicz-Kessler', '1', '498.13'),
+('82', 'KesslerandSons', '8', '448.12'),
+('58', 'Sporer-Parisian', '3', '121.07'),
+('95', 'Lockman-Hartmann', '4', '166.36'),
+('81', 'Cruickshank,WalkerandBins', '8', '253.31'),
+('81', 'Cruickshank,WalkerandBins', '10', '60.09'),
+('83', 'Stiedemann,MrazandWalter', '6', '297.76'),
+('29', 'Altenwerth-Thompson', '8', '198.08'),
+('33', 'Lowe-Fadel', '1', '385.47'),
+('56', 'Mayer,SatterfieldandKshlerin', '6', '380.35'),
+('60', 'Ernser,LeschandWyman', '3', '316.70'),
+('71', 'LehnerGroup', '12', '410.14'),
+('94', 'Williamson,TrantowandKiehn', '3', '491.14'),
+('1', 'Cormier-Bins', '6', '253.54'),
+('84', 'Mann-Friesen', '3', '107.63'),
+('33', 'Lowe-Fadel', '7', '167.61'),
+('13', 'ThielGroup', '12', '492.36'),
+('29', 'Altenwerth-Thompson', '10', '358.25'),
+('43', 'BergstromandSons', '8', '335.57'),
+('16', 'KlockoandSons', '5', '358.17'),
+('35', 'BergeLLC', '5', '480.87'),
+('67', 'VonRuedenGroup', '5', '97.50'),
+('77', 'Ratke-Buckridge', '3', '402.00'),
+('39', 'SengerGroup', '11', '244.38'),
+('83', 'Stiedemann,MrazandWalter', '9', '156.68'),
+('53', 'Ratke,GoodwinandRussel', '11', '342.23'),
+('69', 'WolffGroup', '4', '19.14'),
+('32', 'Volkman,GottliebandFay', '12', '273.77'),
+('72', 'MetzLLC', '10', '443.10'),
+('69', 'WolffGroup', '11', '333.68'),
+('81', 'Cruickshank,WalkerandBins', '4', '17.33'),
+('5', 'Schumm-Skiles', '4', '447.16'),
+('52', 'Terry-Renner', '10', '163.93'),
+('52', 'Terry-Renner', '9', '448.77'),
+('3', 'Kunze-Kutch', '6', '77.57'),
+('48', 'KiehnGroup', '11', '479.75'),
+('44', 'Gerhold,FeilandRoob', '12', '117.13'),
+('46', 'Berge-Satterfield', '3', '34.17'),
+('54', 'Kohler-Ondricka', '2', '422.07'),
+('44', 'Gerhold,FeilandRoob', '4', '57.29'),
+('34', 'Hodkiewicz-Kessler', '9', '246.55'),
+('46', 'Berge-Satterfield', '9', '120.15'),
+('17', 'DuBuque-Cormier', '4', '70.82'),
+('85', 'RippinGroup', '10', '219.15'),
+('54', 'Kohler-Ondricka', '10', '247.94'),
+('45', 'Collins-Kiehn', '10', '305.25'),
+('60', 'Ernser,LeschandWyman', '1', '261.67'),
+('59', 'Leuschke,GrahamandWalker', '10', '495.38'),
+('18', 'HermannLLC', '6', '27.72'),
+('20', 'Boehm,StrackeandDeckow', '10', '398.45'),
+('75', 'Towne,HettingerandPaucek', '4', '188.58'),
+('5', 'Schumm-Skiles', '5', '202.12'),
+('17', 'DuBuque-Cormier', '3', '337.51'),
+('21', 'Durgan,GoyetteandZemlak', '3', '179.55'),
+('47', 'Harris,WaelchiandMcCullough', '4', '191.05'),
+('45', 'Collins-Kiehn', '7', '82.78'),
+('91', 'SchowalterInc', '6', '423.91'),
+('14', 'WaelchiGroup', '4', '227.78'),
+('68', 'BoyleandSons', '7', '315.95'),
+('30', 'Nikolaus,MuellerandJakubowski', '7', '127.96'),
+('67', 'VonRuedenGroup', '12', '130.82'),
+('57', 'KeeblerLLC', '4', '283.21'),
+('56', 'Mayer,SatterfieldandKshlerin', '9', '329.24'),
+('48', 'KiehnGroup', '2', '268.18'),
+('35', 'BergeLLC', '1', '360.59'),
+('80', 'Howell,DickinsonandDietrich', '10', '81.74'),
+('57', 'KeeblerLLC', '12', '404.31'),
+('61', 'Lehner,KozeyandKuhlman', '9', '268.63'),
+('80', 'Howell,DickinsonandDietrich', '3', '211.83'),
+('6', 'JohnsLLC', '7', '470.64'),
+('34', 'Hodkiewicz-Kessler', '10', '43.18'),
+('10', 'Herzog,RitchieandWolf', '10', '361.87'),
+('14', 'WaelchiGroup', '2', '285.97'),
+('75', 'Towne,HettingerandPaucek', '1', '425.42'),
+('54', 'Kohler-Ondricka', '7', '329.91'),
+('97', 'Bradtke,BeattyandSawayn', '9', '123.01'),
+('74', 'McKenzieGroup', '10', '247.29'),
+('4', 'Heidenreich-Ernser', '10', '20.50'),
+('91', 'SchowalterInc', '1', '409.43'),
+('93', 'Bosco,RoobandSchneider', '4', '38.23'),
+('20', 'Boehm,StrackeandDeckow', '9', '303.74'),
+('23', 'Schuster-Grant', '1', '467.20'),
+('14', 'WaelchiGroup', '8', '468.81'),
+('42', 'Kassulke-Pfeffer', '10', '492.15'),
+('93', 'Bosco,RoobandSchneider', '3', '301.80'),
+('21', 'Durgan,GoyetteandZemlak', '4', '374.47');
 
 create table WishList(
     ProductID INT NOT NULL,
