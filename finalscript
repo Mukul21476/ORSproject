@@ -485,226 +485,6 @@ VALUES
 ('21', '2023-07-11'),
 ('31', '2023-10-25');
 
-drop table Orders;
-CREATE TABLE Orders(
-	order_id INT NOT NULL auto_increment primary key,
-    order_date_time datetime default now(),
-    delivery_address varchar(90) NOT NULL,
-    order_status varchar(50) NOT NULL,
-    order_amount INT NOT NULL,
-    payment_mode varchar(50) NOT NULL,
-    coupon_id INT,
-    tracking_id INT NOT NULL,
-    foreign key(coupon_id) references coupons(coupon_id),
-    foreign key(tracking_id) references Order_details(tracking_id)
-    );
-    
-INSERT INTO Orders(delivery_address,order_status,order_amount,payment_mode,tracking_id)
-VALUES
-('73496 Brown Curve Suite 991
-South Allisontown, GU 19447', 'Delivered', '53.71', 'Visa', '26'),
-('3308 Wilson Pine Suite 075
-Davidview, MA 62104', 'Delivered', '3.24', 'Visa', '84'),
-('59732 Dean Knoll
-West Tammytown, WI 51793', 'Payment Complete', '492.09', 'PayPal', '83'),
-('3343 Henderson Springs Suite 350
-New Christinebury, OH 94731', 'Delivered', '187.59', 'Visa', '64'),
-('425 Dorsey Tunnel Suite 844
-Denisebury, ME 58233', 'Dispatched', '284.04', 'Visa', '73'),
-('4769 Lindsey Ports Suite 584
-New Gregory, KS 08321', 'Payment Complete', '230.86', 'Mastercard', '41'),
-('27036 Ferguson Stream Suite 775
-South Alexander, OH 39832', 'Dispatched', '400.02', 'PayPal', '22'),
-('37910 Joseph Haven Apt. 090
-Lake Allisonside, FM 16561', 'Payment Complete', '463.59', 'Mastercard', '12'),
-('PSC 0408, Box 1681
-APO AP 10852', 'Delivered', '356.69', 'PayPal', '69'),
-('74401 Hodges Way
-West Jennifer, PR 13378', 'Dispatched', '19.14', 'Mastercard', '17'),
-('6552 Michael Ramp Suite 873
-East Monique, NH 77401', 'Dispatched', '200.91', 'Visa', '73'),
-('1930 Leslie Drive Apt. 344
-Kimberlystad, GU 06269', 'Payment Complete', '460.34', 'Visa', '26'),
-('73203 Morris Overpass Apt. 912
-Carlsonhaven, MA 52296', 'Dispatched', '16.73', 'PayPal', '14'),
-('351 Deborah Plain
-South Patrick, AS 50817', 'Dispatched', '40.70', 'PayPal', '25'),
-('8904 Rachel Tunnel Suite 105
-Port Vanessa, MI 21428', 'Delivered', '383.91', 'PayPal', '97'),
-('642 Campbell Centers
-Whitestad, KY 36195', 'Payment Complete', '421.86', 'Mastercard', '40'),
-('8127 Tony Garden
-Aliceshire, ND 42109', 'Payment Complete', '190.32', 'Visa', '76'),
-('4776 Miller Trail Apt. 509
-South Chelseabury, MH 88586', 'Delivered', '235.58', 'Mastercard', '20'),
-('320 Mckee Ferry
-South Cameron, WI 31160', 'Payment Complete', '197.72', 'Mastercard', '13'),
-('8941 Davis Locks Apt. 990
-East Rebecca, NM 86781', 'Delivered', '432.39', 'PayPal', '15'),
-('PSC 4731, Box 1487
-APO AA 82902', 'Payment Complete', '280.89', 'PayPal', '36'),
-('72365 Phillip Field
-Brettchester, KS 86376', 'Delivered', '276.00', 'PayPal', '32'),
-('USS Moore
-FPO AE 80572', 'Delivered', '399.41', 'PayPal', '55'),
-('926 Stephanie Island
-Tonyhaven, PW 82388', 'Payment Complete', '214.67', 'PayPal', '28'),
-('1013 Hubbard Road Apt. 920
-Carlsonton, AL 65140', 'Payment Complete', '214.18', 'Visa', '39'),
-('165 West Unions
-West Nicole, SD 43236', 'Payment Complete', '139.09', 'Visa', '57'),
-('2953 Jones Spring
-Brownberg, RI 86558', 'Dispatched', '207.89', 'Visa', '90'),
-('693 Jeffrey Courts
-Port Jessica, CT 03817', 'Delivered', '491.05', 'PayPal', '21'),
-('9005 Kelly Tunnel Apt. 072
-West Chrisberg, WI 39007', 'Payment Complete', '131.58', 'PayPal', '8'),
-('97316 Oneal Motorway Apt. 524
-South Angelaburgh, IA 48699', 'Dispatched', '496.30', 'PayPal', '80'),
-('60237 Quinn Ferry Apt. 934
-East John, SC 38298', 'Payment Complete', '140.94', 'Visa', '52'),
-('7566 Todd Square
-South Jasmine, MO 15814', 'Delivered', '431.37', 'PayPal', '89'),
-('13803 Carrie Summit
-New Sarahton, NM 82763', 'Delivered', '210.93', 'Visa', '92'),
-('1613 Gloria Cape Apt. 295
-Westland, WV 94437', 'Payment Complete', '348.62', 'PayPal', '87'),
-('PSC 7957, Box 5521
-APO AP 78982', 'Dispatched', '437.05', 'PayPal', '74'),
-('0129 King Highway Suite 876
-Vegamouth, OK 81159', 'Dispatched', '5.30', 'PayPal', '65'),
-('657 Christina Avenue Suite 305
-Smithmouth, MO 69894', 'Dispatched', '300.82', 'Mastercard', '5'),
-('21154 Timothy Well Apt. 097
-Port Marissa, PA 03377', 'Delivered', '484.48', 'Mastercard', '55'),
-('25014 Donna Viaduct Apt. 008
-South Darrell, NV 38695', 'Dispatched', '403.80', 'Mastercard', '66'),
-('32494 Mark Plain Suite 266
-Lake Kelli, MN 08978', 'Payment Complete', '143.10', 'Mastercard', '13'),
-('7523 Teresa Rapids
-South Kathy, FL 61034', 'Payment Complete', '11.37', 'Visa', '41'),
-('5077 Jeffrey Greens Apt. 968
-Garnertown, AL 49074', 'Dispatched', '495.84', 'PayPal', '99'),
-('PSC 1056, Box 5531
-APO AE 90941', 'Payment Complete', '161.57', 'PayPal', '18'),
-('7540 Kelly Ways
-North Miranda, OH 23165', 'Dispatched', '250.74', 'Visa', '62'),
-('64819 Gomez Hills Suite 628
-East Jamesside, GU 00611', 'Dispatched', '392.48', 'PayPal', '29'),
-('49081 Jonathan Radial Suite 388
-Jenniferland, KY 66533', 'Payment Complete', '170.06', 'Mastercard', '47'),
-('8914 Kelli Flats
-Andersonberg, MH 49188', 'Payment Complete', '417.76', 'Mastercard', '65'),
-('4206 Thomas Cliff
-Raymondside, AL 70338', 'Dispatched', '415.66', 'Mastercard', '32'),
-('638 Sanders Avenue
-North Erikaburgh, WI 15945', 'Dispatched', '91.54', 'Visa', '92'),
-('63219 Micheal Harbor
-South Susanside, OR 61780', 'Payment Complete', '454.71', 'Visa', '44'),
-('112 Nelson Tunnel
-Craigchester, KS 18548', 'Dispatched', '373.42', 'Visa', '53'),
-('9498 Jamie Dam
-Eileenberg, MT 44045', 'Delivered', '453.61', 'Mastercard', '81'),
-('503 Jose Village
-Dustinchester, VA 76686', 'Delivered', '334.19', 'Visa', '11'),
-('22734 Forbes Route
-Lake Margaret, WV 00823', 'Dispatched', '419.60', 'PayPal', '27'),
-('582 Andrew Harbor
-Port Melanieborough, CA 19194', 'Payment Complete', '186.98', 'Mastercard', '64'),
-('0549 Desiree Villages
-Brianfort, TX 88853', 'Delivered', '186.33', 'Visa', '22'),
-('544 Rivera Brooks
-Port Eric, MT 41216', 'Dispatched', '160.99', 'Mastercard', '80'),
-('82829 Howard Track
-South Christopher, LA 14623', 'Delivered', '261.85', 'PayPal', '54'),
-('PSC 4131, Box 3543
-APO AP 12497', 'Payment Complete', '222.59', 'Mastercard', '76'),
-('224 Mendoza Summit
-Huangport, VT 90509', 'Delivered', '406.48', 'Mastercard', '51'),
-('137 Catherine Lights
-Port Jessica, MP 08651', 'Delivered', '218.29', 'Mastercard', '47'),
-('78085 Robert Fall
-Nicholasville, WY 62121', 'Payment Complete', '459.00', 'Mastercard', '33'),
-('676 Perkins Mall
-Thompsonmouth, NE 68836', 'Dispatched', '351.24', 'Visa', '10'),
-('0369 Charles Manors Apt. 685
-Whitechester, AR 59415', 'Payment Complete', '331.41', 'PayPal', '46'),
-('49537 Buck Trafficway
-East Russellburgh, MT 95763', 'Dispatched', '294.99', 'PayPal', '74'),
-('698 Fowler Ports
-Knightburgh, ND 34425', 'Dispatched', '307.25', 'PayPal', '81'),
-('20500 Bishop Corner Apt. 323
-New Johnnyhaven, KS 58079', 'Payment Complete', '216.67', 'Mastercard', '23'),
-('790 Stephen Mountain
-Reneeberg, MP 20339', 'Dispatched', '289.80', 'Mastercard', '99'),
-('379 Brian Turnpike
-East Tarahaven, CT 94434', 'Dispatched', '85.80', 'Mastercard', '42'),
-('809 Joseph Fields Suite 099
-New Jason, MH 06498', 'Delivered', '40.07', 'Visa', '70'),
-('8902 Fuentes Port
-North Sherry, AS 34418', 'Delivered', '257.26', 'Mastercard', '2'),
-('5677 Sharp Overpass
-East Anthonychester, CA 67089', 'Delivered', '367.94', 'PayPal', '82'),
-('595 Williams Mountain Suite 637
-Graymouth, PA 07857', 'Delivered', '315.19', 'PayPal', '33'),
-('USCGC Farmer
-FPO AP 99131', 'Payment Complete', '429.34', 'Mastercard', '15'),
-('238 Tammy Spring Suite 272
-South Christopherfort, NE 12048', 'Dispatched', '230.51', 'Visa', '72'),
-('8953 Diana Inlet
-Ryanland, MN 84167', 'Dispatched', '115.62', 'Visa', '79'),
-('USNS Newman
-FPO AP 68885', 'Delivered', '7.92', 'Visa', '65'),
-('USNV Mercado
-FPO AE 68659', 'Delivered', '210.44', 'PayPal', '64'),
-('86954 Gallagher Crossroad
-Benjaminton, OH 24606', 'Dispatched', '309.91', 'Mastercard', '56'),
-('476 Angela Ports Apt. 692
-Adammouth, SC 85608', 'Delivered', '302.61', 'Mastercard', '5'),
-('473 Juan Loop Suite 304
-Lake Kylemouth, VA 48187', 'Dispatched', '94.86', 'PayPal', '81'),
-('8429 Charlene Throughway
-Brownside, PR 00823', 'Dispatched', '211.25', 'PayPal', '65'),
-('135 Sean Avenue
-Port Feliciaburgh, SD 07654', 'Delivered', '371.52', 'PayPal', '31'),
-('25980 Munoz Garden
-Robertton, TX 88019', 'Payment Complete', '466.95', 'PayPal', '14'),
-('009 Patricia Plains
-East Robert, FM 62583', 'Delivered', '74.96', 'PayPal', '76'),
-('76980 Moore Port
-Scottburgh, ME 14749', 'Dispatched', '302.62', 'Mastercard', '38'),
-('4002 David Drive
-Amyberg, VT 51666', 'Delivered', '2.38', 'Visa', '91'),
-('4914 Jordan Junctions
-East Amber, MP 78088', 'Dispatched', '283.41', 'PayPal', '58'),
-('054 Cook Haven
-Port Billy, MO 75838', 'Payment Complete', '120.48', 'PayPal', '78'),
-('1371 Molly Forges
-Jesseview, WV 18402', 'Dispatched', '356.72', 'Mastercard', '32'),
-('20651 Joshua Village
-Rebeccamouth, NY 81799', 'Delivered', '125.25', 'Visa', '37'),
-('4769 Ramirez Via
-Meredithbury, CT 50118', 'Payment Complete', '382.04', 'PayPal', '76'),
-('756 Michael Garden
-Richardfort, PW 87436', 'Delivered', '41.61', 'PayPal', '93'),
-('PSC 5456, Box 6982
-APO AA 27967', 'Payment Complete', '309.01', 'PayPal', '58'),
-('89306 Nicole Road Suite 049
-West Alvin, AS 08993', 'Dispatched', '57.34', 'Mastercard', '26'),
-('7389 Margaret Point
-West Kaitlin, AS 92321', 'Payment Complete', '16.44', 'Mastercard', '56'),
-('04004 Katrina Squares Suite 830
-Ashleyville, CO 79862', 'Delivered', '46.57', 'Visa', '97'),
-('21294 Peterson Point
-Ericville, WV 41302', 'Delivered', '438.21', 'PayPal', '67'),
-('11573 Brown Junctions Apt. 586
-New Michelle, GA 31881', 'Dispatched', '52.66', 'Visa', '24'),
-('0246 James Orchard
-South Karenside, UT 08007', 'Payment Complete', '441.52', 'PayPal', '49');
-
-
-
-
 CREATE TABLE Order_details(
 	tracking_id INT NOT NULL primary key auto_increment,
     shipper_name varchar(80) NOT NULL,
@@ -915,12 +695,225 @@ West Craig, SC 58072', '2023-01-01'),
 Christinashire, NY 86031', '2023-02-12'),
 ('James Friedman', '35371 Thompson Greens
 Thomasstad, IL 88850', '2023-05-23');
-    
-    
 
+drop table Orders;
+CREATE TABLE Orders(
+	order_id INT NOT NULL auto_increment primary key,
+    order_date_time datetime default now(),
+    delivery_address varchar(90) NOT NULL,
+    order_status varchar(50) NOT NULL,
+    order_amount INT NOT NULL,
+    payment_mode varchar(50) NOT NULL,
+    coupon_id INT,
+    tracking_id INT NOT NULL,
+    foreign key(coupon_id) references coupons(coupon_id),
+    foreign key(tracking_id) references Order_details(tracking_id)
+    );
     
+INSERT INTO Orders(delivery_address,order_status,coupon_id,order_amount,payment_mode,tracking_id)
+VALUES
+('73496 Brown Curve Suite 991
+South Allisontown, GU 19447', 'Delivered',null, '53.71', 'Visa', '26'),
+('3308 Wilson Pine Suite 075
+Davidview, MA 62104', 'Delivered',21,'3.24', 'Visa', '84'),
+('59732 Dean Knoll
+West Tammytown, WI 51793', 'Payment Complete', 62,'492.09', 'PayPal', '83'),
+('3343 Henderson Springs Suite 350
+New Christinebury, OH 94731', 'Delivered', 7,'187.59', 'Visa', '64'),
+('425 Dorsey Tunnel Suite 844
+Denisebury, ME 58233', 'Dispatched',null, '284.04', 'Visa', '73'),
+('4769 Lindsey Ports Suite 584
+New Gregory, KS 08321', 'Payment Complete',90, '230.86', 'Mastercard', '41'),
+('27036 Ferguson Stream Suite 775
+South Alexander, OH 39832', 'Dispatched',1, '400.02', 'PayPal', '22'),
+('37910 Joseph Haven Apt. 090
+Lake Allisonside, FM 16561', 'Payment Complete',34, '463.59', 'Mastercard', '12'),
+('PSC 0408, Box 1681
+APO AP 10852', 'Delivered',15, '356.69', 'PayPal', '69'),
+('74401 Hodges Way
+West Jennifer, PR 13378', 'Dispatched',null, '19.14', 'Mastercard', '17'),
+('6552 Michael Ramp Suite 873
+East Monique, NH 77401', 'Dispatched',null, '200.91', 'Visa', '73'),
+('1930 Leslie Drive Apt. 344
+Kimberlystad, GU 06269', 'Payment Complete',null, '460.34', 'Visa', '26'),
+('73203 Morris Overpass Apt. 912
+Carlsonhaven, MA 52296', 'Dispatched',null, '16.73', 'PayPal', '14'),
+('351 Deborah Plain
+South Patrick, AS 50817', 'Dispatched',null, '40.70', 'PayPal', '25'),
+('8904 Rachel Tunnel Suite 105
+Port Vanessa, MI 21428', 'Delivered',null, '383.91', 'PayPal', '97'),
+('642 Campbell Centers
+Whitestad, KY 36195', 'Payment Complete',null, '421.86', 'Mastercard', '40'),
+('8127 Tony Garden
+Aliceshire, ND 42109', 'Payment Complete',null, '190.32', 'Visa', '76'),
+('4776 Miller Trail Apt. 509
+South Chelseabury, MH 88586', 'Delivered',null, '235.58', 'Mastercard', '20'),
+('320 Mckee Ferry
+South Cameron, WI 31160', 'Payment Complete',null, '197.72', 'Mastercard', '13'),
+('8941 Davis Locks Apt. 990
+East Rebecca, NM 86781', 'Delivered',null, '432.39', 'PayPal', '15'),
+('PSC 4731, Box 1487
+APO AA 82902', 'Payment Complete',null, '280.89', 'PayPal', '36'),
+('72365 Phillip Field
+Brettchester, KS 86376', 'Delivered',null, '276.00', 'PayPal', '32'),
+('USS Moore
+FPO AE 80572', 'Delivered',null, '399.41', 'PayPal', '55'),
+('926 Stephanie Island
+Tonyhaven, PW 82388', 'Payment Complete',null, '214.67', 'PayPal', '28'),
+('1013 Hubbard Road Apt. 920
+Carlsonton, AL 65140', 'Payment Complete',null, '214.18', 'Visa', '39'),
+('165 West Unions
+West Nicole, SD 43236', 'Payment Complete',null, '139.09', 'Visa', '57'),
+('2953 Jones Spring
+Brownberg, RI 86558', 'Dispatched',null, '207.89', 'Visa', '90'),
+('693 Jeffrey Courts
+Port Jessica, CT 03817', 'Delivered',null, '491.05', 'PayPal', '21'),
+('9005 Kelly Tunnel Apt. 072
+West Chrisberg, WI 39007', 'Payment Complete',null, '131.58', 'PayPal', '8'),
+('97316 Oneal Motorway Apt. 524
+South Angelaburgh, IA 48699', 'Dispatched',null, '496.30', 'PayPal', '80'),
+('60237 Quinn Ferry Apt. 934
+East John, SC 38298', 'Payment Complete',null, '140.94', 'Visa', '52'),
+('7566 Todd Square
+South Jasmine, MO 15814', 'Delivered',null, '431.37', 'PayPal', '89'),
+('13803 Carrie Summit
+New Sarahton, NM 82763', 'Delivered',null, '210.93', 'Visa', '92'),
+('1613 Gloria Cape Apt. 295
+Westland, WV 94437', 'Payment Complete',null, '348.62', 'PayPal', '87'),
+('PSC 7957, Box 5521
+APO AP 78982', 'Dispatched',null, '437.05', 'PayPal', '74'),
+('0129 King Highway Suite 876
+Vegamouth, OK 81159', 'Dispatched',null, '5.30', 'PayPal', '65'),
+('657 Christina Avenue Suite 305
+Smithmouth, MO 69894', 'Dispatched',null, '300.82', 'Mastercard', '5'),
+('21154 Timothy Well Apt. 097
+Port Marissa, PA 03377', 'Delivered',null, '484.48', 'Mastercard', '55'),
+('25014 Donna Viaduct Apt. 008
+South Darrell, NV 38695', 'Dispatched',null, '403.80', 'Mastercard', '66'),
+('32494 Mark Plain Suite 266
+Lake Kelli, MN 08978', 'Payment Complete',null, '143.10', 'Mastercard', '13'),
+('7523 Teresa Rapids
+South Kathy, FL 61034', 'Payment Complete',null, '11.37', 'Visa', '41'),
+('5077 Jeffrey Greens Apt. 968
+Garnertown, AL 49074', 'Dispatched',null, '495.84', 'PayPal', '99'),
+('PSC 1056, Box 5531
+APO AE 90941', 'Payment Complete',null, '161.57', 'PayPal', '18'),
+('7540 Kelly Ways
+North Miranda, OH 23165', 'Dispatched',null, '250.74', 'Visa', '62'),
+('64819 Gomez Hills Suite 628
+East Jamesside, GU 00611', 'Dispatched',null, '392.48', 'PayPal', '29'),
+('49081 Jonathan Radial Suite 388
+Jenniferland, KY 66533', 'Payment Complete',null, '170.06', 'Mastercard', '47'),
+('8914 Kelli Flats
+Andersonberg, MH 49188', 'Payment Complete',null, '417.76', 'Mastercard', '65'),
+('4206 Thomas Cliff
+Raymondside, AL 70338', 'Dispatched',null, '415.66', 'Mastercard', '32'),
+('638 Sanders Avenue
+North Erikaburgh, WI 15945', 'Dispatched',null, '91.54', 'Visa', '92'),
+('63219 Micheal Harbor
+South Susanside, OR 61780', 'Payment Complete',null, '454.71', 'Visa', '44'),
+('112 Nelson Tunnel
+Craigchester, KS 18548', 'Dispatched',null, '373.42', 'Visa', '53'),
+('9498 Jamie Dam
+Eileenberg, MT 44045', 'Delivered',null, '453.61', 'Mastercard', '81'),
+('503 Jose Village
+Dustinchester, VA 76686', 'Delivered',null, '334.19', 'Visa', '11'),
+('22734 Forbes Route
+Lake Margaret, WV 00823', 'Dispatched',null, '419.60', 'PayPal', '27'),
+('582 Andrew Harbor
+Port Melanieborough, CA 19194', 'Payment Complete',null, '186.98', 'Mastercard', '64'),
+('0549 Desiree Villages
+Brianfort, TX 88853', 'Delivered',null, '186.33', 'Visa', '22'),
+('544 Rivera Brooks
+Port Eric, MT 41216', 'Dispatched',null, '160.99', 'Mastercard', '80'),
+('82829 Howard Track
+South Christopher, LA 14623', 'Delivered',null, '261.85', 'PayPal', '54'),
+('PSC 4131, Box 3543
+APO AP 12497', 'Payment Complete',null, '222.59', 'Mastercard', '76'),
+('224 Mendoza Summit
+Huangport, VT 90509', 'Delivered',null, '406.48', 'Mastercard', '51'),
+('137 Catherine Lights
+Port Jessica, MP 08651', 'Delivered',null, '218.29', 'Mastercard', '47'),
+('78085 Robert Fall
+Nicholasville, WY 62121', 'Payment Complete',null, '459.00', 'Mastercard', '33'),
+('676 Perkins Mall
+Thompsonmouth, NE 68836', 'Dispatched',null, '351.24', 'Visa', '10'),
+('0369 Charles Manors Apt. 685
+Whitechester, AR 59415', 'Payment Complete',null, '331.41', 'PayPal', '46'),
+('49537 Buck Trafficway
+East Russellburgh, MT 95763', 'Dispatched',null, '294.99', 'PayPal', '74'),
+('698 Fowler Ports
+Knightburgh, ND 34425', 'Dispatched',null, '307.25', 'PayPal', '81'),
+('20500 Bishop Corner Apt. 323
+New Johnnyhaven, KS 58079', 'Payment Complete',null, '216.67', 'Mastercard', '23'),
+('790 Stephen Mountain
+Reneeberg, MP 20339', 'Dispatched',null, '289.80', 'Mastercard', '99'),
+('379 Brian Turnpike
+East Tarahaven, CT 94434', 'Dispatched',null, '85.80', 'Mastercard', '42'),
+('809 Joseph Fields Suite 099
+New Jason, MH 06498', 'Delivered',null, '40.07', 'Visa', '70'),
+('8902 Fuentes Port
+North Sherry, AS 34418', 'Delivered',null, '257.26', 'Mastercard', '2'),
+('5677 Sharp Overpass
+East Anthonychester, CA 67089', 'Delivered',null, '367.94', 'PayPal', '82'),
+('595 Williams Mountain Suite 637
+Graymouth, PA 07857', 'Delivered',null, '315.19', 'PayPal', '33'),
+('USCGC Farmer
+FPO AP 99131', 'Payment Complete',null, '429.34', 'Mastercard', '15'),
+('238 Tammy Spring Suite 272
+South Christopherfort, NE 12048', 'Dispatched',null, '230.51', 'Visa', '72'),
+('8953 Diana Inlet
+Ryanland, MN 84167', 'Dispatched',null, '115.62', 'Visa', '79'),
+('USNS Newman
+FPO AP 68885', 'Delivered',null, '7.92', 'Visa', '65'),
+('USNV Mercado
+FPO AE 68659', 'Delivered',null, '210.44', 'PayPal', '64'),
+('86954 Gallagher Crossroad
+Benjaminton, OH 24606', 'Dispatched',null, '309.91', 'Mastercard', '56'),
+('476 Angela Ports Apt. 692
+Adammouth, SC 85608', 'Delivered',null, '302.61', 'Mastercard', '5'),
+('473 Juan Loop Suite 304
+Lake Kylemouth, VA 48187', 'Dispatched',null, '94.86', 'PayPal', '81'),
+('8429 Charlene Throughway
+Brownside, PR 00823', 'Dispatched',null, '211.25', 'PayPal', '65'),
+('135 Sean Avenue
+Port Feliciaburgh, SD 07654', 'Delivered',null, '371.52', 'PayPal', '31'),
+('25980 Munoz Garden
+Robertton, TX 88019', 'Payment Complete',null, '466.95', 'PayPal', '14'),
+('009 Patricia Plains
+East Robert, FM 62583', 'Delivered',null, '74.96', 'PayPal', '76'),
+('76980 Moore Port
+Scottburgh, ME 14749', 'Dispatched',null, '302.62', 'Mastercard', '38'),
+('4002 David Drive
+Amyberg, VT 51666', 'Delivered',null, '2.38', 'Visa', '91'),
+('4914 Jordan Junctions
+East Amber, MP 78088', 'Dispatched',null, '283.41', 'PayPal', '58'),
+('054 Cook Haven
+Port Billy, MO 75838', 'Payment Complete',null, '120.48', 'PayPal', '78'),
+('1371 Molly Forges
+Jesseview, WV 18402', 'Dispatched',null, '356.72', 'Mastercard', '32'),
+('20651 Joshua Village
+Rebeccamouth, NY 81799', 'Delivered',null, '125.25', 'Visa', '37'),
+('4769 Ramirez Via
+Meredithbury, CT 50118', 'Payment Complete',null, '382.04', 'PayPal', '76'),
+('756 Michael Garden
+Richardfort, PW 87436', 'Delivered',null, '41.61', 'PayPal', '93'),
+('PSC 5456, Box 6982
+APO AA 27967', 'Payment Complete',null, '309.01', 'PayPal', '58'),
+('89306 Nicole Road Suite 049
+West Alvin, AS 08993', 'Dispatched',null, '57.34', 'Mastercard', '26'),
+('7389 Margaret Point
+West Kaitlin, AS 92321', 'Payment Complete',null, '16.44', 'Mastercard', '56'),
+('04004 Katrina Squares Suite 830
+Ashleyville, CO 79862', 'Delivered',null, '46.57', 'Visa', '97'),
+('21294 Peterson Point
+Ericville, WV 41302', 'Delivered',null, '438.21', 'PayPal', '67'),
+('11573 Brown Junctions Apt. 586
+New Michelle, GA 31881', 'Dispatched',null, '52.66', 'Visa', '24'),
+('0246 James Orchard
+South Karenside, UT 08007', 'Payment Complete',null, '441.52', 'PayPal', '49');
 
-    
+
 CREATE TABLE Cart(
     ProductID INT NOT NULL,
     custid INT NOT NULL,
