@@ -1,0 +1,1471 @@
+CREATE DATABASE OnlineRetailStore;
+USE OnlineRetailStore;
+
+-- Created cutomer table--
+CREATE TABLE customer(
+	CustID INT NOT NULL auto_increment,
+    CustName VARCHAR(90),
+    PhoneNumber VARCHAR(90),
+    EmailAddress VARCHAR(90),
+    CustAddr VARCHAR(90),
+    SavedPaymentMethod VARCHAR(90),
+    CustMembership VARCHAR(90),
+    PRIMARY KEY(CustID)
+);
+
+INSERT INTO CUSTOMER (CustName, PhoneNumber, EmailAddress, CustAddr, SavedPaymentMethod, CustMembership)
+VALUES('Anne Choi', '+1-211-676-5424', 'millertyler@example.org', '5602 Levy Fords
+Christinetown, FL 55441', 'Mastercard', 'Gold'),
+('Brian May', '470-578-8451x672', 'michael84@example.com', 'USCGC Thomas
+FPO AE 26532', 'PayPal', 'Gold'),
+('Keith Nicholson', '1559041967', 'trujillowilliam@example.net', 'PSC 7750, Box 1084
+APO AP 24072', 'Mastercard', 'Gold'),
+('Bethany Johnson', '667-066-9831x563', 'meltonsue@example.org', '0341 Shawn Forks
+Paulside, PA 35027', 'Visa', 'Gold'),
+('David Walters', '459-051-2782x28887', 'reynoldsjared@example.net', '97006 Cobb Hollow
+Derekberg, NV 78255', 'PayPal', 'Silver'),
+('Justin Weiss', '(955)112-0395', 'ccraig@example.net', '2834 Sarah Ranch Suite 171
+South Kimberly, ID 80243', 'Mastercard', 'Gold'),
+('Jennifer Gilbert', '(511)634-3873x08705', 'tbarr@example.net', '41179 Woodard Views Apt. 131
+South Erictown, NE 42289', 'PayPal', 'Gold'),
+('Michael Evans', '(155)980-8388', 'susan45@example.org', '96872 Snyder Green Suite 396
+Simpsonton, SD 75679', 'PayPal', 'Platinum'),
+('Cheryl Elliott', '(543)167-7510x75787', 'tbennett@example.net', 'PSC 7024, Box 6331
+APO AE 35680', 'Visa', 'Silver'),
+('Natalie Young', '(260)679-1312x22971', 'frankdaniel@example.net', 'PSC 1259, Box 3778
+APO AE 41312', 'Mastercard', 'Gold'),
+('Patricia Clark', '821-036-3569', 'ballarddylan@example.net', '2071 Julie Bypass
+Lake Steventown, IA 01289', 'Visa', 'Gold'),
+('Seth Welch', '+1-108-319-6596x22908', 'nathaniel68@example.com', '3663 Amber Expressway Suite 904
+Rodriguezmouth, WA 11662', 'Mastercard', 'Gold'),
+('James Rojas', '6793794824', 'michaelramos@example.org', '635 Amanda Cove
+Michaelfurt, OR 49861', 'Visa', 'Platinum'),
+('Meghan Brown', '218-891-7792x23757', 'xjohnson@example.org', '5486 April Locks Apt. 867
+Nicholastown, DC 25997', 'Mastercard', 'Gold'),
+('Marcus Miller', '001-035-913-0784x59035', 'torresrenee@example.org', '07674 Lori Junctions
+North Melissaberg, VT 26238', 'PayPal', 'Silver'),
+('Rebecca Sparks', '001-318-267-2644', 'hwhite@example.net', '48892 Hernandez Knolls Suite 686
+Doughertybury, NH 39901', 'Mastercard', 'Gold'),
+('Joseph King', '001-265-782-9501x69852', 'langmarc@example.org', '48025 Warren Roads Suite 876
+Timothyville, AS 48669', 'Visa', 'Platinum'),
+('Gregory Jimenez Jr.', '184-083-6048', 'jacobmiller@example.net', '15546 Steven Coves
+Barberfort, DC 57630', 'Visa', 'Gold'),
+('Michael Blankenship', '577.768.5065', 'caitlin76@example.net', '31155 Janice Lane Suite 534
+Allisonfurt, MH 59094', 'Visa', 'Platinum'),
+('Denise Solomon', '001-946-484-5419x703', 'rileycarol@example.org', '091 Mark Land
+Lake Juanmouth, KS 07033', 'PayPal', 'Platinum'),
+('Diane Massey', '+1-282-967-0445x03797', 'michelle63@example.org', '81759 Shannon Junctions
+Richardland, CO 90643', 'Mastercard', 'Gold'),
+('Kelly Castillo', '422-713-8687x9546', 'thomasstewart@example.com', '72232 Miller Path
+East Erikaland, DE 27221', 'Mastercard', 'Silver'),
+('Daniel Pugh', '+1-176-855-6377x21175', 'hallbrenda@example.org', '518 Bowen Knolls
+Stephenmouth, MN 38471', 'PayPal', 'Silver'),
+('Bradley Wilson', '8679943138', 'tnelson@example.net', '92156 Anthony Valleys Apt. 866
+South Sara, WY 81351', 'PayPal', 'Silver'),
+('Michael Hoffman', '(638)883-3841x67543', 'lauramitchell@example.com', '62708 Bobby Via Apt. 836
+West Veronicabury, MD 46467', 'Mastercard', 'Platinum'),
+('Natalie Jones', '474-235-5471x38921', 'joseph05@example.org', '6207 Michael Viaduct
+Brianstad, IN 24990', 'Visa', 'Platinum'),
+('Scott Davis', '(644)872-9084', 'justin34@example.org', '796 Thomas Landing
+Lake Kimberlyburgh, OK 80344', 'Mastercard', 'Platinum'),
+('Maria Vaughn', '+1-808-252-2112x7165', 'baxteralyssa@example.com', '5144 Robert Circle Suite 688
+Kathleenview, NH 03131', 'Mastercard', 'Platinum'),
+('Victoria Lane', '(395)988-8039x7367', 'gutierrezmichael@example.org', '82544 Larry Meadows
+Michelemouth, MT 84183', 'Visa', 'Silver'),
+('Thomas Murphy', '(894)386-8341', 'michelle05@example.org', '751 Torres Walk Apt. 852
+West Marissaville, AK 00659', 'Visa', 'Silver'),
+('Alexandria Wagner', '001-503-045-9922', 'rebecca20@example.org', '574 Robert Street Suite 251
+Garciaberg, CT 68136', 'Visa', 'Silver'),
+('Bradley Jones', '488-468-3066', 'kmoyer@example.org', 'Unit 4598 Box 6684
+DPO AE 53052', 'Visa', 'Gold'),
+('Tyler Jordan', '+1-279-778-3029x46627', 'sandradunn@example.net', '153 Virginia Springs
+Port Timothy, LA 66242', 'PayPal', 'Platinum'),
+('Amanda Brown', '067-613-5323x78496', 'kmeyer@example.com', '03334 Thompson Junction Suite 966
+North Patrick, IN 57494', 'PayPal', 'Gold'),
+('Bonnie Alvarez', '4272503021', 'rodriguezpatricia@example.com', '8537 Pratt Rapid
+North Thomas, MI 28187', 'Visa', 'Silver'),
+('Lisa Brooks', '(584)394-6001', 'nancybrown@example.org', '784 Strong Divide Suite 268
+Port Maria, VA 70035', 'Visa', 'Silver'),
+('Pamela Johnson', '6746217285', 'heatherlynch@example.com', '55117 Lorraine Tunnel Apt. 991
+New Ryanberg, MS 58296', 'Mastercard', 'Platinum'),
+('Natalie Rodriguez', '642.128.3197', 'epark@example.com', '6128 Hannah Fort
+Port Melinda, AR 97748', 'Visa', 'Platinum'),
+('Tammy Jackson', '940-797-4551', 'donna45@example.net', '3332 Montoya Streets Suite 326
+Matthewbury, LA 34452', 'Mastercard', 'Platinum'),
+('Casey Fleming', '(817)212-0292x6763', 'lnelson@example.net', '945 Robin Islands
+Alexland, MT 64536', 'Mastercard', 'Platinum'),
+('Carl Hernandez', '113-403-5903x56944', 'robertrobles@example.net', '7228 Shah Drive
+Austinbury, UT 24313', 'Mastercard', 'Silver'),
+('Frank Nguyen', '426-132-8754', 'wcross@example.org', '32664 Oliver Branch Suite 398
+Mullinsmouth, ND 96682', 'Visa', 'Gold'),
+('Leah Ruiz', '614-481-8653x203', 'marcuskirby@example.com', 'USNV Rocha
+FPO AP 77521', 'Mastercard', 'Gold'),
+('Brittany Moon', '001-464-462-6374x365', 'blevinsrhonda@example.net', '9707 Nelson Terrace Apt. 416
+Lake Keithchester, KS 73669', 'Mastercard', 'Platinum'),
+('Colleen Cox', '170.461.6540x91831', 'bishopjuan@example.net', '98392 Shawn Dale
+West Jeffreybury, AK 25763', 'Visa', 'Silver'),
+('Dennis Ortiz', '452-868-6151x8436', 'pcollins@example.net', '306 Jackson Circles
+Smithborough, IA 11337', 'PayPal', 'Silver'),
+('Jonathan Contreras', '(759)590-8559', 'amysimpson@example.net', 'Unit 0367 Box 2571
+DPO AP 22320', 'Visa', 'Silver'),
+('Amy Ramirez', '001-085-505-3016', 'caleb15@example.com', '32854 Adam Crossing Suite 757
+Cindyhaven, OK 93632', 'Visa', 'Gold'),
+('Andre Huffman', '297.404.8390', 'jasongarrett@example.net', 'Unit 4072 Box 8991
+DPO AP 86682', 'PayPal', 'Platinum'),
+('Angela Grant', '+1-349-046-1622x89449', 'vsosa@example.com', '1876 Connie Villages Suite 119
+Wintersfort, MA 27733', 'Visa', 'Platinum'),
+('Susan Cooper', '888-307-8885x13800', 'fshepard@example.com', '032 King Inlet Suite 201
+New Sarahville, CT 53481', 'Mastercard', 'Gold'),
+('Susan Miller', '(605)488-7836', 'gjordan@example.org', '934 Robbins Stream Suite 218
+South Bryan, ID 77199', 'Visa', 'Gold'),
+('Jennifer Weber', '427-150-8562x50525', 'kjimenez@example.net', '93992 Banks Manor
+New Leahview, FM 96623', 'Visa', 'Platinum'),
+('Benjamin Brown', '+1-113-141-3039x5007', 'csparks@example.org', '019 Leslie Square
+North Tracyfurt, MA 79351', 'Visa', 'Silver'),
+('Chelsea Salas DDS', '+1-260-617-4362x09933', 'parkerchristopher@example.com', '01218 Wilson Mount
+East Jeffery, MD 82532', 'Visa', 'Platinum'),
+('Tammy Ramirez', '553-041-8611', 'peter49@example.org', '44166 Kathy Throughway
+Youngville, MN 40001', 'Mastercard', 'Platinum'),
+('Seth Bishop', '076-219-7374x886', 'lindseyjohnson@example.net', '7024 Clark Lock
+Vasquezbury, SD 67024', 'Visa', 'Silver'),
+('Madeline Berry', '698.780.5863', 'dalton71@example.org', '1955 Michael Squares Apt. 069
+Stephanieport, SC 43564', 'Mastercard', 'Gold'),
+('Patricia Chan MD', '594.069.3471x24171', 'shannon45@example.org', '2409 Linda Way
+Adrienneberg, WI 83194', 'PayPal', 'Platinum'),
+('Andrew Swanson', '(075)852-2728x14231', 'joseph12@example.net', 'USNS Wells
+FPO AP 91870', 'Visa', 'Silver'),
+('Angela Cobb', '887-260-2413', 'xwilliamson@example.net', '73344 Pennington Trail Suite 060
+Edwardsmouth, KS 48067', 'Visa', 'Gold'),
+('Matthew Schroeder', '(218)211-9075x00027', 'conwayrichard@example.org', '188 Jackson Viaduct
+West Brad, SC 13775', 'Mastercard', 'Gold'),
+('Stephanie Salazar', '(573)056-3712x34611', 'petersonanthony@example.org', '4944 Matthew Road
+Andrewfurt, VI 42719', 'Visa', 'Platinum'),
+('Kevin Walker', '789-918-1013', 'pbarnett@example.com', '8383 Watkins Inlet Apt. 939
+New Elizabeth, SC 64197', 'PayPal', 'Gold'),
+('Bradley Chambers', '563.913.3090x1618', 'traceychristensen@example.org', '839 Bonnie Junctions
+Port Sarahmouth, MI 55994', 'Mastercard', 'Platinum'),
+('Tamara Lopez', '+1-514-651-6944', 'petersendavid@example.org', '0580 Bell Skyway Suite 437
+Blakemouth, GA 76924', 'Visa', 'Gold'),
+('Kimberly Graham', '+1-949-049-7016x254', 'barbara07@example.net', 'Unit 3764 Box 3014
+DPO AA 47502', 'Visa', 'Platinum'),
+('Donald Callahan MD', '+1-575-672-1036x173', 'smithdonna@example.org', '0959 Michael Station
+Mirandamouth, PR 79508', 'Mastercard', 'Silver'),
+('Melissa Smith', '+1-276-936-1630', 'joshua90@example.net', '519 Manuel Views
+Fryetown, ID 05962', 'Mastercard', 'Silver'),
+('Misty Martinez', '923-373-9230x4028', 'bbrooks@example.net', '73309 Ross Meadow
+South Kellieland, VI 68121', 'PayPal', 'Gold'),
+('Ms. Julie Moore', '895-960-2870', 'meredith40@example.com', '64497 Parker Summit Suite 834
+North Victoriabury, HI 96034', 'PayPal', 'Gold'),
+('Michael Bailey', '2674753119', 'vmontgomery@example.com', '9626 Carrie Island
+Port Jimmy, NE 68262', 'Visa', 'Platinum'),
+('Dr. Robert Jacobs', '001-240-400-5799x18560', 'tfrench@example.net', '038 Katelyn Streets Apt. 079
+Woodsmouth, WY 55469', 'Mastercard', 'Silver'),
+('Aaron Houston', '246.085.8777', 'lesterrichard@example.net', '98151 Rivers Forest
+South Annaburgh, DC 11690', 'Visa', 'Gold'),
+('Michelle Sosa', '130.438.2325', 'josephlandry@example.com', '348 Hubbard Port Apt. 830
+Port Janice, NH 89684', 'Visa', 'Gold'),
+('Lindsay Combs', '947.300.2173', 'vanessaescobar@example.net', '6162 Rich Isle Suite 678
+Ruthville, OH 49484', 'PayPal', 'Platinum'),
+('Brittany Davis', '105-360-1782x5611', 'lisaklein@example.net', 'Unit 3943 Box 6222
+DPO AA 17423', 'Mastercard', 'Gold'),
+('Shawn Andersen', '001-072-582-3868x17554', 'keithwilliam@example.org', '773 John Stream Suite 449
+Allenville, TN 57226', 'Visa', 'Platinum'),
+('Heather Porter', '475.464.0863x085', 'james89@example.com', '1952 Timothy Fort Suite 463
+Smithtown, VT 28731', 'Visa', 'Gold'),
+('Jose Orozco', '066-375-3982x94744', 'gnovak@example.com', 'USCGC Gonzalez
+FPO AE 13762', 'Visa', 'Platinum'),
+('Ronald Henderson', '001-827-331-2866x2739', 'vhodge@example.net', '957 Holt Island
+Perezview, SC 32699', 'PayPal', 'Platinum'),
+('Andrew Holmes MD', '+1-092-756-6958x9732', 'nancywelch@example.net', '572 Amy Shore Suite 829
+New Davidbury, KY 86947', 'PayPal', 'Silver'),
+('Monica Duncan', '057.345.7397', 'heather03@example.org', '747 Parker Loaf Suite 407
+Janetland, RI 87091', 'Visa', 'Platinum'),
+('Joel Jones', '+1-525-521-1883x44105', 'rebeccawilliams@example.org', '369 David Mills
+South Lesliebury, PR 62035', 'PayPal', 'Silver'),
+('Allison Anderson', '(522)891-6689x128', 'stanleybrenda@example.org', '0851 King Camp Apt. 043
+Jamesport, NY 29543', 'Mastercard', 'Platinum'),
+('Nicole Morrow', '+1-333-372-1463', 'joseph24@example.org', '765 Drake Square Apt. 066
+South Jennifer, VA 02394', 'Mastercard', 'Platinum'),
+('Joshua Reeves', '001-695-232-3636', 'julieanderson@example.com', '506 Smith Island
+New Justinborough, OR 65366', 'PayPal', 'Platinum'),
+('Leslie Lloyd', '386-236-6747', 'isilva@example.net', '8160 Amy Burg Suite 907
+Hensleychester, WA 09772', 'Mastercard', 'Gold'),
+('Keith Young', '(497)481-1620', 'michellecampbell@example.net', '89812 Faulkner Corners Apt. 163
+North William, DE 62962', 'PayPal', 'Gold'),
+('Ruth Mann', '001-549-627-5321x6535', 'amanda66@example.com', '4707 Mcdonald Estates Apt. 766
+Rachelside, NC 75397', 'Mastercard', 'Gold'),
+('Calvin Lee', '1799529439', 'dmcgee@example.org', '2224 Stephanie Via Apt. 690
+Griffinbury, LA 55358', 'PayPal', 'Silver'),
+('Michele Cortez', '432.093.7153', 'danielbaker@example.net', '8800 Rebecca Stream Apt. 589
+North Markland, ND 01360', 'PayPal', 'Gold'),
+('Ryan Nguyen', '272-377-8207x1152', 'lauralawrence@example.com', '68687 William Fort Suite 211
+Manningtown, TX 21201', 'PayPal', 'Platinum'),
+('Danielle Snow', '001-259-517-2435x5864', 'hernandezjared@example.com', '782 Mark Shoal
+Gutierrezville, AZ 37449', 'Visa', 'Silver'),
+('Angela White', '+1-176-783-5193x51113', 'darrenlewis@example.org', '7017 Gwendolyn Plains Apt. 462
+North Melissachester, NE 95776', 'Mastercard', 'Platinum'),
+('Katherine Rodriguez', '425-790-2595', 'zdavis@example.net', '19565 Caroline Freeway
+Janetshire, OK 42499', 'PayPal', 'Silver'),
+('Mario Morrison', '+1-947-712-9885', 'nross@example.org', '247 Charles Shoals
+North Joanna, CO 57248', 'Visa', 'Silver'),
+('Denise Cook', '728.752.6733x5080', 'gardnerjeremy@example.org', '15971 Duncan Pass
+Patrickfurt, NH 84675', 'PayPal', 'Silver'),
+('Donald Davidson', '001-779-851-8452x2642', 'kellyamber@example.org', '10928 Fox Wall Apt. 407
+North John, KY 40450', 'Mastercard', 'Gold'),
+('Jennifer Marshall', '021.658.3117x75966', 'martinezmichael@example.net', '846 Robert Squares Suite 161
+North David, MD 16603', 'Mastercard', 'Platinum');
+
+-- creating product category--
+
+CREATE TABLE productCategory(
+	CategoryID INT auto_increment PRIMARY KEY,
+    CategoryName VARCHAR(70) NOT NULL
+);
+
+INSERT INTO productCategory(CategoryName)
+VALUES('Electronics'),
+ ('Food & Beverage'),
+ ('Home & Garden'),
+ ('Sports & Outdoors'),
+ ('Music & Musical Instruments'),
+ ('Health & Wellness'),
+ ('Toys & Games');
+
+drop table Product;
+-- creating product table--
+CREATE TABLE Product (
+  ProductID INT PRIMARY KEY,
+  ProductName VARCHAR(255) NOT NULL,
+  ProductBrand VARCHAR(255) NOT NULL,
+  AvailableQty INT ,
+  ProductReviews INT,
+  ProductDescription TEXT,
+  ProductPrice DECIMAL(10,2) NOT NULL,
+  categoryID INT,
+  FOREIGN KEY (categoryID) REFERENCES productCategory(categoryID)
+);
+
+INSERT INTO Product (ProductID, ProductName, ProductBrand, AvailableQty, ProductReviews, ProductDescription, ProductPrice,categoryid)
+VALUES
+(1, 'Cormier-Bins', 'Blue Ocean', 499, 2, 'The latest model with advanced features.', 6266, 6),
+(2, 'Wunsch,SkilesandMosciski', 'Radiant', 33, 5, 'A large and powerful tablet.', 5575, 1),
+(3, 'Kunze-Kutch', 'Spark', 112, 2, 'Noise-cancelling and comfortable.', 2025, 4),
+(4, 'Heidenreich-Ernser', 'Evergreen', 378, 3, 'A powerful device for professionals.', 9071, 7),
+(5, 'Schumm-Skiles', 'Skyline', 18, 3, 'A powerful device for professionals.', 4127, 6),
+(6, 'JohnsLLC', 'Thunderbird', 20, 2, 'A large and powerful tablet.', 9937, 7),
+(7, 'FayGroup', 'Apex', 370, 4, 'A smartwatch with health monitoring features.', 9298, 7),
+(8, 'Marvin,RutherfordandLynch', 'Rainbow', 150, 2, 'A powerful device for professionals.', 1645, 5), 
+(9, 'Gutkowski,HilpertandKoch', 'Sunrise', 290, 4, 'A powerful device for professionals.', 8907, 4), 
+(10, 'Herzog,RitchieandWolf', 'Sunset', 94, 3, 'Noise-cancelling and comfortable.', 8012, 6), 
+(11, 'FritschGroup', 'Phoenix', 218, 3, 'Stream 4K HDR content with the latest device and Siri remote.', 6949, 7), 
+(12, 'Weber,RathandReilly', 'Dove', 496, 5, 'A powerful device for professionals.', 8036, 2), 
+(13, 'ThielGroup', 'Firebird', 219, 5, 'Stream 4K HDR content with the latest device and Siri remote.', 5983, 3), 
+(14, 'WaelchiGroup', 'Oceanic', 32, 4, 'A powerful device for professionals.', 3629, 3), 
+(15, 'Ruecker,MertzandHagenes', 'Stellar', 366, 3, 'A large and powerful tablet.', 8583, 1), 
+(16, 'KlockoandSons', 'Galactic', 219, 4, 'A powerful device for professionals.', 8889, 1), 
+(17, 'DuBuque-Cormier', 'Aurora', 360, 2, 'Stream 4K HDR content with the latest device and Siri remote.', 3274, 5), 
+(18, 'HermannLLC', 'Skyhawk', 309, 4, 'Stream 4K HDR content with the latest device and Siri remote.', 9108, 2), 
+(19, 'Mayert-Glover', 'Eclipse', 491, 2, 'The latest model with advanced features.', 2511, 6),
+(20, 'Boehm,StrackeandDeckow', 'Diamond', 305, 3, 'A powerful device for professionals.', 520, 3), 
+(21, 'Durgan,GoyetteandZemlak', 'Golden', 117, 4, 'A powerful device for professionals.', 6926, 5), 
+(22, 'Gleason-Muller', 'Silver', 167, 5, 'Stream 4K HDR content with the latest device and Siri remote.', 1064, 1), 
+(23, 'Schuster-Grant', 'Bronze', 397, 5, 'A powerful device for professionals.', 6025, 5), 
+(24, 'HintzandSons', 'Platinum', 211, 3, 'A smartwatch with health monitoring features.', 3246, 2), 
+(25, 'HintzInc', 'Sapphire', 82, 3, 'A smartwatch with health monitoring features.', 8436, 2), 
+(26, 'Rosenbaum-Corkery', 'Ruby', 377, 3, 'A smartwatch with health monitoring features.', 5585, 1), 
+(27, 'Wolf-Halvorson', 'Emerald', 253, 2, 'A smartwatch with health monitoring features.', 7044, 2), 
+(28, 'NicolasLLC', 'Opal', 171, 2, 'A smartwatch with health monitoring features.', 4010, 4), 
+(29, 'Altenwerth-Thompson', 'Topaz', 115, 5, 'Stream 4K HDR content with the latest device and Siri remote.', 5569, 2), 
+(30, 'Nikolaus,MuellerandJakubowski', 'Pearl', 479, 4, 'A large and powerful tablet.', 3190, 2), 
+(31, 'Fisher,GoldnerandDare', 'Diamond', 14, 3, 'A powerful device for professionals.', 472, 6), 
+(32, 'Volkman,GottliebandFay', 'Ivory', 38, 2, 'Noise-cancelling and comfortable.', 1305, 6), 
+(33, 'Lowe-Fadel', 'Mystic', 135, 3, 'A powerful device for professionals.', 6034, 4), 
+(34, 'Hodkiewicz-Kessler', 'Cosmic', 353, 3, 'A large and powerful tablet.', 3585, 1), 
+(35, 'BergeLLC', 'Galaxy', 329, 2, 'Stream 4K HDR content with the latest device and Siri remote.', 4029, 2), 
+(36, 'HagenesLLC', 'Solar', 347, 3, 'Noise-cancelling and comfortable.', 2804, 1), 
+(37, 'Ebert,EmardandWalter', 'Lunar', 339, 3, 'A smartwatch with health monitoring features.', 6889, 5), 
+(38, 'Hane-Hilpert', 'Nebula', 496, 2, 'A large and powerful tablet.', 8902, 6), 
+(39, 'SengerGroup', 'Meteor', 479, 5, 'The latest model with advanced features.', 9492, 1), 
+(40, 'Wolff,SchmidtandKeebler', 'Stardust', 13, 2, 'A smartwatch with health monitoring features.', 9243, 2), 
+(41, 'Lang-Watsica', 'Celestial', 462, 2, 'Stream 4K HDR content with the latest device and Siri remote.', 3301, 3), 
+(42, 'Kassulke-Pfeffer', 'Galactic', 128, 4, 'A smartwatch with health monitoring features.', 1154, 6), 
+(43, 'BergstromandSons', 'Cosmic', 123, 3, 'A large and powerful tablet.', 9133, 3), 
+(44, 'Gerhold,FeilandRoob', 'Universe', 113, 3, 'Stream 4K HDR content with the latest device and Siri remote.', 9315, 1),
+(45, 'Collins-Kiehn', 'Orbit', 50, 3, 'A powerful device for professionals.', 200, 4), 
+(46, 'Berge-Satterfield', 'Stellar', 13, 5, 'A powerful device for professionals.', 5143, 3),
+(47, 'Harris,WaelchiandMcCullough', 'Meteor', 418, 3, 'A smartwatch with health monitoring features.', 6462, 2), 
+(48, 'KiehnGroup', 'Galactic', 448, 3, 'Stream 4K HDR content with the latest device and Siri remote.', 1647, 3), 
+(49, 'FaheyInc', 'Solar', 338, 3, 'A powerful device for professionals.', 6509, 1), 
+(50, 'Farrell,MarksandLangworth', 'Lunar', 463, 2, 'A large and powerful tablet.', 6730, 7), 
+(51, 'KleinLLC', 'Solaris', 353, 4, 'A smartwatch with health monitoring features.', 8989, 3), 
+(52, 'Terry-Renner', 'Aquatic', 150, 2, 'The latest model with advanced features.', 3011, 4), 
+(53, 'Ratke,GoodwinandRussel', 'Ocean', 338, 3, 'A smartwatch with health monitoring features.', 7799, 5), 
+(54, 'Kohler-Ondricka', 'River', 240, 2, 'A smartwatch with health monitoring features.', 8874, 1), 
+(55, 'WittingInc', 'Stream', 114, 3, 'Noise-cancelling and comfortable.', 533, 1), 
+(56, 'Mayer,SatterfieldandKshlerin', 'Cascade', 96, 2, 'A powerful device for professionals.', 9316, 5),
+(57, 'KeeblerLLC', 'Fountain', 21, 4, 'Stream 4K HDR content with the latest device and Siri remote.', 3809, 5), 
+(58, 'Sporer-Parisian', 'River', 446, 4, 'The latest model with advanced features.', 7617, 3), 
+(59, 'Leuschke,GrahamandWalker', 'Stream', 342, 4, 'A smartwatch with health monitoring features.', 8548, 3), 
+(60, 'Ernser,LeschandWyman', 'Mountain', 134, 2, 'A smartwatch with health monitoring features.', 3196, 3), 
+(61, 'Lehner,KozeyandKuhlman', 'Alpine', 269, 2, 'A powerful device for professionals.', 4762, 7), 
+(62, 'Robel,SchimmelandMonahan', 'Summit', 259, 3, 'A large and powerful tablet.', 8685, 5), 
+(63, 'Crona,BernierandThompson', 'Peak', 197, 4, 'Noise-cancelling and comfortable.', 4131, 4), 
+(64, 'RoobInc', 'Mountain', 268, 5, 'Noise-cancelling and comfortable.', 2723, 1), 
+(65, 'Wilkinson,NienowandSchroeder', 'Alpine', 161, 5, 'Noise-cancelling and comfortable.', 3109, 1), 
+(66, 'Fisher-Parker', 'Summit', 29, 2, 'Noise-cancelling and comfortable.', 4698, 7), 
+(67, 'VonRuedenGroup', 'Peak', 64, 3, 'The latest model with advanced features.', 9349, 3), 
+(68, 'BoyleandSons', 'Hill', 361, 4, 'Noise-cancelling and comfortable.', 7270, 1), 
+(69, 'WolffGroup', 'Valley', 400, 5, 'Stream 4K HDR content with the latest device and Siri remote.', 1880, 5), 
+(70, 'Bogisich,BeattyandHirthe', 'Forest', 437, 3, 'A large and powerful tablet.', 6876, 6), 
+(71, 'LehnerGroup', 'Jungle', 202, 2, 'The latest model with advanced features.', 927, 3), 
+(72, 'MetzLLC', 'Woods', 255, 4, 'A powerful device for professionals.', 6946, 2), 
+(73, 'Bruen,OsinskiandMante', 'Rainforest', 271, 2, 'A large and powerful tablet.', 9949, 1), 
+(74, 'McKenzieGroup', 'Wild', 194, 4, 'A powerful device for professionals.', 7163, 5), 
+(75, 'Towne,HettingerandPaucek', 'Savannah', 47, 2, 'A smartwatch with health monitoring features.', 3278, 6), 
+(76, 'Altenwerth-Daniel', 'Prairie', 77, 4, 'A smartwatch with health monitoring features.', 411, 7), 
+(77, 'Ratke-Buckridge', 'Desert', 253, 4, 'A powerful device for professionals.', 5525, 2), 
+(78, 'Herman,McDermottandAltenwerth', 'Sand', 183, 4, 'A smartwatch with health monitoring features.', 5336, 2), 
+(79, 'Ritchie-Marquardt', 'Dunes', 346, 4, 'Stream 4K HDR content with the latest device and Siri remote.', 1811, 1), 
+(80, 'Howell,DickinsonandDietrich', 'Rocks', 307, 2, 'A large and powerful tablet.', 3444, 7), 
+(81, 'Cruickshank,WalkerandBins', 'Canyon', 2, 3, 'Stream 4K HDR content with the latest device and Siri remote.', 2344, 6), 
+(82, 'KesslerandSons', 'Glacier', 203, 2, 'A smartwatch with health monitoring features.', 6402, 1), 
+(83, 'Stiedemann,MrazandWalter', 'Arctic', 354, 3, 'A powerful device for professionals.', 4116, 4), 
+(84, 'Mann-Friesen', 'Tundra', 351, 4, 'Noise-cancelling and comfortable.', 3647, 5), 
+(85, 'RippinGroup', 'Polar', 414, 3, 'Stream 4K HDR content with the latest device and Siri remote.', 8301, 5), 
+(86, "Streich-O'Connell", 'Arctic', 67, 5, 'A large and powerful tablet.', 3929, 3), 
+(87, 'HauckGroup', 'Tundra', 105, 2, 'The latest model with advanced features.', 4866, 7), 
+(88, 'Swaniawski,NienowandStanton', 'Polar', 324, 3, 'A powerful device for professionals.', 7140, 1), 
+(89, 'Pouros-Hilll', 'Alpine', 148, 5, 'Noise-cancelling and comfortable.', 1998, 4), 
+(90, 'Hartmann-Keebler', 'Arctic', 401, 4, 'The latest model with advanced features.', 8317, 3), 
+(91, 'SchowalterInc', 'Tundra', 265, 4, 'A powerful device for professionals.', 5325, 2), 
+(92, 'Kerluke,ToyandCummerata', 'Polar', 117, 5, 'Noise-cancelling and comfortable.', 8304, 5), 
+(93, 'Bosco,RoobandSchneider', 'Highland', 168, 3, 'A large and powerful tablet.', 5456, 1), 
+(94, 'Williamson,TrantowandKiehn', 'Country', 466, 4, 'The latest model with advanced features.', 1785, 1), 
+(95, 'Lockman-Hartmann', 'River', 383, 3, 'A powerful device for professionals.', 9370, 1), 
+(96, 'Romaguera,HellerandChamplin', 'Stream', 55, 2, 'A smartwatch with health monitoring features.', 1393, 4), 
+(97, 'Bradtke,BeattyandSawayn', 'Lake', 471, 4, 'A large and powerful tablet.', 8949, 6),
+(98, 'Ortiz-Crist', 'Ocean', 485, 2, 'A powerful device for professionals.', 6917, 7), 
+(99, 'SchuppeInc', 'Sea', 250, 2, 'Noise-cancelling and comfortable.', 3699, 7), 
+(100, 'McGlynnandSons', 'Beach.', 324, 3, 'Noise-cancelling and comfortable.', 9004, 3);
+
+-- creating admin table
+CREATE TABLE adminData(
+	AdminID INT NOT NULL auto_increment primary key,
+    AdminName VARCHAR(30),
+    AdminRole VARCHAR(40)
+);
+
+INSERT INTO adminData(AdminName,AdminRole)
+VALUES ('Mallory Cain', 'Customer Service'),
+('Juan Byrd', 'Data Analysis'),
+('Daniel Vargas', 'Marketing'),
+('Richard Davis', 'Order Processing'),
+('Nicole Bryant', 'Marketing'),
+('Robert Moss', 'HR'),
+('Dr. Amy Cohen', 'Data Analysis'),
+('Charles Ortega', 'HR'),
+('Carla Lopez', 'Marketing'),
+('David Harris', 'Customer Service'),
+('Jessica Ellis', 'Financial Management'),
+('Kaylee Cunningham', 'Inventory Management'),
+('Amber Knight MD', 'Financial Management'),
+('Ashley Campbell', 'Data Analysis'),
+('Michelle Miller', 'Financial Management');
+
+
+
+-- 
+drop table coupons;
+CREATE TABLE coupons(
+	coupon_id INT NOT NULL auto_increment primary key,
+    coupon_discount INT NOT NULL,
+    expiry_date date NOT NULL
+    );
+    
+INSERT INTO coupons(coupon_discount,expiry_date) 
+VALUES
+('43', '2023-02-17'),
+('43', '2023-05-10'),
+('13', '2023-07-02'),
+('31', '2023-11-21'),
+('31', '2023-08-11'),
+('27', '2023-11-28'),
+('21', '2023-09-15'),
+('26', '2023-12-17'),
+('36', '2023-07-10'),
+('31', '2023-11-02'),
+('46', '2023-02-02'),
+('26', '2023-01-27'),
+('43', '2023-11-13'),
+('29', '2023-12-24'),
+('43', '2023-03-31'),
+('39', '2023-03-21'),
+('36', '2023-05-22'),
+('17', '2023-11-15'),
+('37', '2023-10-18'),
+('11', '2023-07-30'),
+('37', '2023-07-25'),
+('35', '2023-08-22'),
+('20', '2023-08-28'),
+('21', '2023-04-26'),
+('40', '2023-12-29'),
+('19', '2023-11-27'),
+('26', '2023-12-22'),
+('10', '2023-01-16'),
+('12', '2023-07-07'),
+('41', '2023-06-06'),
+('42', '2023-05-11'),
+('32', '2023-11-22'),
+('30', '2023-12-09'),
+('50', '2023-06-18'),
+('24', '2023-06-20'),
+('29', '2023-10-24'),
+('12', '2023-09-09'),
+('24', '2023-08-12'),
+('32', '2023-07-16'),
+('27', '2023-11-23'),
+('22', '2023-11-07'),
+('46', '2023-11-15'),
+('41', '2023-11-05'),
+('42', '2023-05-15'),
+('45', '2023-10-24'),
+('21', '2023-07-29'),
+('26', '2023-01-24'),
+('27', '2023-01-13'),
+('36', '2023-10-08'),
+('15', '2023-04-09'),
+('16', '2023-01-02'),
+('45', '2023-01-15'),
+('20', '2023-01-16'),
+('10', '2023-12-22'),
+('10', '2023-08-28'),
+('44', '2023-08-07'),
+('40', '2023-03-08'),
+('42', '2023-12-26'),
+('48', '2023-10-30'),
+('22', '2023-03-23'),
+('13', '2023-08-31'),
+('11', '2023-12-14'),
+('50', '2023-03-20'),
+('18', '2023-05-25'),
+('43', '2023-02-14'),
+('25', '2023-05-23'),
+('10', '2023-07-28'),
+('39', '2023-08-21'),
+('22', '2023-02-10'),
+('25', '2023-07-31'),
+('43', '2023-04-21'),
+('33', '2023-10-13'),
+('38', '2023-12-02'),
+('17', '2023-10-21'),
+('46', '2023-11-24'),
+('21', '2023-03-16'),
+('18', '2023-05-09'),
+('41', '2023-01-03'),
+('14', '2023-03-27'),
+('21', '2023-02-03'),
+('40', '2023-06-25'),
+('25', '2023-09-26'),
+('39', '2023-02-10'),
+('27', '2023-08-01'),
+('28', '2023-03-20'),
+('40', '2023-01-18'),
+('37', '2023-12-10'),
+('48', '2023-12-20'),
+('26', '2023-11-01'),
+('37', '2023-06-01'),
+('39', '2023-07-09'),
+('18', '2023-06-15'),
+('25', '2023-12-23'),
+('13', '2023-12-23'),
+('13', '2023-10-10'),
+('27', '2023-02-27'),
+('25', '2023-04-11'),
+('30', '2023-11-30'),
+('21', '2023-07-11'),
+('31', '2023-10-25');
+
+drop table Orders;
+CREATE TABLE Orders(
+	order_id INT NOT NULL auto_increment primary key,
+    order_date_time datetime default now(),
+    delivery_address varchar(90) NOT NULL,
+    order_status varchar(50) NOT NULL,
+    order_amount INT NOT NULL,
+    payment_mode varchar(50) NOT NULL,
+    coupon_id INT,
+    tracking_id INT NOT NULL,
+    foreign key(coupon_id) references coupons(coupon_id),
+    foreign key(tracking_id) references Order_details(tracking_id)
+    );
+    
+INSERT INTO Orders(delivery_address,order_status,order_amount,payment_mode,tracking_id)
+VALUES
+('73496 Brown Curve Suite 991
+South Allisontown, GU 19447', 'Delivered', '53.71', 'Visa', '26'),
+('3308 Wilson Pine Suite 075
+Davidview, MA 62104', 'Delivered', '3.24', 'Visa', '84'),
+('59732 Dean Knoll
+West Tammytown, WI 51793', 'Payment Complete', '492.09', 'PayPal', '83'),
+('3343 Henderson Springs Suite 350
+New Christinebury, OH 94731', 'Delivered', '187.59', 'Visa', '64'),
+('425 Dorsey Tunnel Suite 844
+Denisebury, ME 58233', 'Dispatched', '284.04', 'Visa', '73'),
+('4769 Lindsey Ports Suite 584
+New Gregory, KS 08321', 'Payment Complete', '230.86', 'Mastercard', '41'),
+('27036 Ferguson Stream Suite 775
+South Alexander, OH 39832', 'Dispatched', '400.02', 'PayPal', '22'),
+('37910 Joseph Haven Apt. 090
+Lake Allisonside, FM 16561', 'Payment Complete', '463.59', 'Mastercard', '12'),
+('PSC 0408, Box 1681
+APO AP 10852', 'Delivered', '356.69', 'PayPal', '69'),
+('74401 Hodges Way
+West Jennifer, PR 13378', 'Dispatched', '19.14', 'Mastercard', '17'),
+('6552 Michael Ramp Suite 873
+East Monique, NH 77401', 'Dispatched', '200.91', 'Visa', '73'),
+('1930 Leslie Drive Apt. 344
+Kimberlystad, GU 06269', 'Payment Complete', '460.34', 'Visa', '26'),
+('73203 Morris Overpass Apt. 912
+Carlsonhaven, MA 52296', 'Dispatched', '16.73', 'PayPal', '14'),
+('351 Deborah Plain
+South Patrick, AS 50817', 'Dispatched', '40.70', 'PayPal', '25'),
+('8904 Rachel Tunnel Suite 105
+Port Vanessa, MI 21428', 'Delivered', '383.91', 'PayPal', '97'),
+('642 Campbell Centers
+Whitestad, KY 36195', 'Payment Complete', '421.86', 'Mastercard', '40'),
+('8127 Tony Garden
+Aliceshire, ND 42109', 'Payment Complete', '190.32', 'Visa', '76'),
+('4776 Miller Trail Apt. 509
+South Chelseabury, MH 88586', 'Delivered', '235.58', 'Mastercard', '20'),
+('320 Mckee Ferry
+South Cameron, WI 31160', 'Payment Complete', '197.72', 'Mastercard', '13'),
+('8941 Davis Locks Apt. 990
+East Rebecca, NM 86781', 'Delivered', '432.39', 'PayPal', '15'),
+('PSC 4731, Box 1487
+APO AA 82902', 'Payment Complete', '280.89', 'PayPal', '36'),
+('72365 Phillip Field
+Brettchester, KS 86376', 'Delivered', '276.00', 'PayPal', '32'),
+('USS Moore
+FPO AE 80572', 'Delivered', '399.41', 'PayPal', '55'),
+('926 Stephanie Island
+Tonyhaven, PW 82388', 'Payment Complete', '214.67', 'PayPal', '28'),
+('1013 Hubbard Road Apt. 920
+Carlsonton, AL 65140', 'Payment Complete', '214.18', 'Visa', '39'),
+('165 West Unions
+West Nicole, SD 43236', 'Payment Complete', '139.09', 'Visa', '57'),
+('2953 Jones Spring
+Brownberg, RI 86558', 'Dispatched', '207.89', 'Visa', '90'),
+('693 Jeffrey Courts
+Port Jessica, CT 03817', 'Delivered', '491.05', 'PayPal', '21'),
+('9005 Kelly Tunnel Apt. 072
+West Chrisberg, WI 39007', 'Payment Complete', '131.58', 'PayPal', '8'),
+('97316 Oneal Motorway Apt. 524
+South Angelaburgh, IA 48699', 'Dispatched', '496.30', 'PayPal', '80'),
+('60237 Quinn Ferry Apt. 934
+East John, SC 38298', 'Payment Complete', '140.94', 'Visa', '52'),
+('7566 Todd Square
+South Jasmine, MO 15814', 'Delivered', '431.37', 'PayPal', '89'),
+('13803 Carrie Summit
+New Sarahton, NM 82763', 'Delivered', '210.93', 'Visa', '92'),
+('1613 Gloria Cape Apt. 295
+Westland, WV 94437', 'Payment Complete', '348.62', 'PayPal', '87'),
+('PSC 7957, Box 5521
+APO AP 78982', 'Dispatched', '437.05', 'PayPal', '74'),
+('0129 King Highway Suite 876
+Vegamouth, OK 81159', 'Dispatched', '5.30', 'PayPal', '65'),
+('657 Christina Avenue Suite 305
+Smithmouth, MO 69894', 'Dispatched', '300.82', 'Mastercard', '5'),
+('21154 Timothy Well Apt. 097
+Port Marissa, PA 03377', 'Delivered', '484.48', 'Mastercard', '55'),
+('25014 Donna Viaduct Apt. 008
+South Darrell, NV 38695', 'Dispatched', '403.80', 'Mastercard', '66'),
+('32494 Mark Plain Suite 266
+Lake Kelli, MN 08978', 'Payment Complete', '143.10', 'Mastercard', '13'),
+('7523 Teresa Rapids
+South Kathy, FL 61034', 'Payment Complete', '11.37', 'Visa', '41'),
+('5077 Jeffrey Greens Apt. 968
+Garnertown, AL 49074', 'Dispatched', '495.84', 'PayPal', '99'),
+('PSC 1056, Box 5531
+APO AE 90941', 'Payment Complete', '161.57', 'PayPal', '18'),
+('7540 Kelly Ways
+North Miranda, OH 23165', 'Dispatched', '250.74', 'Visa', '62'),
+('64819 Gomez Hills Suite 628
+East Jamesside, GU 00611', 'Dispatched', '392.48', 'PayPal', '29'),
+('49081 Jonathan Radial Suite 388
+Jenniferland, KY 66533', 'Payment Complete', '170.06', 'Mastercard', '47'),
+('8914 Kelli Flats
+Andersonberg, MH 49188', 'Payment Complete', '417.76', 'Mastercard', '65'),
+('4206 Thomas Cliff
+Raymondside, AL 70338', 'Dispatched', '415.66', 'Mastercard', '32'),
+('638 Sanders Avenue
+North Erikaburgh, WI 15945', 'Dispatched', '91.54', 'Visa', '92'),
+('63219 Micheal Harbor
+South Susanside, OR 61780', 'Payment Complete', '454.71', 'Visa', '44'),
+('112 Nelson Tunnel
+Craigchester, KS 18548', 'Dispatched', '373.42', 'Visa', '53'),
+('9498 Jamie Dam
+Eileenberg, MT 44045', 'Delivered', '453.61', 'Mastercard', '81'),
+('503 Jose Village
+Dustinchester, VA 76686', 'Delivered', '334.19', 'Visa', '11'),
+('22734 Forbes Route
+Lake Margaret, WV 00823', 'Dispatched', '419.60', 'PayPal', '27'),
+('582 Andrew Harbor
+Port Melanieborough, CA 19194', 'Payment Complete', '186.98', 'Mastercard', '64'),
+('0549 Desiree Villages
+Brianfort, TX 88853', 'Delivered', '186.33', 'Visa', '22'),
+('544 Rivera Brooks
+Port Eric, MT 41216', 'Dispatched', '160.99', 'Mastercard', '80'),
+('82829 Howard Track
+South Christopher, LA 14623', 'Delivered', '261.85', 'PayPal', '54'),
+('PSC 4131, Box 3543
+APO AP 12497', 'Payment Complete', '222.59', 'Mastercard', '76'),
+('224 Mendoza Summit
+Huangport, VT 90509', 'Delivered', '406.48', 'Mastercard', '51'),
+('137 Catherine Lights
+Port Jessica, MP 08651', 'Delivered', '218.29', 'Mastercard', '47'),
+('78085 Robert Fall
+Nicholasville, WY 62121', 'Payment Complete', '459.00', 'Mastercard', '33'),
+('676 Perkins Mall
+Thompsonmouth, NE 68836', 'Dispatched', '351.24', 'Visa', '10'),
+('0369 Charles Manors Apt. 685
+Whitechester, AR 59415', 'Payment Complete', '331.41', 'PayPal', '46'),
+('49537 Buck Trafficway
+East Russellburgh, MT 95763', 'Dispatched', '294.99', 'PayPal', '74'),
+('698 Fowler Ports
+Knightburgh, ND 34425', 'Dispatched', '307.25', 'PayPal', '81'),
+('20500 Bishop Corner Apt. 323
+New Johnnyhaven, KS 58079', 'Payment Complete', '216.67', 'Mastercard', '23'),
+('790 Stephen Mountain
+Reneeberg, MP 20339', 'Dispatched', '289.80', 'Mastercard', '99'),
+('379 Brian Turnpike
+East Tarahaven, CT 94434', 'Dispatched', '85.80', 'Mastercard', '42'),
+('809 Joseph Fields Suite 099
+New Jason, MH 06498', 'Delivered', '40.07', 'Visa', '70'),
+('8902 Fuentes Port
+North Sherry, AS 34418', 'Delivered', '257.26', 'Mastercard', '2'),
+('5677 Sharp Overpass
+East Anthonychester, CA 67089', 'Delivered', '367.94', 'PayPal', '82'),
+('595 Williams Mountain Suite 637
+Graymouth, PA 07857', 'Delivered', '315.19', 'PayPal', '33'),
+('USCGC Farmer
+FPO AP 99131', 'Payment Complete', '429.34', 'Mastercard', '15'),
+('238 Tammy Spring Suite 272
+South Christopherfort, NE 12048', 'Dispatched', '230.51', 'Visa', '72'),
+('8953 Diana Inlet
+Ryanland, MN 84167', 'Dispatched', '115.62', 'Visa', '79'),
+('USNS Newman
+FPO AP 68885', 'Delivered', '7.92', 'Visa', '65'),
+('USNV Mercado
+FPO AE 68659', 'Delivered', '210.44', 'PayPal', '64'),
+('86954 Gallagher Crossroad
+Benjaminton, OH 24606', 'Dispatched', '309.91', 'Mastercard', '56'),
+('476 Angela Ports Apt. 692
+Adammouth, SC 85608', 'Delivered', '302.61', 'Mastercard', '5'),
+('473 Juan Loop Suite 304
+Lake Kylemouth, VA 48187', 'Dispatched', '94.86', 'PayPal', '81'),
+('8429 Charlene Throughway
+Brownside, PR 00823', 'Dispatched', '211.25', 'PayPal', '65'),
+('135 Sean Avenue
+Port Feliciaburgh, SD 07654', 'Delivered', '371.52', 'PayPal', '31'),
+('25980 Munoz Garden
+Robertton, TX 88019', 'Payment Complete', '466.95', 'PayPal', '14'),
+('009 Patricia Plains
+East Robert, FM 62583', 'Delivered', '74.96', 'PayPal', '76'),
+('76980 Moore Port
+Scottburgh, ME 14749', 'Dispatched', '302.62', 'Mastercard', '38'),
+('4002 David Drive
+Amyberg, VT 51666', 'Delivered', '2.38', 'Visa', '91'),
+('4914 Jordan Junctions
+East Amber, MP 78088', 'Dispatched', '283.41', 'PayPal', '58'),
+('054 Cook Haven
+Port Billy, MO 75838', 'Payment Complete', '120.48', 'PayPal', '78'),
+('1371 Molly Forges
+Jesseview, WV 18402', 'Dispatched', '356.72', 'Mastercard', '32'),
+('20651 Joshua Village
+Rebeccamouth, NY 81799', 'Delivered', '125.25', 'Visa', '37'),
+('4769 Ramirez Via
+Meredithbury, CT 50118', 'Payment Complete', '382.04', 'PayPal', '76'),
+('756 Michael Garden
+Richardfort, PW 87436', 'Delivered', '41.61', 'PayPal', '93'),
+('PSC 5456, Box 6982
+APO AA 27967', 'Payment Complete', '309.01', 'PayPal', '58'),
+('89306 Nicole Road Suite 049
+West Alvin, AS 08993', 'Dispatched', '57.34', 'Mastercard', '26'),
+('7389 Margaret Point
+West Kaitlin, AS 92321', 'Payment Complete', '16.44', 'Mastercard', '56'),
+('04004 Katrina Squares Suite 830
+Ashleyville, CO 79862', 'Delivered', '46.57', 'Visa', '97'),
+('21294 Peterson Point
+Ericville, WV 41302', 'Delivered', '438.21', 'PayPal', '67'),
+('11573 Brown Junctions Apt. 586
+New Michelle, GA 31881', 'Dispatched', '52.66', 'Visa', '24'),
+('0246 James Orchard
+South Karenside, UT 08007', 'Payment Complete', '441.52', 'PayPal', '49');
+
+
+
+
+CREATE TABLE Order_details(
+	tracking_id INT NOT NULL primary key auto_increment,
+    shipper_name varchar(80) NOT NULL,
+    location varchar(90) NOT NULL,
+    expected_delivery_date date NOT NULL
+    );
+    
+    
+INSERT INTO Order_details(shipper_name,location,expected_delivery_date)
+VALUES
+('Jason Stone', '7173 Yvonne Dale
+North Margaretburgh, WV 52109', '2023-07-31'),
+('Samantha Harrison', '2407 Daniel Highway
+West Thomas, MH 67692', '2023-06-25'),
+('Angela Frazier', '3985 Robinson Mill
+Waynestad, MO 66257', '2023-03-13'),
+('Lisa Mullins', '24269 Lawrence Greens
+Pierceberg, VI 78784', '2023-11-26'),
+('Regina Hall', '568 Dustin Grove
+New Amandaborough, DC 38177', '2023-05-13'),
+('Debbie Hoover', '89059 Christopher Hills Apt. 657
+East Olivia, KY 16907', '2023-07-13'),
+('Whitney Reilly', '72593 Garcia Ways
+East Danielfurt, MT 97513', '2023-10-24'),
+('Gary Marks', 'USNV Watts
+FPO AE 56108', '2023-06-17'),
+('Brian Mosley', '48127 Hayes Islands
+West Micheleberg, GU 65651', '2023-01-27'),
+('Colleen Farley', '7596 Taylor Bypass Apt. 725
+North Nicole, MS 06088', '2023-07-19'),
+('David Barnes', '1834 Jones Island
+Lake Patrickbury, NV 72075', '2023-02-12'),
+('Joshua Cervantes', '185 Ward Mill Suite 806
+South Tracey, WI 47974', '2023-04-23'),
+('Brian Jensen', '53289 Howell Junction
+Carterville, WI 96280', '2023-01-12'),
+('Barbara Guzman', '544 Rubio Streets Apt. 824
+Petersonfurt, GU 52189', '2023-12-30'),
+('Gregory Cooper', '06280 Juan Springs
+Alexandermouth, MT 96134', '2023-10-19'),
+('Theresa Frost', '4931 Timothy Skyway Apt. 591
+Lake Valeriefurt, AZ 15471', '2023-04-01'),
+('Kristen Murphy', '218 Jacob Square Suite 265
+Ruizchester, ND 83859', '2023-12-05'),
+('Nathan Myers', '816 Angela Court
+Josephberg, PA 23868', '2023-06-27'),
+('Lindsey Cordova', '31023 Kevin Extension
+Port Jasonburgh, MD 35594', '2023-06-13'),
+('Karen Clarke', '90644 Amy Forest
+North Stevenmouth, MN 42802', '2023-05-05'),
+('Cody Evans', 'USNS Franklin
+FPO AE 74548', '2023-05-10'),
+('Shaun Osborne', '09051 Timothy Canyon
+Miachester, MH 38542', '2023-10-13'),
+('Eric Bell', '0500 Mike Port
+Conwayhaven, TN 29691', '2023-09-09'),
+('James Odom', '737 Santos Knoll
+Port Anthony, AS 04383', '2023-12-14'),
+('Russell Davis', '96595 Martinez Course Suite 474
+Colemouth, MS 15846', '2023-12-27'),
+('Keith Pierce', '796 Jennings Unions Suite 018
+New Anthony, VI 50454', '2023-03-13'),
+('Kendra Bradshaw', '7778 Frederick Port Apt. 254
+South Scottside, NM 70847', '2023-09-07'),
+('Stephen Brown', '70091 Michael Fort
+Silvaberg, GA 83110', '2023-09-11'),
+('Chris James', '3214 Theresa Mount
+Deborahburgh, KS 36684', '2023-09-18'),
+('Jennifer Dixon', '23375 Johnson Terrace
+Davidmouth, MN 68486', '2023-05-31'),
+('Crystal King', 'PSC 9118, Box 1805
+APO AA 43795', '2023-12-27'),
+('Tiffany Walker', '93676 Karen Hills
+East Lauramouth, WI 03118', '2023-06-07'),
+('Victor Davis', '183 Thomas Turnpike
+New Wendy, ND 25372', '2023-10-16'),
+('Francisco Reed', '1735 Nelson Plaza Apt. 577
+West Mark, KY 91013', '2023-06-16'),
+('Stephanie Miller', '663 Moon Oval
+Jessicaport, MI 32847', '2023-08-05'),
+('Brittany Mathews', 'Unit 2439 Box 1501
+DPO AP 18448', '2023-07-05'),
+('Michelle Patterson', '46711 Cain Ports
+South Abigail, MA 69195', '2023-12-30'),
+('Margaret Henderson', '20913 Snyder Knolls
+Wilsonstad, NV 41814', '2023-09-17'),
+('Kaitlyn Schmidt', '398 Cody Flats Suite 927
+New Josephtown, NY 22495', '2023-11-19'),
+('Cynthia Flores', '6418 Wang Mount
+Kingmouth, FM 49305', '2023-11-13'),
+('Caleb Schultz', '1222 Larry Plaza
+East Kiarachester, SC 14619', '2023-08-17'),
+('William Munoz', '7569 Wells Valleys
+South Stevenport, MI 97439', '2023-01-30'),
+('John Atkins', '8464 Kevin Turnpike Suite 540
+Williamchester, AZ 30843', '2023-02-12'),
+('Garrett Thompson', '8146 May Tunnel Apt. 297
+New Andrew, LA 26632', '2023-03-08'),
+('Shawn Chang', '89345 Jonathan Plain
+West Samantha, FM 29400', '2023-05-29'),
+('Kristin Molina', '9046 Hunt Roads
+Powershaven, NH 88621', '2023-09-05'),
+('Charles Cross', '123 Bell Pines
+Smithburgh, ND 94462', '2023-02-20'),
+('Derrick Howell', '8954 Baker Point Suite 462
+North Mary, MT 83330', '2023-07-13'),
+('Deanna Cox', '968 David Springs Apt. 189
+North Shawn, NY 12742', '2023-01-07'),
+('Kevin Brown', '7287 Jason Lake Suite 580
+Maxwellview, NE 33560', '2023-09-14'),
+('Amy Frank', '088 Clark Station
+Davidmouth, AK 11882', '2023-03-10'),
+('Lance Mcdaniel', 'PSC 2109, Box 8894
+APO AA 27245', '2023-03-17'),
+('Cheryl Nguyen', '6155 Williamson Harbor
+Margaretstad, OH 98557', '2023-04-10'),
+('Deanna Scott', '1946 Carol Flat Apt. 189
+New Kaitlyn, VI 45399', '2023-07-29'),
+('Beverly Willis', '994 Barker Mall
+West Thomas, GA 89812', '2023-07-04'),
+('Michael Haas', '155 Williams Manor Suite 972
+Lake Laurenport, DC 73353', '2023-04-22'),
+('Alisha Hall', '7253 Johnson Throughway Suite 176
+Port Laurie, CA 02560', '2023-03-21'),
+('Bonnie Clark', '6694 Lauren Summit
+New Laurenmouth, NM 03655', '2023-08-18'),
+('Dana Hunter', '4914 Mooney Dam
+Michaelberg, NE 04530', '2023-07-22'),
+('Anthony Taylor', '57056 Garza Mews
+Lake John, RI 39155', '2023-04-30'),
+('Kyle Webb', '37426 Payne Mission
+West Donaldmouth, HI 63447', '2023-05-29'),
+('Robert Kelley', '5478 John Path Apt. 952
+Michelleshire, AR 24287', '2023-11-06'),
+('Paige Hughes', '317 Derek Flat Suite 232
+Willismouth, CA 65415', '2023-11-14'),
+('Derek Lynch', '43141 David Flat
+Lindseyview, MO 02685', '2023-03-24'),
+('Monica Morales', '8777 Linda Ferry
+New Melissa, MN 59773', '2023-12-08'),
+('Crystal Obrien', '05585 Foley Springs
+Suarezmouth, PW 32014', '2023-04-14'),
+('Jennifer Scott', 'USS Callahan
+FPO AP 57013', '2023-11-08'),
+('Melanie Pierce MD', '907 Fernandez Common
+West Tina, AZ 53541', '2023-08-08'),
+('Joshua Adkins', '0031 Michele Manor
+Brianburgh, MA 93676', '2023-11-15'),
+('Daniel Jones', '63593 Allison Ridges
+Webbborough, TX 84429', '2023-12-11'),
+('Dalton Cisneros', '63290 Medina Loop Apt. 801
+South Dustin, NJ 33953', '2023-11-01'),
+('Deborah Fry', '62395 John Prairie Apt. 669
+Michaelville, MH 54421', '2023-11-13'),
+('Amanda Mason', '511 Ashley Branch Suite 412
+Hernandezburgh, DC 58563', '2023-08-24'),
+('Brian Ortiz', '87416 Richard Trail Apt. 728
+North Matthewstad, ME 11916', '2023-06-26'),
+('James Davis', '554 Robin Brooks
+Jenniferfort, UT 11661', '2023-12-20'),
+('Lynn Parker', '85283 Jackson Points
+Carolineton, MP 17796', '2023-09-10'),
+('Richard Francis', '986 Alicia Square
+Debbiemouth, MH 66024', '2023-06-19'),
+('Michael Vaughan', '878 Gonzalez Summit Apt. 215
+North Robertland, CA 27147', '2023-10-03'),
+('Jessica Jennings', '203 Cindy Plain Apt. 765
+Port Latoya, AL 04107', '2023-03-19'),
+('Austin Pineda', '474 Daniel Avenue Apt. 166
+Lake Amyview, IL 67863', '2023-02-24'),
+('Sandra Compton', 'PSC 1883, Box 0699
+APO AP 35880', '2023-06-08'),
+('Jose Norton', '3779 James Loaf
+Matthewport, CA 38550', '2023-10-02'),
+('Nina Fernandez', 'Unit 7933 Box 0847
+DPO AP 30711', '2023-12-17'),
+('Todd Rios', '54813 Alyssa Prairie Suite 707
+Goodfurt, ME 84978', '2023-01-08'),
+('Mary Cherry', '602 Vega Mountain Apt. 338
+Port Lisa, PW 98940', '2023-05-25'),
+('Jessica Sullivan', '9834 Janet Shore
+Laurafort, MO 44570', '2023-01-22'),
+('Laura Blair', '8169 Albert Forge
+Jillfort, RI 36918', '2023-03-29'),
+('James Price', 'USS Mccoy
+FPO AP 49437', '2023-07-10'),
+('Adam Hampton', '560 Adam Point Apt. 575
+Jeremyberg, WY 87482', '2023-09-15'),
+('Heather Bennett', '951 Casey Hollow Apt. 906
+Johnsonshire, DE 97036', '2023-07-01'),
+('Daniel Clark', 'PSC 9273, Box 0424
+APO AP 16336', '2023-05-12'),
+('Richard Wilson', '951 Perez Village Suite 140
+Port Brittanychester, OK 43655', '2023-02-03'),
+('Collin Larson', '407 Anthony Summit
+Port Timothy, NC 57373', '2023-02-20'),
+('Larry Hughes', 'PSC 4813, Box 4542
+APO AE 54365', '2023-04-16'),
+('Mark Moreno', '55450 Nathan Fall
+Dawnstad, SC 23779', '2023-10-18'),
+('Nicholas Page', '0377 Ellison Ford
+Jennaland, IN 28118', '2023-01-28'),
+('Erin Saunders', '459 French Locks
+New William, GA 87405', '2023-10-30'),
+('Sheila James DVM', '2214 Cruz Lake Apt. 637
+West Craig, SC 58072', '2023-01-01'),
+('John Hamilton', '9890 Robertson Key
+Christinashire, NY 86031', '2023-02-12'),
+('James Friedman', '35371 Thompson Greens
+Thomasstad, IL 88850', '2023-05-23');
+    
+    
+
+    
+
+    
+CREATE TABLE Cart(
+    ProductID INT NOT NULL,
+    custid INT NOT NULL,
+    product_name varchar(255) NOT NULL,
+    product_quantity INT NOT NULL,
+    cost decimal(10,2) NOT NULL,
+    foreign key(ProductID) references Product(ProductID),
+    foreign key(custid) references Customer(custid)
+    );
+    
+INSERT INTO Cart(productid,custid,product_name,product_quantity,cost)
+VALUES
+('1', '30', 'Cormier-Bins', '3', '115.71'),
+('42', '16', 'Kassulke-Pfeffer', '12', '140.23'),
+('12', '52', 'Weber,RathandReilly', '11', '319.79'),
+('12', '72', 'Weber,RathandReilly', '1', '139.90'),
+('10', '89', 'Herzog,RitchieandWolf', '9', '277.41'),
+('49', '43', 'FaheyInc', '10', '391.28'),
+('61', '96', 'Lehner,KozeyandKuhlman', '12', '287.16'),
+('45', '17', 'Collins-Kiehn', '4', '198.11'),
+('13', '83', 'ThielGroup', '1', '175.22'),
+('78', '37', 'Herman,McDermottandAltenwerth', '4', '199.07'),
+('60', '36', 'Ernser,LeschandWyman', '8', '463.83'),
+('86', '92', 'Streich-OConnell', '11', '262.15'),
+('43', '74', 'BergstromandSons', '8', '437.94'),
+('8', '70', 'Marvin,RutherfordandLynch', '5', '304.04'),
+('30', '35', 'Nikolaus,MuellerandJakubowski', '10', '7.11'),
+('56', '28', 'Mayer,SatterfieldandKshlerin', '3', '294.64'),
+('11', '51', 'FritschGroup', '12', '441.37'),
+('23', '21', 'Schuster-Grant', '3', '442.65'),
+('77', '31', 'Ratke-Buckridge', '12', '56.72'),
+('69', '49', 'WolffGroup', '1', '279.23'),
+('75', '6', 'Towne,HettingerandPaucek', '1', '176.89'),
+('33', '74', 'Lowe-Fadel', '2', '381.19'),
+('38', '18', 'Hane-Hilpert', '6', '221.36'),
+('83', '1', 'Stiedemann,MrazandWalter', '3', '460.57'),
+('51', '29', 'KleinLLC', '7', '195.41'),
+('93', '90', 'Bosco,RoobandSchneider', '2', '263.82'),
+('86', '60', 'Streich-OConnell', '11', '442.41'),
+('47', '1', 'Harris,WaelchiandMcCullough', '9', '374.05'),
+('59', '49', 'Leuschke,GrahamandWalker', '8', '175.38'),
+('50', '67', 'Farrell,MarksandLangworth', '5', '193.60'),
+('11', '49', 'FritschGroup', '5', '2.98'),
+('53', '98', 'Ratke,GoodwinandRussel', '6', '324.11'),
+('22', '34', 'Gleason-Muller', '9', '159.28'),
+('100', '57', 'McGlynnandSons', '3', '391.60'),
+('23', '10', 'Schuster-Grant', '9', '144.63'),
+('10', '36', 'Herzog,RitchieandWolf', '8', '125.34'),
+('46', '47', 'Berge-Satterfield', '9', '283.13'),
+('5', '7', 'Schumm-Skiles', '1', '385.73'),
+('51', '29', 'KleinLLC', '11', '266.07'),
+('6', '4', 'JohnsLLC', '5', '113.45'),
+('30', '66', 'Nikolaus,MuellerandJakubowski', '11', '293.53'),
+('71', '98', 'LehnerGroup', '2', '259.08'),
+('46', '40', 'Berge-Satterfield', '7', '489.86'),
+('91', '86', 'SchowalterInc', '5', '460.34'),
+('50', '84', 'Farrell,MarksandLangworth', '12', '443.80'),
+('31', '66', 'Fisher,GoldnerandDare', '12', '27.26'),
+('56', '40', 'Mayer,SatterfieldandKshlerin', '5', '459.64'),
+('46', '48', 'Berge-Satterfield', '8', '295.80'),
+('93', '28', 'Bosco,RoobandSchneider', '1', '208.28'),
+('68', '24', 'BoyleandSons', '12', '398.55'),
+('70', '80', 'Bogisich,BeattyandHirthe', '10', '70.59'),
+('61', '41', 'Lehner,KozeyandKuhlman', '8', '56.18'),
+('93', '69', 'Bosco,RoobandSchneider', '2', '27.40'),
+('75', '16', 'Towne,HettingerandPaucek', '2', '443.30'),
+('55', '53', 'WittingInc', '2', '314.19'),
+('59', '98', 'Leuschke,GrahamandWalker', '1', '77.57'),
+('37', '47', 'Ebert,EmardandWalter', '6', '65.09'),
+('95', '73', 'Lockman-Hartmann', '2', '126.20'),
+('28', '8', 'NicolasLLC', '8', '326.27'),
+('77', '22', 'Ratke-Buckridge', '10', '18.63'),
+('80', '41', 'Howell,DickinsonandDietrich', '7', '223.86'),
+('9', '57', 'Gutkowski,HilpertandKoch', '8', '59.41'),
+('44', '16', 'Gerhold,FeilandRoob', '12', '172.47'),
+('96', '40', 'Romaguera,HellerandChamplin', '12', '222.29'),
+('51', '94', 'KleinLLC', '9', '320.50'),
+('97', '29', 'Bradtke,BeattyandSawayn', '10', '246.14'),
+('52', '92', 'Terry-Renner', '6', '376.30'),
+('24', '7', 'HintzandSons', '6', '341.00'),
+('91', '15', 'SchowalterInc', '1', '281.34'),
+('42', '65', 'Kassulke-Pfeffer', '6', '394.55'),
+('86', '17', 'Streich-OConnell', '6', '218.29'),
+('52', '17', 'Terry-Renner', '12', '48.62'),
+('31', '16', 'Fisher,GoldnerandDare', '2', '159.08'),
+('59', '98', 'Leuschke,GrahamandWalker', '3', '88.53'),
+('77', '9', 'Ratke-Buckridge', '4', '255.77'),
+('59', '11', 'Leuschke,GrahamandWalker', '11', '129.96'),
+('22', '85', 'Gleason-Muller', '9', '319.24'),
+('48', '3', 'KiehnGroup', '1', '232.24'),
+('56', '87', 'Mayer,SatterfieldandKshlerin', '2', '258.39'),
+('8', '64', 'Marvin,RutherfordandLynch', '1', '315.03'),
+('77', '2', 'Ratke-Buckridge', '11', '372.94'),
+('87', '89', 'HauckGroup', '6', '378.57'),
+('36', '70', 'HagenesLLC', '11', '211.89'),
+('38', '52', 'Hane-Hilpert', '6', '194.87'),
+('94', '100', 'Williamson,TrantowandKiehn', '3', '44.34'),
+('62', '75', 'Robel,SchimmelandMonahan', '5', '415.04'),
+('96', '6', 'Romaguera,HellerandChamplin', '8', '168.94'),
+('47', '36', 'Harris,WaelchiandMcCullough', '11', '424.89'),
+('73', '53', 'Bruen,OsinskiandMante', '4', '283.30'),
+('85', '38', 'RippinGroup', '8', '489.72'),
+('25', '68', 'HintzInc', '1', '223.18'),
+('68', '100', 'BoyleandSons', '8', '275.15'),
+('10', '84', 'Herzog,RitchieandWolf', '3', '90.42'),
+('22', '93', 'Gleason-Muller', '4', '74.52'),
+('78', '87', 'Herman,McDermottandAltenwerth', '10', '231.09'),
+('89', '41', 'Pouros-Hilll', '12', '395.32'),
+('51', '37', 'KleinLLC', '10', '1.79'),
+('32', '23', 'Volkman,GottliebandFay', '8', '15.23'),
+('2', '41', 'Wunsch,SkilesandMosciski', '2', '107.66'),
+('78', '79', 'Herman,McDermottandAltenwerth', '1', '225.45');
+
+CREATE TABLE WishList(
+    ProductID INT NOT NULL,
+    product_name varchar(255) NOT NULL,
+    customerID INT NOT NULL,
+    foreign key(ProductID) references Product(ProductID),
+    foreign key(customerID) references Customer(custid)
+    );
+
+INSERT INTO WishList(ProductID,product_name,customerID)
+VALUES
+('73', 'Bruen,OsinskiandMante', '10'),
+('31', 'Fisher,GoldnerandDare', '32'),
+('82', 'KesslerandSons', '61'),
+('41', 'Lang-Watsica', '83'),
+('45', 'Collins-Kiehn', '31'),
+('63', 'Crona,BernierandThompson', '25'),
+('84', 'Mann-Friesen', '13'),
+('40', 'Wolff,SchmidtandKeebler', '96'),
+('56', 'Mayer,SatterfieldandKshlerin', '35'),
+('23', 'Schuster-Grant', '58'),
+('71', 'LehnerGroup', '71'),
+('67', 'VonRuedenGroup', '62'),
+('73', 'Bruen,OsinskiandMante', '67'),
+('21', 'Durgan,GoyetteandZemlak', '53'),
+('32', 'Volkman,GottliebandFay', '72'),
+('33', 'Lowe-Fadel', '20'),
+('56', 'Mayer,SatterfieldandKshlerin', '61'),
+('83', 'Stiedemann,MrazandWalter', '15'),
+('81', 'Cruickshank,WalkerandBins', '1'),
+('87', 'HauckGroup', '97'),
+('99', 'SchuppeInc', '30'),
+('77', 'Ratke-Buckridge', '47'),
+('91', 'SchowalterInc', '84'),
+('46', 'Berge-Satterfield', '14'),
+('47', 'Harris,WaelchiandMcCullough', '66'),
+('52', 'Terry-Renner', '57'),
+('33', 'Lowe-Fadel', '2'),
+('83', 'Stiedemann,MrazandWalter', '22'),
+('37', 'Ebert,EmardandWalter', '15'),
+('2', 'Wunsch,SkilesandMosciski', '80'),
+('62', 'Robel,SchimmelandMonahan', '54'),
+('92', 'Kerluke,ToyandCummerata', '82'),
+('61', 'Lehner,KozeyandKuhlman', '14'),
+('33', 'Lowe-Fadel', '83'),
+('76', 'Altenwerth-Daniel', '23'),
+('43', 'BergstromandSons', '38'),
+('39', 'SengerGroup', '4'),
+('23', 'Schuster-Grant', '77'),
+('70', 'Bogisich,BeattyandHirthe', '47'),
+('63', 'Crona,BernierandThompson', '16'),
+('53', 'Ratke,GoodwinandRussel', '93'),
+('80', 'Howell,DickinsonandDietrich', '44'),
+('25', 'HintzInc', '36'),
+('40', 'Wolff,SchmidtandKeebler', '98'),
+('17', 'DuBuque-Cormier', '96'),
+('33', 'Lowe-Fadel', '76'),
+('91', 'SchowalterInc', '22'),
+('47', 'Harris,WaelchiandMcCullough', '13'),
+('64', 'RoobInc', '13'),
+('72', 'MetzLLC', '17'),
+('26', 'Rosenbaum-Corkery', '72'),
+('2', 'Wunsch,SkilesandMosciski', '27'),
+('27', 'Wolf-Halvorson', '77'),
+('53', 'Ratke,GoodwinandRussel', '4'),
+('48', 'KiehnGroup', '39'),
+('62', 'Robel,SchimmelandMonahan', '73'),
+('34', 'Hodkiewicz-Kessler', '58'),
+('39', 'SengerGroup', '46'),
+('48', 'KiehnGroup', '23'),
+('35', 'BergeLLC', '42'),
+('39', 'SengerGroup', '78'),
+('48', 'KiehnGroup', '22'),
+('81', 'Cruickshank,WalkerandBins', '48'),
+('52', 'Terry-Renner', '51'),
+('19', 'Mayert-Glover', '76'),
+('87', 'HauckGroup', '1'),
+('82', 'KesslerandSons', '76'),
+('35', 'BergeLLC', '95'),
+('90', 'Hartmann-Keebler', '54'),
+('51', 'KleinLLC', '14'),
+('100', 'McGlynnandSons', '43'),
+('13', 'ThielGroup', '41'),
+('88', 'Swaniawski,NienowandStanton', '45'),
+('25', 'HintzInc', '11'),
+('68', 'BoyleandSons', '13'),
+('100', 'McGlynnandSons', '96'),
+('7', 'FayGroup', '16'),
+('23', 'Schuster-Grant', '70'),
+('18', 'HermannLLC', '71'),
+('33', 'Lowe-Fadel', '39'),
+('30', 'Nikolaus,MuellerandJakubowski', '57'),
+('83', 'Stiedemann,MrazandWalter', '76'),
+('20', 'Boehm,StrackeandDeckow', '14'),
+('89', 'Pouros-Hilll', '47'),
+('88', 'Swaniawski,NienowandStanton', '60'),
+('46', 'Berge-Satterfield', '59'),
+('67', 'VonRuedenGroup', '11'),
+('53', 'Ratke,GoodwinandRussel', '76'),
+('65', 'Wilkinson,NienowandSchroeder', '23'),
+('76', 'Altenwerth-Daniel', '37'),
+('27', 'Wolf-Halvorson', '24'),
+('89', 'Pouros-Hilll', '77'),
+('33', 'Lowe-Fadel', '61'),
+('50', 'Farrell,MarksandLangworth', '30'),
+('34', 'Hodkiewicz-Kessler', '78'),
+('79', 'Ritchie-Marquardt', '61'),
+('77', 'Ratke-Buckridge', '11'),
+('88', 'Swaniawski,NienowandStanton', '88'),
+('66', 'Fisher-Parker', '27'),
+('22', 'Gleason-Muller', '69');
+
+CREATE TABLE Seller(
+	seller_id INT NOT NULL auto_increment primary key,
+    seller_name varchar(70) NOT NULL,
+    seller_address varchar(90) NOT NULL
+    );   
+    
+    
+INSERT INTO Seller(seller_name,seller_address) 
+VALUES('Crystal Murray', '7318 West Brooks Apt. 514
+Mcmahonland, DE 09309'),
+('Derek Roman', '00883 Hendrix Mission Apt. 316
+West Davidview, PR 53806'),
+('Cody Leon', '5574 Wagner Mission Apt. 067
+Bakerberg, IL 60094'),
+('Kendra Arroyo', '157 Kyle Field
+West Danielle, IA 71349'),
+('Kenneth Johnson', '2843 Butler Extensions Suite 952
+Thomasville, TN 92987'),
+('William Jackson', '8322 Branch Viaduct
+Lestertown, MT 85244'),
+('Allison Jones', '877 Morgan Radial Suite 568
+Lake Michele, WA 95810'),
+('Alyssa Mitchell', '069 Sarah Gardens Suite 991
+East Roberta, WI 40539'),
+('Patricia Mccullough', '667 Robin Coves
+East Marie, NC 92814'),
+('Ryan Ramirez', '8784 Sweeney Rapid Suite 058
+Lake Jamesport, AK 42824'),
+('Melissa Perez', '5426 Brianna Gateway Apt. 563
+Hollandfurt, MH 20298'),
+('Mike Sanchez', 'Unit 6900 Box 3390
+DPO AE 87534'),
+('Jordan Shea', 'PSC 4503, Box 6397
+APO AA 83404'),
+('John Rogers', '4951 Bryant Trafficway Suite 811
+North Bradleyfurt, AK 67620'),
+('William Potts', '6604 David Ferry
+Perezshire, NJ 58871'),
+('Wyatt Noble', 'USS Turner
+FPO AP 50724'),
+('Catherine Braun', '23235 Angela Manors
+Patelton, SC 61186'),
+('Sandra Gilbert', '158 Collier Crossroad Apt. 060
+Jillbury, GU 47776'),
+('Mario Randolph', '2287 Moore Crossroad
+Mccoystad, ND 94686'),
+('Jody Lowery', '2055 Allen View Suite 516
+Jacksonport, NJ 91294'),
+('Christopher Thompson', '0808 Jason Loaf
+East Jeffreyfurt, AR 72696'),
+('Robert Rodriguez', '913 Dunn Mountains
+South Christopherton, ME 54454'),
+('Susan Rodriguez', '21033 Angela Common
+Tranfurt, UT 32612'),
+('Stephanie Park', '194 Peterson Passage
+North Justin, VI 27100'),
+('Helen Mcdowell', 'PSC 9047, Box 3239
+APO AA 19627'),
+('Patricia Carter', '70855 Poole Parkways
+East Meganburgh, VA 21099'),
+('Kyle Allen', 'PSC 6470, Box 8364
+APO AE 53395'),
+('Todd Washington', '69085 Melissa Rapids Suite 213
+Stanleyfurt, MS 81624'),
+('Micheal Koch', '6089 Estrada Stravenue Suite 923
+South Charlesstad, ND 43838'),
+('Benjamin Kaufman', '72538 Samuel Islands Suite 157
+Woodardstad, CA 53244'),
+('Amy Mcmillan', '7154 Wilson Circle Apt. 225
+Normaville, WV 96477'),
+('Sheri Jackson', '305 Candace Neck
+Adamsberg, WI 49106'),
+('Ethan Maldonado', '63167 Jacqueline Creek
+Lake Richard, PW 49217'),
+('John Rodgers', '8226 Daniel Summit
+West Rachelland, VA 12175'),
+('Mrs. Kimberly Phillips', '427 Rose Ways Apt. 415
+Sharonmouth, AL 59316'),
+('Kristie Hughes', '758 Shaw Islands Apt. 752
+West Nicole, MS 14402'),
+('Marissa Jimenez', '660 Jackie Vista
+South Deborahview, WA 55364'),
+('Carmen Thomas', '5241 Madeline Cliffs Suite 974
+Jonesfort, MS 12182'),
+('Joseph Green', '613 Tony Garden Apt. 913
+Johnsonport, AS 97393'),
+('Anthony Cooper PhD', '77943 Aaron Island Apt. 753
+Katelynmouth, GA 57972'),
+('Elizabeth Ortiz', '509 Archer Field Suite 834
+North Kevinburgh, AZ 06561'),
+('Andrew Newman', '024 Jennifer Radial Suite 241
+Mistyville, MA 43356'),
+('Peter Hall', '9455 Michael Roads
+South Barbara, WI 37046'),
+('Cheryl Griffin', '924 Theresa Greens Apt. 847
+Brianville, AK 40402'),
+('James Thomas', 'USCGC Haley
+FPO AA 76596'),
+('Lisa Lopez', '272 Bradley Mill
+Brownmouth, ME 14705'),
+('Angela Kelley', '153 Lauren Alley Suite 181
+Port Timothy, AS 12684'),
+('James Wade', '55674 Benson Square
+South Gloria, FL 75795'),
+('John Barnes', '445 Case Canyon
+North Tracy, SD 20681'),
+('Dennis Mccormick', '285 Miranda Points
+West Caitlyn, OK 98244'),
+('Audrey Gonzales', '78582 Amanda Green
+New Robertbury, FL 72148'),
+('Jacob Harris DDS', '134 Melissa Stravenue
+East James, OK 09852'),
+('Mrs. Margaret Myers', '931 Laura Dam Apt. 371
+Maxtown, IN 83008'),
+('Daniel Berry', '4779 Donna Crest Suite 343
+Port Travis, LA 68827'),
+('Christopher Walton', '22553 Donna Way Suite 658
+Webbberg, ID 29291'),
+('David Salas', '4521 Edgar Wells Apt. 577
+Karenton, AL 06432'),
+('Shelly Lewis', 'USNS Wong
+FPO AP 05165'),
+('Amy Griffith', '56407 Kristin Terrace Suite 866
+Hamptonstad, HI 84947'),
+('Renee Crawford', '1018 Craig Prairie
+Thomasville, PW 89895'),
+('Jennifer Lane', '4964 Lisa Parkway
+Davidmouth, NJ 67263'),
+('Denise Hernandez', '406 Dale Plains Apt. 018
+North Lisahaven, CO 12417'),
+('Susan Patel', '603 Montes Road
+West Kylechester, IA 09693'),
+('Timothy Martin', '523 Medina Circles
+Port Maryhaven, MN 66313'),
+('Kenneth May', '732 Morris Loaf Apt. 009
+Garnerfort, VA 48720'),
+('Mrs. Erica Peterson', 'Unit 6767 Box 7248
+DPO AA 32485'),
+('Frank Thomas', '64068 Hendricks Heights Apt. 402
+Gonzalezville, GA 95692'),
+('Seth Carter', '22303 Dennis Villages Suite 653
+Sharptown, WI 86115'),
+('Gregory Ho', '750 Thompson Streets
+Howellshire, VA 76793'),
+('Juan Arias', '1087 Jerome Mall
+Manningside, PW 39575'),
+('Adrian Holland', '768 Chad Harbor
+East Destinyville, OH 05480'),
+('Emily Shields', '3206 Michael Valleys Suite 917
+North Angelaberg, MH 81438'),
+('Anita Wilson', '3264 Joshua Stream Suite 011
+North Derek, WY 26188'),
+('Mrs. Misty Hendricks', '8584 Schmitt Hollow Apt. 300
+Port Sarah, VI 21789'),
+('Alexis Lyons', '86964 Todd Court
+West Matthewmouth, NE 08262'),
+('Vanessa Kelly', '756 Timothy Estate
+Donnaport, SD 43964'),
+('John Jimenez', '039 Waller Junction Apt. 271
+North Pamelaside, IL 31170'),
+('Elizabeth Fox', '0622 Donna Loaf
+North Paige, TX 75610'),
+('Shawn Andersen', '7257 Claudia Forges Suite 478
+Port Kathleenton, KY 44683'),
+('Elaine Combs', '36923 Alexander Village
+Carrstad, OR 15199'),
+('Elizabeth Pierce', '22422 Michael Place
+Port Jaclynhaven, OR 81509'),
+('Patricia Walls', '271 Shelton Heights
+North Melissa, OH 86150'),
+('Nancy Johnson', '9464 Mccormick Drive
+South Tracey, SC 94888'),
+('Kenneth Evans', '90255 Fox Lodge Suite 339
+Lake Donald, OH 38268'),
+('James Martin', '9673 Wilson Place
+Ashleychester, TX 45791'),
+('Michael Anderson', '273 Scott Cove Apt. 449
+West Joseph, GA 16216'),
+('Eric Rodriguez', 'USS Rodriguez
+FPO AE 73431'),
+('Jessica White', '9795 Jared Flat Suite 980
+New Brittanyside, IL 76485'),
+('Marvin Ho', '7860 Jackson Manor Suite 090
+Parsonsland, AK 32610'),
+('Paul Yu', '703 Morris Center Suite 873
+North Rodneyport, NM 90364'),
+('Donna Jones', '55979 Tammy Course
+Brownhaven, GU 64445'),
+('Desiree Stewart', '21403 Christopher Highway
+Longstad, DE 72199'),
+('Nicholas Poole', '775 Dustin Well Apt. 614
+Nguyenborough, MI 60712'),
+('Alyssa Mendoza', '32512 Jacqueline Garden Apt. 654
+Peterport, MI 09681'),
+('Kimberly Miller', '918 Joseph Extensions
+Nicoleton, NM 73166'),
+('Michele Ford', '0964 Colleen Prairie Apt. 359
+Littlechester, AZ 12084'),
+('Nicolas Guerrero', '54299 Aaron Ways Suite 643
+Port Mariaview, CO 06949'),
+('Dennis Wilson', '05057 Alicia Camp
+South Joseph, PR 71604'),
+('Anna Salazar', '359 Jackson Tunnel Suite 229
+North Barbara, AS 63017'),
+('Jack Paul', 'USCGC Zuniga
+FPO AA 14499'),
+('Lisa Dorsey', '2479 Zavala Spur
+New Tiffanymouth, CT 85222');
+
+
+
+CREATE TABLE OrderHistory(
+    CustomerID INT NOT NULL,
+    Order_id INT NOT NULL,
+    foreign key(CustomerID) references customer(CustID),
+    foreign key(Order_id) references Orders(order_id)
+);
+
+INSERT INTO OrderHistory(CustomerID,Order_id)
+VALUES
+(62,37),
+(75,3),
+(76,31),
+(27,45),
+(48,26),
+(6,48),
+(80,75),
+(88,38),
+(40,15),
+(16,3),
+(33,89),
+(30,71),
+(27,29),
+(86,61),
+(4,85),
+(42,93),
+(34,1),
+(51,91),
+(12,4),
+(89,26),
+(52,94),
+(24,62),
+(33,96),
+(44,48),
+(56,63),
+(26,19),
+(43,10),
+(28,96),
+(24,3),
+(19,4),
+(95,94),
+(40,17),
+(56,32),
+(42,38),
+(98,68),
+(67,29),
+(26,22),
+(70,3),
+(23,8),
+(79,88),
+(47,6),
+(22,73),
+(92,77),
+(49,80),
+(15,71),
+(29,27),
+(48,83),
+(54,88),
+(4,76),
+(49,56),
+(95,60),
+(14,55),
+(59,4),
+(29,86),
+(38,67),
+(95,35),
+(87,65),
+(11,9),
+(74,40),
+(81,32),
+(67,47),
+(54,71),
+(61,93),
+(76,96),
+(68,78),
+(94,3),
+(58,92),
+(87,99),
+(82,44),
+(11,54),
+(4,25),
+(77,77),
+(21,49),
+(54,36),
+(43,58),
+(41,90),
+(31,2),
+(33,61),
+(47,80),
+(11,6),
+(93,99),
+(87,78),
+(63,73),
+(90,1),
+(48,68),
+(33,20),
+(8,84),
+(64,71),
+(66,69),
+(64,56),
+(96,94),
+(15,47),
+(81,92),
+(34,61),
+(36,68),
+(45,82),
+(63,60),
+(15,86),
+(81,40),
+(76,64);
+
+    
+    
+    
