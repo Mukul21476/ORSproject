@@ -1,7 +1,7 @@
-SELECT * FROM admindata;
+SELECT * FROM admindata group by AdminRole;
 
 
-SELECT seller_name, seller_address FROM seller;
+SELECT seller_name, seller_address FROM seller order by seller_name;
 
 
 SELECT order_id, order_date_time, order_amount FROM orders WHERE order_status = 'Delivered';
