@@ -40,3 +40,4 @@ from
 where
 	customer.custid=cart.custid;
 select sum(cart.cost) from customer,cart where customer.custid=cart.custid;
+select * from orders group by payment_mode;
