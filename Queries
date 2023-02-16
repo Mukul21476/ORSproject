@@ -60,3 +60,11 @@ UPDATE customer SET custname = 'Manas Narang' WHERE custid = 1;
 UPDATE product SET Availableqty = 1000 WHERE productid = 2;
 
 select product_quantity*cost as amount from cart;
+
+select 
+	orders.order_id, orders.order_date_time,orders.delivery_address,orders.order_status,orders.order_amount,orders.payment_mode,orders.coupon_id,order_details.shipper_name,order_details.expected_delivery_date
+from
+	orders,order_details,orderhistory,customer
+where
+	customer.custid=62 and orderhistory.customerid=62 and orderhistory.order_id=orders.order_id and orders.tracking_id=order_details.tracking_id;
+
