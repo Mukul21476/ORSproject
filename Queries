@@ -23,3 +23,20 @@ SELECT CategoryName, COUNT(*) as num_products FROM product INNER JOIN productCat
 
 
 SELECT CustName, EmailAddress, SavedPaymentMethod FROM customer WHERE CustID = 10;
+
+
+select * from customer,orderhistory where customer.custid=4 and orderhistory.customerid=4;
+select customer.custname, wishist.productid,wishlist.product_name, product_category.category_name
+	from customer,wishlist,product,product_category
+    where customer.custid=10 and wishlist.customerid=10 and wishlist.productid=product.productid and product.categoryid=product_category.categoryid;
+select count(*) from coupons where expiry_date >'2023-03-16';
+select count(*) from customers where custmembership="Gold";
+select * from orders,order_details where orders.trackingid=order_details.trackingid and 
+order_details.expected_delivery_date<'2023-02-28';
+select 
+	customer.custname, cart.productid,cart.product_name,cart.product_quantity,cart.cost 
+from
+	customer,cart
+where
+	customer.custid=cart.custid;
+select sum(cart.cost) from customer,cart where customer.custid=cart.custid;
