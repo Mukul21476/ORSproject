@@ -1,0 +1,25 @@
+SELECT * FROM admindata;
+
+
+SELECT seller_name, seller_address FROM seller;
+
+
+SELECT order_id, order_date_time, order_amount FROM orders WHERE order_status = 'Delivered';
+
+
+SELECT * FROM order_details WHERE Tracking_id = 50;
+
+
+SELECT * FROM coupons WHERE coupon_id = (SELECT coupon_id FROM orders WHERE order_id = 3);
+
+
+SELECT cost FROM cart WHERE custID = 30 AND ProductID = 1;
+
+
+SELECT * FROM orderhistory WHERE CustomerID = 81;
+
+
+SELECT CategoryName, COUNT(*) as num_products FROM product INNER JOIN productCategory ON product.categoryID = productCategory.CategoryID GROUP BY CategoryName;
+
+
+SELECT CustName, EmailAddress, SavedPaymentMethod FROM customer WHERE CustID = 10;
