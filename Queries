@@ -68,3 +68,15 @@ from
 where
 	customer.custid=62 and orderhistory.customerid=62 and orderhistory.order_id=orders.order_id and orders.tracking_id=order_details.tracking_id;
 
+
+desc customer;
+desc admindata;
+desc cart;
+desc coupons;
+desc order_details;
+desc orders;
+desc product;
+desc productcategory;
+desc seller;
+desc wishlist;
+desc orderhistory;
