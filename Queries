@@ -1,7 +1,7 @@
-SELECT * FROM admindata group by AdminRole;
+SELECT * FROM admindata;
 
 
-SELECT seller_name, seller_address FROM seller order by seller_name;
+SELECT seller_name, seller_address FROM seller;
 
 
 SELECT order_id, order_date_time, order_amount FROM orders WHERE order_status = 'Delivered';
@@ -27,23 +27,36 @@ SELECT CustName, EmailAddress, SavedPaymentMethod FROM customer WHERE CustID = 1
 
 select * from customer,orderhistory where customer.custid=4 and orderhistory.customerid=4;
 
+select customer.custname, wishlist.productid,wishlist.product_name, productcategory.categoryname
+	from customer,wishlist,product,productcategory
+    where customer.custid=10 and wishlist.customerid=10 and wishlist.ProductID=product.productid and product.categoryid=productcategory.categoryid;
+    
 select count(*) from coupons where expiry_date >'2023-03-16';
 
-select count(*) from customers where custmembership="Gold";
+select count(*) from customer where custmembership="Gold";
 
-select * from orders,order_details where orders.trackingid=order_details.trackingid and 
+select * from orders,order_details where orders.tracking_id=order_details.tracking_id and 
 order_details.expected_delivery_date<'2023-02-28';
 
-select 
-	customer.custname, cart.productid,cart.product_name,cart.product_quantity,cart.cost 
-from
-	customer,cart
-where
-	customer.custid=cart.custid;
 
-select sum(cart.cost) from customer,cart where customer.custid=cart.custid;
 
-select * from orders group by payment_mode;
+select sum(cart.cost) from customer,cart where customer.custid=30 and cart.custid = 30;
+
+select productid from wishlist;
+
+
+SELECT customer.custname, wishlist.productid, wishlist.product_name, productcategory.categoryname
+FROM customer, wishlist, product, productcategory
+WHERE productcategory.categoryid = product.categoryid
+  AND product.productid = (SELECT productid FROM wishlist
+                           WHERE customerid = 10)
+  AND customer.custid = 10
+  AND wishlist.productid = product.productid
+  AND product.categoryid = productcategory.categoryid;
+
+
+UPDATE customer SET custname = 'Manas Narang' WHERE custid = 1;
+
+UPDATE product SET Availableqty = 1000 WHERE productid = 2;
 
 select product_quantity*cost as amount from cart;
-
