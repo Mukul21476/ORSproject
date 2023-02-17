@@ -245,6 +245,8 @@ CREATE TABLE Product (
   FOREIGN KEY (categoryID) REFERENCES productCategory(categoryID)
 );
 
+insert into product value(101,"Cormier-Bins","Blue Ocean",5,5,"hidsbuyh",789.90,5);
+
 INSERT INTO Product (ProductID, ProductName, ProductBrand, AvailableQty, ProductReviews, ProductDescription, ProductPrice,categoryid)
 VALUES
 (1, 'Cormier-Bins', 'Blue Ocean', 499, 2, 'The latest model with advanced features.', 6266, 6),
