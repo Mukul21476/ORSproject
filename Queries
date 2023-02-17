@@ -87,6 +87,12 @@ LEFT JOIN cart ch ON p.productid = ch.productid
 GROUP BY p.productid
 ORDER BY COUNT(ch.productid) DESC;
 
+-- shows the same product whoes price is different
+SELECT productname 
+FROM product 
+GROUP BY productname 
+HAVING COUNT(DISTINCT productprice) > 1;
+
 
 desc customer;
 desc admindata;
