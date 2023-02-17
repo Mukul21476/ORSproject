@@ -1,5 +1,3 @@
-SELECT * FROM admindata group by AdminRole;
-
 select count(distinct(AdminRole)) from adminData;
 
 
@@ -78,6 +76,13 @@ select * from product where ProductReviews=(select max(ProductReviews) from prod
 
 
 select avg(cost) from cart;
+
+SELECT p.productname, c.categoryname, COUNT(ch.productid) as order_count
+FROM product p
+INNER JOIN productcategory c ON p.categoryid = c.categoryid
+LEFT JOIN cart ch ON p.productid = ch.productid
+GROUP BY p.productid
+ORDER BY COUNT(ch.productid) DESC;
 
 
 desc customer;
