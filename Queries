@@ -1,5 +1,7 @@
 SELECT * FROM admindata group by AdminRole;
 
+select count(distinct(AdminRole)) from adminData;
+
 
 SELECT seller_name, seller_address FROM seller order by seller_name;
 
@@ -7,42 +9,28 @@ SELECT seller_name, seller_address FROM seller order by seller_name;
 SELECT order_id, order_date_time, order_amount FROM orders WHERE order_status = 'Delivered';
 
 
-SELECT * FROM order_details WHERE Tracking_id = 50;
-
-
 SELECT * FROM coupons WHERE coupon_id = (SELECT coupon_id FROM orders WHERE order_id = 3);
-
-
-SELECT cost FROM cart WHERE custID = 30 AND ProductID = 1;
-
-
-SELECT * FROM orderhistory WHERE CustomerID = 81;
 
 
 SELECT CategoryName, COUNT(*) as num_products FROM product INNER JOIN productCategory ON product.categoryID = productCategory.CategoryID GROUP BY CategoryName;
 
 
-SELECT CustName, EmailAddress, SavedPaymentMethod FROM customer WHERE CustID = 10;
-
-
 select * from customer,orderhistory where customer.custid=4 and orderhistory.customerid=4;
+
 
 select customer.custname, wishlist.productid,wishlist.product_name, productcategory.categoryname
 	from customer,wishlist,product,productcategory
     where customer.custid=10 and wishlist.customerid=10 and wishlist.ProductID=product.productid and product.categoryid=productcategory.categoryid;
     
+
 select count(*) from coupons where expiry_date >'2023-03-16';
 
-select count(*) from customer where custmembership="Gold";
 
 select * from orders,order_details where orders.tracking_id=order_details.tracking_id and 
 order_details.expected_delivery_date<'2023-02-28';
 
 
-
-select sum(cart.cost) from customer,cart where customer.custid=30 and cart.custid = 30;
-
-select productid from wishlist;
+select sum(cart.cost*cart.product_quantity) from customer,cart where customer.custid=30 and cart.custid = 30;
 
 
 SELECT customer.custname, wishlist.productid, wishlist.product_name, productcategory.categoryname
@@ -57,9 +45,12 @@ WHERE productcategory.categoryid = product.categoryid
 
 UPDATE customer SET custname = 'Manas Narang' WHERE custid = 1;
 
+
 UPDATE product SET Availableqty = 1000 WHERE productid = 2;
 
+
 select product_quantity*cost as amount from cart;
+
 
 select 
 	orders.order_id, orders.order_date_time,orders.delivery_address,orders.order_status,orders.order_amount,orders.payment_mode,orders.coupon_id,order_details.shipper_name,order_details.expected_delivery_date
@@ -67,6 +58,23 @@ from
 	orders,order_details,orderhistory,customer
 where
 	customer.custid=62 and orderhistory.customerid=62 and orderhistory.order_id=orders.order_id and orders.tracking_id=order_details.tracking_id;
+
+
+select * from orders order by order_amount desc;
+
+
+select distinct product_name from cart;
+
+
+select custname from customer where CustMembership in ("Gold","Platinum");
+
+
+select ProductName from product where productBrand like "S%" OR ProductReviews>3;
+
+select min(cost) from cart;
+
+
+select * from product where ProductReviews=(select max(ProductReviews) from product);
 
 
 desc customer;
