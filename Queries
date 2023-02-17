@@ -77,6 +77,9 @@ select min(cost) from cart;
 select * from product where ProductReviews=(select max(ProductReviews) from product);
 
 
+select avg(cost) from cart;
+
+
 desc customer;
 desc admindata;
 desc cart;
