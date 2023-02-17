@@ -32,7 +32,7 @@ order_details.expected_delivery_date<'2023-02-28';
 select sum(cart.cost*cart.product_quantity) from customer,cart where customer.custid=30 and cart.custid = 30;
 
 
-SELECT customer.custname, wishlist.productid, wishlist.product_name, productcategory.categoryname
+SELECT distinct customer.custname, wishlist.productid, wishlist.product_name, productcategory.categoryname
 FROM customer, wishlist, product, productcategory
 WHERE productcategory.categoryid = product.categoryid
   AND product.productid = (SELECT productid FROM wishlist
