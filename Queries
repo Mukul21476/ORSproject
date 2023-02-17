@@ -1,7 +1,7 @@
 -- count the no of roles present in the admin data
 select count(distinct(AdminRole)) from adminData;
 
--- 
+-- show seller names and addresses arranged in alphabetical order based on seller names
 SELECT seller_name, seller_address FROM seller order by seller_name;
 
 -- shows some field from order table whose oder is delivered
