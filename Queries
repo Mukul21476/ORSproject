@@ -13,25 +13,20 @@ SELECT * FROM coupons WHERE coupon_id = (SELECT coupon_id FROM orders WHERE orde
 --  it shows the number of products in each category respectively
 SELECT CategoryName, COUNT(*) as num_products FROM product INNER JOIN productCategory ON product.categoryID = productCategory.CategoryID GROUP BY CategoryName;
 
-
+-- show order history and customer data for customer id 4
 select * from customer,orderhistory where customer.custid=4 and orderhistory.customerid=4;
 
-
-select customer.custname, wishlist.productid,wishlist.product_name, productcategory.categoryname
-	from customer,wishlist,product,productcategory
-    where customer.custid=10 and wishlist.customerid=10 and wishlist.ProductID=product.productid and product.categoryid=productcategory.categoryid;
-    
-
+-- show number of coupons that expire after 16/03/2023
 select count(*) from coupons where expiry_date >'2023-03-16';
 
-
+-- show order data with details for orders with expected delivery date before 28/02/2023
 select * from orders,order_details where orders.tracking_id=order_details.tracking_id and 
 order_details.expected_delivery_date<'2023-02-28';
 
-
+-- show total amount of products placed in cart for customer with id 30
 select sum(cart.cost*cart.product_quantity) from customer,cart where customer.custid=30 and cart.custid = 30;
 
-
+-- show customer name and the data of products(along with category) present in their wishlist for customer id 10
 SELECT distinct customer.custname, wishlist.productid, wishlist.product_name, productcategory.categoryname
 FROM customer, wishlist, product, productcategory
 WHERE productcategory.categoryid = product.categoryid
@@ -41,16 +36,16 @@ WHERE productcategory.categoryid = product.categoryid
   AND wishlist.productid = product.productid
   AND product.categoryid = productcategory.categoryid;
 
-
+-- change name of customer with id 1
 UPDATE customer SET custname = 'Manas Narang' WHERE custid = 1;
 
-
+-- change available quantity for product with id 2
 UPDATE product SET Availableqty = 1000 WHERE productid = 2;
 
-
+-- display amounts for each product added to cart
 select product_quantity*cost as amount from cart;
 
-
+-- show order data for all orders of customer with id 62
 select 
 	orders.order_id, orders.order_date_time,orders.delivery_address,orders.order_status,orders.order_amount,orders.payment_mode,orders.coupon_id,order_details.shipper_name,order_details.expected_delivery_date
 from
@@ -58,35 +53,34 @@ from
 where
 	customer.custid=62 and orderhistory.customerid=62 and orderhistory.order_id=orders.order_id and orders.tracking_id=order_details.tracking_id;
 
-
+-- show all orders in descending order based on order amount
 select * from orders order by order_amount desc;
 
-
+-- show the names of products added to cart
 select distinct product_name from cart;
 
-
+-- show names of customers whose membership is either Gold or Platinum
 select custname from customer where CustMembership in ("Gold","Platinum");
 
-
+-- show names of products whose brand name starts with 'S' or reviews are greater than 3
 select ProductName from product where productBrand like "S%" OR ProductReviews>3;
 
+-- show minimum cost of items placed in cart
 select min(cost) from cart;
 
-
+--show product data for products with the best reviews
 select * from product where ProductReviews=(select max(ProductReviews) from product);
 
-
+-- show average cost of items present in cart
 select avg(cost) from cart;
 
 -- Fetch all products and their categories, sorted by the number of times they have been ordered
-
 SELECT p.productname, c.categoryname, COUNT(ch.productid) as order_count
 FROM product p
 INNER JOIN productcategory c ON p.categoryid = c.categoryid
 LEFT JOIN cart ch ON p.productid = ch.productid
 GROUP BY p.productid
 ORDER BY COUNT(ch.productid) DESC;
-
 
 
 
