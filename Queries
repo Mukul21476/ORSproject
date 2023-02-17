@@ -78,6 +78,8 @@ select * from product where ProductReviews=(select max(ProductReviews) from prod
 
 select avg(cost) from cart;
 
+-- Fetch all products and their categories, sorted by the number of times they have been ordered
+
 SELECT p.productname, c.categoryname, COUNT(ch.productid) as order_count
 FROM product p
 INNER JOIN productcategory c ON p.categoryid = c.categoryid
