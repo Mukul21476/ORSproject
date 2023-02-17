@@ -1,15 +1,16 @@
+-- count the no of roles present in the admin data
 select count(distinct(AdminRole)) from adminData;
 
-
+-- 
 SELECT seller_name, seller_address FROM seller order by seller_name;
 
-
+-- shows some field from order table whose oder is delivered
 SELECT order_id, order_date_time, order_amount FROM orders WHERE order_status = 'Delivered';
 
-
+-- shows the coupon data used in orderid 3
 SELECT * FROM coupons WHERE coupon_id = (SELECT coupon_id FROM orders WHERE order_id = 3);
 
-
+--  it shows the number of products in each category respectively
 SELECT CategoryName, COUNT(*) as num_products FROM product INNER JOIN productCategory ON product.categoryID = productCategory.CategoryID GROUP BY CategoryName;
 
 
