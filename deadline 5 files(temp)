@@ -88,3 +88,32 @@ select product_name, product_quantity, avg(cost)
 from cart, product
 where cart.productid=product.productid
 group by product_name, product_quantity with rollup;
+
+
+
+----------------------------------------------------------
+delimiter //
+CREATE TRIGGER update_inventory
+BEFORE INSERT ON Cart
+FOR EACH ROW
+BEGIN
+    DECLARE available_qty INT;
+    SELECT AvailableQty INTO available_qty FROM Product WHERE ProductID = NEW.ProductID;
+    IF NEW.product_quantity > available_qty THEN
+        SIGNAL SQLSTATE '45000' 
+        SET MESSAGE_TEXT = 'Quantity not available';
+    ELSE
+        UPDATE Product SET AvailableQty = available_qty - NEW.product_quantity WHERE ProductID = NEW.ProductID;
+    END IF;
+END;
+//
+
+delimiter //
+CREATE TRIGGER check_coupon_expiry BEFORE INSERT ON coupons FOR EACH ROW
+BEGIN
+  IF NEW.expiry_date < NOW() THEN
+    SIGNAL SQLSTATE '45000' 
+    SET MESSAGE_TEXT = 'Cannot add coupon with expired expiry date';
+  END IF;
+END
+//
