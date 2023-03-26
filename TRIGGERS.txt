@@ -1,0 +1,30 @@
+delimiter //
+CREATE TRIGGER check_coupon_expiry BEFORE INSERT ON coupons FOR EACH ROW
+BEGIN
+  IF NEW.expiry_date < NOW() THEN
+    SIGNAL SQLSTATE '45000' 
+    SET MESSAGE_TEXT = 'Cannot add coupon with expired expiry date';
+  END IF;
+END
+//
+
+insert into coupons values (400,20,'2023-03-01');
+
+
+delimiter //
+CREATE TRIGGER update_inventory
+BEFORE INSERT ON Cart
+FOR EACH ROW
+BEGIN
+    DECLARE available_qty INT;
+    SELECT AvailableQty INTO available_qty FROM Product WHERE ProductID = NEW.ProductID;
+    IF NEW.product_quantity > available_qty THEN
+        SIGNAL SQLSTATE '45000' 
+        SET MESSAGE_TEXT = 'Quantity not available';
+    ELSE
+        UPDATE Product SET AvailableQty = available_qty - NEW.product_quantity WHERE ProductID = NEW.ProductID;
+    END IF;
+END;
+//
+insert into cart(ProductID,custid,product_name,product_quantity,cost)
+values(1,30,"Cormier-Bins",495,6266.00);
