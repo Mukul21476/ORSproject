@@ -92,6 +92,10 @@ group by product_name, product_quantity with rollup;
 
 
 ----------------------------------------------------------
+
+insert into cart(ProductID,custid,product_name,product_quantity,cost)
+values(1,30,"Cormier-Bins",495,6266.00);
+
 delimiter //
 CREATE TRIGGER update_inventory
 BEFORE INSERT ON Cart
