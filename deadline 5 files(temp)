@@ -66,3 +66,25 @@ END;//
 
 DROP TRIGGER IF EXISTS update_inventory;
 DROP TRIGGER IF EXISTS update_order_status;
+
+
+---------------------------------------------------
+select productname, categoryname, sum(availableqty)
+from product,productcategory
+where product.categoryid=productcategory.categoryid
+group by productname,categoryname with rollup;
+
+select order_status, month(order_date_time) as mon, sum(order_amount)
+from orders
+group by order_status, month(order_date_time) with rollup;
+
+select productname, productbrand, sum(productprice)
+from product
+group by productname, productbrand with rollup
+order by sum(productprice) desc;
+
+
+select product_name, product_quantity, avg(cost)
+from cart, product
+where cart.productid=product.productid
+group by product_name, product_quantity with rollup;
