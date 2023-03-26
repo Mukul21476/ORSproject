@@ -1,3 +1,51 @@
+# embedded queries
+query1= '''
+    SELECT Product.ProductName, SUM(Cart.product_quantity) AS total_sold
+    FROM Product
+    JOIN Cart ON Product.ProductID = Cart.ProductID
+    GROUP BY Product.ProductID
+    ORDER BY total_sold DESC
+    LIMIT 5
+'''
+
+query2 = '''
+    SELECT Product.ProductName, AVG(Product.ProductReviews) AS avg_reviews
+    FROM Product
+    JOIN ProductCategory ON Product.categoryID = ProductCategory.CategoryID
+    WHERE ProductCategory.CategoryName = 'Electronics'
+    GROUP BY Product.ProductID
+    HAVING AVG(Product.ProductReviews) > 4.0
+    ORDER BY AVG(Product.ProductReviews) DESC
+    LIMIT 10
+'''
+
+
+olap_query1="""select productname, categoryname, sum(availableqty)
+from product,productcategory
+where product.categoryid=productcategory.categoryid
+group by productname,categoryname with rollup
+limit 10;"""
+
+olap_query2="""select order_status, month(order_date_time) as mon, sum(order_amount)
+from orders
+group by order_status, month(order_date_time) with rollup
+limit 10;"""
+
+olap_query3="""select productname, productbrand, sum(productprice)
+from product
+group by productname, productbrand with rollup
+order by sum(productprice) desc
+limit 10;"""
+
+olap_query4="""select product_name, product_quantity, avg(cost)
+from cart, product
+where cart.productid=product.productid
+group by product_name, product_quantity with rollup
+limit 10;"""
+#CLI
+
+===============================================================================================
+
 delimiter //
 CREATE TRIGGER check_coupon_expiry BEFORE INSERT ON coupons FOR EACH ROW
 BEGIN
