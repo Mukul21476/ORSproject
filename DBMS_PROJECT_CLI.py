@@ -49,26 +49,30 @@ query2 = '''
 olap_query1="""select productname, categoryname, sum(availableqty)
 from product,productcategory
 where product.categoryid=productcategory.categoryid
-group by productname,categoryname with rollup;"""
+group by productname,categoryname with rollup
+limit 10;"""
 
 olap_query2="""select order_status, month(order_date_time) as mon, sum(order_amount)
 from orders
-group by order_status, month(order_date_time) with rollup;"""
+group by order_status, month(order_date_time) with rollup
+limit 10;"""
 
 olap_query3="""select productname, productbrand, sum(productprice)
 from product
 group by productname, productbrand with rollup
-order by sum(productprice) desc;"""
+order by sum(productprice) desc
+limit 10;"""
 
 olap_query4="""select product_name, product_quantity, avg(cost)
 from cart, product
 where cart.productid=product.productid
-group by product_name, product_quantity with rollup;"""
+group by product_name, product_quantity with rollup
+limit 10;"""
 #CLI
 while True:
     print("""Choose one of the following options:
-            1. Get product name and quantity sold
-            2. Get product name and average reviews
+            1. Get top 5 products based on their total quantity sold 
+            2. Get top 10 highly reviewed electronics products
             3. Olap query 1
             4. Olap query 2
             5. Olap query 3
