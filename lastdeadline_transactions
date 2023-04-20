@@ -23,12 +23,4 @@ COMMIT;
 
 
 -- conflicting transaction
-START TRANSACTION;
-UPDATE Customer SET SavedPaymentMethod = 'Mastercard' WHERE CustID = 101;
-UPDATE Customer SET SavedPaymentMethod = 'Visa' WHERE CustID = 101;
-COMMIT;
- 
-START TRANSACTION;
-INSERT INTO Cart(ProductID,custID,product_name,product_quantity,cost) VALUES (1001, 101, 'iPhone 14', 1, 899);
-INSERT INTO Cart(ProductID,custID,product_name,product_quantity,cost) VALUES (1001, 102, 'iPhone 14', 1, 899);
-COMMIT;
+
