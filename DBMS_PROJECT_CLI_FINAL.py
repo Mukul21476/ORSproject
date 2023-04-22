@@ -89,6 +89,33 @@ def customer_menu():
 			"6) Checkout cart\n" +
 			"7) Back")
 
+
+def checkout_cart(custid):
+    mycursor.execute(f"SELECT productid,productname,productprice FROM cart JOIN product ON cart.productid=product.productid WHERE custid={custid}")
+    cart_items = mycursor.fetchall()
+    if not cart_items:
+        print("Your cart is empty.")
+        return
+    total_price = 0
+    print("Cart Items:")
+    for item in cart_items:
+        print("Product id = " + str(item[0]) + '\t' + "Product name: " + item[1] + '\t' + "Product price: " + str(item[2]))
+        total_price += item[2]
+    print("Total price: " + str(total_price))
+    confirm = input("Do you want to checkout? (y/n)")
+    if confirm.lower() == 'y':
+        # Add the cart items to the order table
+        mycursor.execute(f"INSERT INTO orders(custid, orderdate, totalamount) VALUES ({custid}, NOW(), {total_price})")
+        order_id = mycursor.lastrowid
+        for item in cart_items:
+            mycursor.execute(f"INSERT INTO orderitems(orderid, productid, quantity, unitprice) VALUES ({order_id}, {item[0]}, 1, {item[2]})")
+        mydb.commit()
+        print(f"Order placed successfully for Customer ID + {custid}!")
+        # Empty the cart once ordered successfully
+        mycursor.execute(f"DELETE FROM cart WHERE custid={custid}")
+        mydb.commit()
+	
+
 while True:
 	print_outer_menu()
 	ch=int(input())
@@ -102,7 +129,7 @@ while True:
 					mycursor.execute("insert into productcategory(categoryname) values("+cat_name+");")
 				elif ch==2:		#delete category
 					cat_name=input("Enter category name: ")
-					mycursor.execute(f"delete from product where productid in (select productid from product where categoryid in(select categortid from productcategory where categoryname={cat_name}) )")
+					mycursor.execute(f"delete from product where productid in (select productid from product where categoryid in(select categoryid from productcategory where categoryname={cat_name}) )")
 					mycursor.execute(f"delete from productcategory where categoryname={cat_name}")
 				elif ch==3:		#add product 
 					prod_name=input("Enter product name: ")
@@ -123,9 +150,8 @@ while True:
 				elif ch==6:
 					break
 				else:
-					invalid_input_msg()
-		else:
-			continue
+					# invalid_input_msg()
+
 	elif ch==2:		#login as customer
 		k,custid=authenticate_customer()
 		if k:
@@ -157,12 +183,12 @@ while True:
 					print("Cart emptied succesfully!\n")
 				elif ch==6:		#checkout cart
 					#place order
-					
+					c_id = int(input("Enter the customer ID: "))
+					checkout_cart(c_id)
 				elif ch==7:		#back
 					break
 				else:
 					invalid_input_msg()
-
 		else:
 			continue
 	elif ch==3:
