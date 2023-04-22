@@ -215,6 +215,11 @@ North John, KY 40450', 'Mastercard', 'Gold'),
 ('Jennifer Marshall', '021.658.3117x75966', 'martinezmichael@example.net', '846 Robert Squares Suite 161
 North David, MD 16603', 'Mastercard', 'Platinum');
 
+
+ALTER TABLE customer ADD CustomerPassword VARCHAR(255);
+
+UPDATE customer SET CustomerPassword = SUBSTRING(MD5(RAND()) FROM 1 FOR 10) WHERE CustID > 0;
+
 -- creating product category--
 
 CREATE TABLE productCategory(
@@ -350,6 +355,14 @@ VALUES
 (99, 'SchuppeInc', 'Sea', 250, 2, 'Noise-cancelling and comfortable.', 3699, 7), 
 (100, 'McGlynnandSons', 'Beach.', 324, 3, 'Noise-cancelling and comfortable.', 9004, 3);
 
+
+ALTER TABLE Product ADD ProductSeller INT;
+
+ALTER TABLE Product ADD CONSTRAINT fk_ProductSeller
+FOREIGN KEY (ProductSeller) REFERENCES Seller(seller_id);
+
+UPDATE Product SET ProductSeller = ProductID;
+
 -- creating admin table
 CREATE TABLE adminData(
 	AdminID INT NOT NULL auto_increment primary key,
@@ -373,6 +386,13 @@ VALUES ('Mallory Cain', 'Customer Service'),
 ('Amber Knight MD', 'Financial Management'),
 ('Ashley Campbell', 'Data Analysis'),
 ('Michelle Miller', 'Financial Management');
+
+
+ALTER TABLE adminData ADD AdminPassword VARCHAR(255);
+
+UPDATE adminData SET AdminPassword = SUBSTRING(MD5(RAND()) FROM 1 FOR 10) WHERE AdminID > 0;
+
+
 
 
 
