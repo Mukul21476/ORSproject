@@ -2,7 +2,7 @@ import mysql.connector as SQL
 
 
 admins={"Beff Jezos":"pwd1","Gill Bates":"pwd2"}
-
+customers={}
 
 def print_outer_menu():
 	print("""Choose one of the following options:
@@ -17,24 +17,47 @@ def print_outer_menu():
 
 
 def authenticate_admin():
-	user=input("Enter your name: ")
-	pwd=input("Enter your password: ")
-	if user in admins:
-		if admins[user]==pwd:
-			return True
+	while True:
+		user=input("Enter your name: ")
+		if user in admins:
+			for i in range(3):
+				pwd=input("Enter your password: ")		
+				if admins[user]==pwd:
+					return True
+				elif i==2:
+					print("Incorrect Password entered too many times! Redirecting to main menu...")
+				else:
+					print("Incorrect Password! Enter again! "+str(3-i-1)+" attempts left")
+			return False
 		else:
-			print("Incorrect Password! Enter again!")
-	else:
-		print("Admin not found! Please enter valid name!")
+			print("Admin not found! Please enter valid name!")
 	
 
 def authenticate_customer():
-	user=input("Enter username: ")
-	pwd=input("Enter password: ")
+	while True:
+		user=input("Enter your email id: ")
+		if user in customers:
+			for i in range(3):
+				pwd=input("Enter your password: ")		
+				if customers[user]==pwd:
+					return True
+				elif i==2:
+					print("Incorrect Password entered too many times! Redirecting to main menu...")
+				else:
+					print("Incorrect Password! Enter again! "+str(3-i-1)+" attempts left")
+			return False
+		else:
+			print("Customer not found! Please enter valid email id!")
 
 def customer_sign_up():
-	name=input("Enter name: ")
-	pwd=input("Enter password: ")
+	while True:
+		name=input("Enter email id: ")
+		pwd=input("Enter password: ")
+		if name not in customers:
+			customers[name]=pwd
+			print("Customer registered successfully!")
+		else:
+			print("Customer with same email id already registered! Enter valid email id! ")
 
 def admin_menu():
 	print("Please choose any one of the following actions:\n" +
@@ -64,9 +87,15 @@ while True:
 	print_outer_menu()
 	ch=int(input())
 	if ch==1:
-		authenticate_admin()
+		if authenticate_admin():
+			admin_menu()
+		else:
+			continue
 	elif ch==2:
-		authenticate_customer()
+		if authenticate_customer():
+			customer_menu()
+		else:
+			continue
 	elif ch==3:
 		customer_sign_up()
 	elif ch==4:
