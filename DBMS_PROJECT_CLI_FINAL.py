@@ -90,30 +90,52 @@ def customer_menu():
 			"7) Back")
 
 
-def checkout_cart(custid):
-    mycursor.execute(f"SELECT productid,productname,productprice FROM cart JOIN product ON cart.productid=product.productid WHERE custid={custid}")
+def checkout_cart(custid, delivery_address):
+    # Get the cart items
+    mycursor.execute(f"SELECT productid, productname, productprice FROM cart JOIN product ON cart.productid=product.productid WHERE custid={custid}")
     cart_items = mycursor.fetchall()
+    
+    # Check if cart is empty
     if not cart_items:
         print("Your cart is empty.")
         return
-    total_price = 0
-    print("Cart Items:")
-    for item in cart_items:
-        print("Product id = " + str(item[0]) + '\t' + "Product name: " + item[1] + '\t' + "Product price: " + str(item[2]))
-        total_price += item[2]
-    print("Total price: " + str(total_price))
-    confirm = input("Do you want to checkout? (y/n)")
-    if confirm.lower() == 'y':
-        # Add the cart items to the order table
-        mycursor.execute(f"INSERT INTO orders(custid, orderdate, totalamount) VALUES ({custid}, NOW(), {total_price})")
-        order_id = mycursor.lastrowid
-        for item in cart_items:
-            mycursor.execute(f"INSERT INTO orderitems(orderid, productid, quantity, unitprice) VALUES ({order_id}, {item[0]}, 1, {item[2]})")
-        mydb.commit()
-        print(f"Order placed successfully for Customer ID + {custid}!")
-        # Empty the cart once ordered successfully
-        mycursor.execute(f"DELETE FROM cart WHERE custid={custid}")
-        mydb.commit()
+    
+    # Calculate total price
+    total_price = sum(item[2] for item in cart_items)
+    
+    # Get coupon details (if applicable)
+    coupon_id = None
+    coupon_discount = 0
+    coupon_expiry = None
+    coupon_code = input("Enter coupon code/ coupon id (if applicable): ")
+    if coupon_code:
+        mycursor.execute(f"SELECT coupon_id, coupon_discount, expiry_date FROM coupons WHERE coupon_id='{coupon_code}'")
+        coupon = mycursor.fetchone()
+        if coupon:
+            coupon_id, coupon_discount, coupon_expiry = coupon
+            if coupon_expiry < datetime.now():
+                print("Coupon has expired.")
+                return
+				
+        else:
+            print("Invalid coupon code.")
+            return
+    
+    # Calculate final price
+    final_price = total_price - (total_price * (coupon_discount/100))
+    
+    # Insert order details into Orders table
+    order_date_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    payment_mode = input("Enter payment mode (e.g. credit card, PayPal, etc.): ")
+    tracking_id = random.randint(150,1000)
+    mycursor.execute(f"INSERT INTO Orders (order_date_time, delivery_address, order_status, order_amount, payment_mode, coupon_id, tracking_id) VALUES ('{order_date_time}', '{delivery_address}', 'pending', {final_price}, '{payment_mode}', {coupon_id}, '{tracking_id}')")
+    order_id = mycursor.lastrowid
+    
+    mycursor.execute(f"INSERT INTO OrderHistory (CustomerID, Order_id) VALUES ({custid}, {order_id})")# Insert into OrderHistory table
+    mycursor.execute(f"DELETE FROM cart WHERE custid={custid}")# Empty the cart
+    mydb.commit()
+    
+    print("Order placed successfully!")
 	
 
 while True:
@@ -184,7 +206,8 @@ while True:
 				elif ch==6:		#checkout cart
 					#place order
 					c_id = int(input("Enter the customer ID: "))
-					checkout_cart(c_id)
+					c_add = input("Enter the customer address: ")
+					checkout_cart(c_id,c_add)
 				elif ch==7:		#back
 					break
 				else:
