@@ -11,9 +11,6 @@ mydb = SQL.connect(
 
 mycursor = mydb.cursor()
 
-admins={"Beff Jezos":"pwd1","Gill Bates":"pwd2"}
-customers={}
-sellers={}
 
 def invalid_input_msg():
 	print("Invalid input! Enter again!")
@@ -32,10 +29,9 @@ def print_outer_menu():
 	1. Login as Admin
 	2. Login as Customer
 	3. Sign up as Customer
-	4. Login as Seller
-	5. Sign up as Seller
-	6. Explore product catalog
-	7. Exit the application.
+	4. Register to be a Seller
+	5. Explore product catalog
+	6. Exit the application.
 	""")
 
 
@@ -63,12 +59,16 @@ def authenticate_admin():
 def authenticate_customer():
 	while True:
 		user=input("Enter your email id: ")
-		if user in customers:
+		mycursor.execute(f"Select customerpassword from customer where emailaddress={user};")
+		p=mycursor.fetchall()
+		if p:
 			for i in range(3):
 				pwd=input("Enter your password: ")		
-				if customers[user]==pwd:
-					mycursor.execute(f"select custid from customer where custname={user}")
+				if p[0][0]==pwd:
+					mycursor.execute(f"select custid,custname from customer where custname={user}")
 					id=mycursor[0][0]
+					name=mycursor[0][1]
+					print(f"Welcome {name}!!\n")
 					return True,id
 				elif i==2:
 					print("Incorrect Password entered too many times! Redirecting to main menu...")
@@ -80,39 +80,43 @@ def authenticate_customer():
 
 def customer_sign_up():
 	while True:
-		name=input("Enter email id: ")
+		name=input("Enter your name: ")
+		num=input("Enter your phone number: ")
+		mail=input("Enter email id: ")
+		addr=input("Enter your address: ")
+		saved_payment=input("Enter payment method you would like to save: (Enter '-' if you don't want to save any payment method)")
+		membership=input("Choose your customer membership: (Silver, GOld, Platinum)")
 		pwd=input("Enter password: ")
-		if name not in customers:
-			customers[name]=pwd
+		mycursor.execute(f"select custid from customer where emailaddress={mail};")
+		customers=mycursor.fetchall()
+		if not customers:
+			mycursor.execute(f"Insert into customer(custname,phonenumber,emailaddress,custaddr,savedpaymentmethod,custmembership) values({name},{num},{mail},{addr},{saved_payment},{membership});")
+			mydb.commit()
 			print("Customer registered successfully!")
 		else:
 			print("Customer with same email id already registered! Enter valid email id! ")
 
-def authenticate_seller():
-	while True:
-		user=input("Enter your name: ")
-		if user in sellers:
-			for i in range(3):
-				pwd=input("Enter your password: ")		
-				if sellers[user]==pwd:
-					return True
-				elif i==2:
-					print("Incorrect Password entered too many times! Redirecting to main menu...")
-				else:
-					print("Incorrect Password! Enter again! "+str(3-i-1)+" attempts left")
-			return False
-		else:
-			print("Seller not found! Please enter valid name!")
+# def authenticate_seller():
+# 	while True:
+# 		user=input("Enter your name: ")
+# 		if user in sellers:
+# 			for i in range(3):
+# 				pwd=input("Enter your password: ")		
+# 				if sellers[user]==pwd:
+# 					return True
+# 				elif i==2:
+# 					print("Incorrect Password entered too many times! Redirecting to main menu...")
+# 				else:
+# 					print("Incorrect Password! Enter again! "+str(3-i-1)+" attempts left")
+# 			return False
+# 		else:
+# 			print("Seller not found! Please enter valid name!")
 
 def seller_sign_up():
-	while True:
-		name=input("Enter name: ")
-		pwd=input("Enter password: ")
-		if name not in sellers:
-			sellers[name]=pwd
-			print("Seller registered successfully!")
-		else:
-			print("Seller with same name already registered! Enter valid name! ")	
+	user=input("Enter your name: ")
+	addr=input("Enter your address: ")
+	mycursor.execute(f"Insert into seller(seller_name,seller_address) values({user},{addr});")
+	mydb.commit()
 
 def admin_menu():
 	print("Please choose any one of the following actions:\n" +
@@ -243,7 +247,7 @@ while True:
 					quant=int(input("Enter product quantity: "))
 					mycursor.execute(f"select min(productprice) from product where productid={prod_id};")
 					price=mycursor[0][0]
-					mycursor.execute(f"insert into cart(productid,custid,product_name,product_quantity,cost) values({prod_id},{custid},{prod_name},{quant},{price*quant});")
+					mycursor.execute(f"insert into cart(productid,custid,product_name,product_quantity,cost) values({prod_id},{custid},{prod_name},{quant},{price});")
 					mydb.commit()
 					print("Product added to cart successfully!\n")
 				elif ch==3:		#add prod to wishlist
@@ -283,15 +287,13 @@ while True:
 
 		else:
 			continue
-	elif ch==3:
+	elif ch==3:		#sign up as customer
 		customer_sign_up()
-	elif ch==4:
-		authenticate_seller()
-	elif ch==5:
+	elif ch==4:		#register as seller
 		seller_sign_up()
-	elif ch==6:
+	elif ch==5:		#product catalog
 		print_catalog()
-	elif ch==7:
+	elif ch==6:		#exit
 		exit_msg()
 		break
 	else:
