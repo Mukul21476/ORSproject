@@ -507,6 +507,15 @@ VALUES
 ('21', '2023-07-11'),
 ('31', '2023-10-25');
 
+ALTER TABLE coupons
+ADD COLUMN customerID INT,
+ADD CONSTRAINT fk_customer
+FOREIGN KEY (customerID)
+REFERENCES customer(CustID);
+
+UPDATE coupons SET customerid = coupon_id;
+
+
 CREATE TABLE Order_details(
 	tracking_id INT NOT NULL primary key auto_increment,
     shipper_name varchar(80) NOT NULL,
