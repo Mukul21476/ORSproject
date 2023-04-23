@@ -161,12 +161,16 @@ def checkout_cart(custid, delivery_address):
 	cust_m = mycursor.fetchone()[0]
 	if cust_m == "Gold":
 		exp_dd = datetime.now() + timedelta(days=2)
+		shipr = "Jason Stone"
 	elif cust_m == "Platinum":
 		exp_dd = datetime.now() + timedelta(days=1)
+		shipr = "Samantha Harrison"
 	elif cust_m == "Silver":
 		exp_dd = datetime.now() + timedelta(days=3)
+		shipr = "Angela Frazier"
 	else:
 		exp_dd = datetime.now() + timedelta(days=5)
+		shipr = "Regina Hall"
 
     
     # Getting coupon details (if applicable)
@@ -199,7 +203,8 @@ def checkout_cart(custid, delivery_address):
     
     # Insert into OrderHistory table
     mycursor.execute(f"INSERT INTO OrderHistory (CustomerID, Order_id) VALUES ({custid}, {order_id})")
-    mycursor.execute(f"INSERT INTO order_details (shipper_name,location,expected_delivery_date) VALUES ({},{delivery_address},{exp_dd})")#randomised ya koi 3 shipper wala dekh le idhar
+    # Insert into order_details table
+    mycursor.execute(f"INSERT INTO order_details (shipper_name,location,expected_delivery_date) VALUES ({shipr},{delivery_address},{exp_dd})")
     
     # Update product quantities
     for item in cart_items:
