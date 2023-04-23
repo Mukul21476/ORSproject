@@ -41,7 +41,7 @@ def authenticate_admin():
 	while True:
 		user=input("Enter your name: ")
 		#CHECK THIS ONCE
-		mycursor.execute(f"select adminpassword from admindata where adminname={user}")
+		mycursor.execute(f"select adminpassword from admindata where adminname='{user}';")
 		p=mycursor.fetchall()
 		if p:
 			for i in range(3):
@@ -60,13 +60,13 @@ def authenticate_admin():
 def authenticate_customer():
 	while True:
 		user=input("Enter your email id: ")
-		mycursor.execute(f"Select customerpassword from customer where emailaddress={user};")
+		mycursor.execute(f"Select customerpassword from customer where emailaddress='{user}';")
 		p=mycursor.fetchall()
 		if p:
 			for i in range(3):
 				pwd=input("Enter your password: ")		
 				if p[0][0]==pwd:
-					mycursor.execute(f"select custid,custname from customer where custname={user}")
+					mycursor.execute(f"select custid,custname from customer where custname='{user}'")
 					id=mycursor[0][0]
 					name=mycursor[0][1]
 					print(f"Welcome {name}!!\n")
@@ -88,10 +88,10 @@ def customer_sign_up():
 		saved_payment=input("Enter payment method you would like to save: (Enter '-' if you don't want to save any payment method)")
 		membership=input("Choose your customer membership: (Silver, GOld, Platinum)")
 		pwd=input("Enter password: ")
-		mycursor.execute(f"select custid from customer where emailaddress={mail};")
+		mycursor.execute(f"select custid from customer where emailaddress='{mail}';")
 		customers=mycursor.fetchall()
 		if not customers:
-			mycursor.execute(f"Insert into customer(custname,phonenumber,emailaddress,custaddr,savedpaymentmethod,custmembership) values({name},{num},{mail},{addr},{saved_payment},{membership});")
+			mycursor.execute(f"Insert into customer(custname,phonenumber,emailaddress,custaddr,savedpaymentmethod,custmembership) values('{name}','{num}','{mail}','{addr}','{saved_payment}','{membership}');")
 			mydb.commit()
 			print("Customer registered successfully!")
 		else:
@@ -116,7 +116,7 @@ def customer_sign_up():
 def seller_sign_up():
 	user=input("Enter your name: ")
 	addr=input("Enter your address: ")
-	mycursor.execute(f"Insert into seller(seller_name,seller_address) values({user},{addr});")
+	mycursor.execute(f"Insert into seller(seller_name,seller_address) values('{user}','{addr}');")
 	mydb.commit()
 
 def admin_menu():
@@ -130,9 +130,9 @@ def admin_menu():
 
 def customer_menu():
 	print("Choose one of the following options:\n"+
-       		"1) Browse products\n" +
-            "2) Add a product to cart\n" +
-	    	"3) Add a product to wishlist\n"+
+			"1) Browse products\n" +
+			"2) Add a product to cart\n" +
+			"3) Add a product to wishlist\n"+
 			"4) View coupons\n" +
 			"5) View cart\n" +
 			"6) Empty cart\n" +
@@ -140,31 +140,31 @@ def customer_menu():
 			"8) Empty wishlist\n"+
 			"9) Checkout cart\n" +
 			"10) Back")
-	
+
 
 def checkout_cart(custid, delivery_address):
-    # Getting the cart items
-    mycursor.execute(f"SELECT productid, productname, cost, product_quantity FROM cart WHERE custid={custid}")
-    cart_items = mycursor.fetchall()
-    
-    # Checking if cart is empty
-    if not cart_items:
-        print("Your cart is empty.")
-        return
+	# Getting the cart items
+	mycursor.execute(f"SELECT productid, productname, cost, product_quantity FROM cart WHERE custid={custid}")
+	cart_items = mycursor.fetchall()
 
-    # Checking if items are out of stock
-    for item in cart_items:
-        product_id, productname, cost, qty = item
-        mycursor.execute(f"SELECT AvailableQty FROM product WHERE id = {product_id}")
-        available_qty = mycursor.fetchone()[0]
-        if qty > available_qty:
-            print(f"{item[1]} is out of stock. Only {available_qty} available.")
-            return
-	
-    # Calculating total price and quantity
-    total_price = sum(item[2]*item[3] for item in cart_items)
-    total_qty = sum(item[3] for item in cart_items)
-    
+	# Checking if cart is empty
+	if not cart_items:
+		print("Your cart is empty.")
+		return
+
+	# Checking if items are out of stock
+	for item in cart_items:
+		product_id, productname, cost, qty = item
+		mycursor.execute(f"SELECT AvailableQty FROM product WHERE id = {product_id}")
+		available_qty = mycursor.fetchone()[0]
+		if qty > available_qty:
+			print(f"{item[1]} is out of stock. Only {available_qty} available.")
+			return
+
+	# Calculating total price and quantity
+	total_price = sum(item[2]*item[3] for item in cart_items)
+	total_qty = sum(item[3] for item in cart_items)
+
 	# Determine the customer membership and set expected delivery date
 	mycursor.execute(f"SELECT CustMembership FROM customer WHERE custid={custid}")
 	cust_m = mycursor.fetchone()[0]
@@ -181,51 +181,53 @@ def checkout_cart(custid, delivery_address):
 		exp_dd = datetime.now() + timedelta(days=5)
 		shipr = "Regina Hall"
 
-    
-    # Getting coupon details (if applicable)
-    coupon_id = None
-    coupon_discount = 0
-    coupon_expiry = None
-    coupon_code = input("Enter coupon code/ coupon id (if applicable): ")
-    if coupon_code:
-        mycursor.execute(f"SELECT coupon_id, coupon_discount, expiry_date FROM coupons WHERE coupon_id='{coupon_code}'")
-        coupon = mycursor.fetchone()
-        if coupon:
-            coupon_id, coupon_discount, coupon_expiry = coupon
-            if coupon_expiry < datetime.now():
-                print("Coupon has expired.")
-                return
+
+	# Getting coupon details (if applicable)
+	coupon_id = None
+	coupon_discount = 0
+	coupon_expiry = None
+	coupon_code = input("Enter coupon code/ coupon id (if applicable): ")
+	if coupon_code:
+		mycursor.execute(f"SELECT coupon_id, coupon_discount, expiry_date FROM coupons WHERE coupon_id='{coupon_code}'")
+		coupon = mycursor.fetchone()
+		if coupon:
+			coupon_id, coupon_discount, coupon_expiry = coupon
+			if coupon_expiry < datetime.now():
+				print("Coupon has expired.")
+				return
 				
-        else:
-            print("Invalid coupon code.")
-            return
-    
-    # Calculating final price
-    final_price = total_price - (total_price * (coupon_discount/100))
-    
-    # Insert order details into Orders table
-    order_date_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    payment_mode = input("Enter payment mode (e.g. credit card, PayPal, etc.): ")
-    tracking_id = random.randint(150,1000)
-    mycursor.execute(f"INSERT INTO Orders (order_date_time, delivery_address, order_status, order_amount, payment_mode, coupon_id, tracking_id) VALUES ('{order_date_time}', '{delivery_address}', 'Order Placed', {final_price}, '{payment_mode}', {coupon_id}, '{tracking_id}')")
-    order_id = mycursor.lastrowid
-    
-    # Insert into OrderHistory table
-    mycursor.execute(f"INSERT INTO OrderHistory (CustomerID, Order_id) VALUES ({custid}, {order_id})")
-    # Insert into order_details table
-    mycursor.execute(f"INSERT INTO order_details (shipper_name,location,expected_delivery_date) VALUES ({shipr},{delivery_address},{exp_dd})")
-    
-    # Update product quantities
-    for item in cart_items:
-        product_id, productname, cost, qty = item
-        mycursor.execute(f"UPDATE product SET AvailableQty = AvailableQty - {qty} WHERE id = {product_id}")
-    
-    # Empty the cart
-    mycursor.execute(f"DELETE FROM cart WHERE custid={custid}")
-    
-    mydb.commit()
-    
-    print(f"Order placed successfully! Total amount: {final_price}, Total quantity: {total_qty}")
+		else:
+			print("Invalid coupon code.")
+			return
+
+	# Calculating final price
+	final_price = total_price - (total_price * (coupon_discount/100))
+
+	# Insert order details into Orders table
+	order_date_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+	payment_mode = input("Enter payment mode (e.g. credit card, PayPal, etc.): ")
+	tracking_id = random.randint(150,1000)
+	mycursor.execute(f"INSERT INTO Orders (order_date_time, delivery_address, order_status, order_amount, payment_mode, coupon_id, tracking_id) VALUES ('{order_date_time}', '{delivery_address}', 'Order Placed', {final_price}, '{payment_mode}', {coupon_id}, '{tracking_id}')")
+	order_id = mycursor.lastrowid
+
+	# Insert into OrderHistory table
+	mycursor.execute(f"INSERT INTO OrderHistory (CustomerID, Order_id) VALUES ({custid}, {order_id})")
+	# Insert into order_details table
+	mycursor.execute(f"INSERT INTO order_details (shipper_name,location,expected_delivery_date) VALUES ({shipr},{delivery_address},{exp_dd})")
+
+	# Update product quantities
+	for item in cart_items:
+		product_id, productname, cost, qty = item
+		mycursor.execute(f"UPDATE product SET AvailableQty = AvailableQty - {qty} WHERE id = {product_id}")
+
+	# Empty the cart
+	mycursor.execute(f"DELETE FROM cart WHERE custid={custid}")
+
+	mydb.commit()
+
+	print(f"Order placed successfully! Total amount: {final_price}, Total quantity: {total_qty}")
+
+
 
 
 
@@ -240,12 +242,12 @@ while True:
 				ch=int(input())
 				if ch==1:	#add category
 					cat_name=input("Enter category name: ")
-					mycursor.execute("insert into productcategory(categoryname) values("+cat_name+");")
+					mycursor.execute("insert into productcategory(categoryname) values('"+cat_name+"');")
 					mydb.commit()
 				elif ch==2:		#delete category
 					cat_name=input("Enter category name: ")
-					mycursor.execute(f"delete from product where productid in (select productid from product where categoryid in(select categortid from productcategory where categoryname={cat_name}) )")
-					mycursor.execute(f"delete from productcategory where categoryname={cat_name}")
+					mycursor.execute(f"delete from product where categoryid in(select categoryid from productcategory where categoryname='{cat_name}');")
+					mycursor.execute(f"delete from productcategory where categoryname='{cat_name}'")
 					mydb.commit()
 				elif ch==3:		#add product 
 					prod_name=input("Enter product name: ")
@@ -255,11 +257,11 @@ while True:
 					desc=input("Enter product description: ")
 					cat=int(input("Enter category id: "))
 					s_id=int(input("Enter seller id: "))
-					mycursor.execute(f"insert into product(productname,productbrand,availableqty,productreviews,productdescription,productprice,catefgoryid,sellerid) values({prod_name}{prod_brand},{quant},5,{desc},{cat},{s_id});")
+					mycursor.execute(f"insert into product(productname,productbrand,availableqty,productreviews,productdescription,productprice,categoryid,productseller) values('{prod_name}','{prod_brand}',{quant},5,'{desc}',{cat},{s_id});")
 					mydb.commit()				
 				elif ch==4:		#delete product
 					prod_name=input("Enter product name: ")
-					mycursor.execute(f"delete from product where productid in (select product id from product where productname={prod_name})")
+					mycursor.execute(f"delete from product where productid in (select product id from product where productname='{prod_name}')")
 					mydb.commit()
 				elif ch==5:		#add discount on product
 					prod_name=input("Enter product name: ")
@@ -286,19 +288,25 @@ while True:
 					quant=int(input("Enter product quantity: "))
 					mycursor.execute(f"select min(productprice) from product where productid={prod_id};")
 					price=mycursor[0][0]
-					mycursor.execute(f"insert into cart(productid,custid,product_name,product_quantity,cost) values({prod_id},{custid},{prod_name},{quant},{price});")
+					mycursor.execute(f"insert into cart(productid,custid,product_name,product_quantity,cost) values({prod_id},{custid},'{prod_name}',{quant},{price});")
 					mydb.commit()
 					print("Product added to cart successfully!\n")
 				elif ch==3:		#add prod to wishlist
 					prod_id=int(input("Enter product id: "))
 					prod_name=input("Enter product name: ")
-					mycursor.execute(f"insert into wishlist(productid,productname,customerid) values({prod_id},{prod_name},{custid})")
+					mycursor.execute(f"insert into wishlist(productid,productname,customerid) values({prod_id},'{prod_name}',{custid})")
 					mydb.commit()
 					print("Product added to wishlist successfully!\n")
 				elif ch==4:		#view coupons(CHECK THIS AFTER CHANGING DB)
-					mycursor.execute("select coupon_id,coupon_discount,expiry_date from coupon LIMIT 10")
+					mycursor.execute(f"Select custmembership from customer where custid={custid};")
+					membership=mycursor.fetchone[0][0]
+					mycursor.execute(f"select coupon_id,coupon_discount,expiry_date from coupons where c_membership='{membership}' AND expiry_date>DATE(NOW()) LIMIT 10")
+					flag=0
 					for i in mycursor:
+						flag=1
 						print("Coupon id: "+i[0]+'\t'+"Coupon discount: "+i[1]+"%"+'\t'+"Expiry date: "+i[2])
+					if flag==0:
+						print("You don't have any coupons right now. Check back later!\n")
 				elif ch==5:		#view cart
 					mycursor.execute(f"Select productid, product_name,product_quantity,cost from cart where custid={custid};")
 					for i in mycursor:
