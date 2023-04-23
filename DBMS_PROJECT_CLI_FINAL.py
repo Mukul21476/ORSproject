@@ -22,7 +22,7 @@ def exit_msg():
 def print_catalog():
 	mycursor.execute("Select productid,productname, productbrand, productprice from product limit 15;")
 	for i in mycursor:
-		print("Product id = "+i[0]+'\t'+"Product name: "+i[1]+'\t'+"Brand name: "+i[2]+'\t'+"Product price = ₹"+i[3])
+		print("Product id = "+str(i[0])+'\t'+"Product name: "+str(i[1])+'\t'+"Brand name: "+str(i[2])+'\t'+"Product price = ₹"+str(i[3]))
 	print('\n')
 
 def print_outer_menu():
@@ -66,16 +66,17 @@ def authenticate_customer():
 			for i in range(3):
 				pwd=input("Enter your password: ")		
 				if p[0][0]==pwd:
-					mycursor.execute(f"select custid,custname from customer where custname='{user}'")
-					id=mycursor[0][0]
-					name=mycursor[0][1]
+					mycursor.execute(f"select custid,custname from customer where emailaddress='{user}'")
+					data=mycursor.fetchall()
+					id=data[0][0]
+					name=data[0][1]
 					print(f"Welcome {name}!!\n")
 					return True,id
 				elif i==2:
 					print("Incorrect Password entered too many times! Redirecting to main menu...")
 				else:
 					print("Incorrect Password! Enter again! "+str(3-i-1)+" attempts left")
-			return False
+			return False,-1
 		else:
 			print("Customer not found! Please enter valid email id!")
 
@@ -91,9 +92,10 @@ def customer_sign_up():
 		mycursor.execute(f"select custid from customer where emailaddress='{mail}';")
 		customers=mycursor.fetchall()
 		if not customers:
-			mycursor.execute(f"Insert into customer(custname,phonenumber,emailaddress,custaddr,savedpaymentmethod,custmembership) values('{name}','{num}','{mail}','{addr}','{saved_payment}','{membership}');")
+			mycursor.execute(f"Insert into customer(custname,phonenumber,emailaddress,custaddr,savedpaymentmethod,custmembership,customerpassword) values('{name}','{num}','{mail}','{addr}','{saved_payment}','{membership}','{pwd}');")
 			mydb.commit()
 			print("Customer registered successfully!")
+			break
 		else:
 			print("Customer with same email id already registered! Enter valid email id! ")
 
@@ -144,7 +146,7 @@ def customer_menu():
 
 def checkout_cart(custid, delivery_address):
 	# Getting the cart items
-	mycursor.execute(f"SELECT productid, productname, cost, product_quantity FROM cart WHERE custid={custid}")
+	mycursor.execute(f"SELECT productid, product_name, cost, product_quantity FROM cart WHERE custid={custid}")
 	cart_items = mycursor.fetchall()
 
 	# Checking if cart is empty
@@ -155,7 +157,7 @@ def checkout_cart(custid, delivery_address):
 	# Checking if items are out of stock
 	for item in cart_items:
 		product_id, productname, cost, qty = item
-		mycursor.execute(f"SELECT AvailableQty FROM product WHERE id = {product_id}")
+		mycursor.execute(f"SELECT AvailableQty FROM product WHERE productid = {product_id}")
 		available_qty = mycursor.fetchone()[0]
 		if qty > available_qty:
 			print(f"{item[1]} is out of stock. Only {available_qty} available.")
@@ -257,11 +259,11 @@ while True:
 					desc=input("Enter product description: ")
 					cat=int(input("Enter category id: "))
 					s_id=int(input("Enter seller id: "))
-					mycursor.execute(f"insert into product(productname,productbrand,availableqty,productreviews,productdescription,productprice,categoryid,productseller) values('{prod_name}','{prod_brand}',{quant},5,'{desc}',{cat},{s_id});")
+					mycursor.execute(f"insert into product(productname,productbrand,availableqty,productreviews,productdescription,productprice,categoryid,productseller) values('{prod_name}','{prod_brand}',{quant},5,'{desc}',{price},{cat},{s_id});")
 					mydb.commit()				
 				elif ch==4:		#delete product
 					prod_name=input("Enter product name: ")
-					mycursor.execute(f"delete from product where productid in (select product id from product where productname='{prod_name}')")
+					mycursor.execute(f"delete from product where productname='{prod_name}'")
 					mydb.commit()
 				elif ch==5:		#add discount on product
 					prod_name=input("Enter product name: ")
@@ -287,7 +289,7 @@ while True:
 					prod_name=input("Enter product name: ")
 					quant=int(input("Enter product quantity: "))
 					mycursor.execute(f"select min(productprice) from product where productid={prod_id};")
-					price=mycursor[0][0]
+					price=mycursor.fetchall()[0][0]
 					mycursor.execute(f"insert into cart(productid,custid,product_name,product_quantity,cost) values({prod_id},{custid},'{prod_name}',{quant},{price});")
 					mydb.commit()
 					print("Product added to cart successfully!\n")
@@ -299,26 +301,26 @@ while True:
 					print("Product added to wishlist successfully!\n")
 				elif ch==4:		#view coupons(CHECK THIS AFTER CHANGING DB)
 					mycursor.execute(f"Select custmembership from customer where custid={custid};")
-					membership=mycursor.fetchone[0][0]
+					membership=mycursor.fetchone()[0]
 					mycursor.execute(f"select coupon_id,coupon_discount,expiry_date from coupons where c_membership='{membership}' AND expiry_date>DATE(NOW()) LIMIT 10")
 					flag=0
 					for i in mycursor:
 						flag=1
-						print("Coupon id: "+i[0]+'\t'+"Coupon discount: "+i[1]+"%"+'\t'+"Expiry date: "+i[2])
+						print("Coupon id: "+str(i[0])+'\t'+"Coupon discount: "+str(i[1])+"%"+'\t'+"Expiry date: "+str(i[2]))
 					if flag==0:
 						print("You don't have any coupons right now. Check back later!\n")
 				elif ch==5:		#view cart
 					mycursor.execute(f"Select productid, product_name,product_quantity,cost from cart where custid={custid};")
 					for i in mycursor:
-						print("Product id: "+i[0]+'\t'+"Product name: "+i[1]+'\t'+"Quantity: "+i[2]+'\t'+"Cost = "+i[3])
+						print("Product id: "+str(i[0])+'\t'+"Product name: "+str(i[1])+'\t'+"Quantity: "+str(i[2])+'\t'+"Cost = "+str(i[3]))
 				elif ch==6:		#empty cart
 					mycursor.execute(f"delete from cart where custid={custid};")
 					mydb.commit()
 					print("Cart emptied succesfully!\n")
 				elif ch==7:		#view wishlist
-					mycursor.execute(f"Select productid, productname from wishlist where customerid={custid}")
+					mycursor.execute(f"Select productid, product_name from wishlist where customerid={custid}")
 					for i in mycursor:
-						print("Product id: "+i[0]+'\t'+"Product name: "+i[1])
+						print("Product id: "+str(i[0])+'\t'+"Product name: "+str(i[1]))
 				elif ch==8:		#empty wishlist
 					mycursor.execute(f"delete from wishlist where customerid={custid}")
 					mydb.commit()
