@@ -1,4 +1,5 @@
 import mysql.connector as SQL
+import random,datetime
 
 
 mydb = SQL.connect(
@@ -12,6 +13,19 @@ mycursor = mydb.cursor()
 
 admins={"Beff Jezos":"pwd1","Gill Bates":"pwd2"}
 customers={}
+sellers={}
+
+def invalid_input_msg():
+	print("Invalid input! Enter again!")
+
+def exit_msg():
+	print("Thank you for using Online Retail Store! Exiting the application...")
+
+def print_catalog():
+	mycursor.execute("Select productid,productname, productbrand, productprice from product limit 15;")
+	for i in mycursor:
+		print("Product id = "+i[0]+'\t'+"Product name: "+i[1]+'\t'+"Brand name: "+i[2]+'\t'+"Product price = ₹"+i[3])
+	print('\n')
 
 def print_outer_menu():
 	print("""Choose one of the following options:
@@ -25,13 +39,17 @@ def print_outer_menu():
 	""")
 
 
+
 def authenticate_admin():
 	while True:
 		user=input("Enter your name: ")
-		if user in admins:
+		#CHECK THIS ONCE
+		mycursor.execute(f"select adminpassword from admindata where adminname={user}")
+		p=mycursor.fetchall()
+		if p:
 			for i in range(3):
 				pwd=input("Enter your password: ")		
-				if admins[user]==pwd:
+				if p[0][0]==pwd:
 					return True
 				elif i==2:
 					print("Incorrect Password entered too many times! Redirecting to main menu...")
@@ -70,6 +88,32 @@ def customer_sign_up():
 		else:
 			print("Customer with same email id already registered! Enter valid email id! ")
 
+def authenticate_seller():
+	while True:
+		user=input("Enter your name: ")
+		if user in sellers:
+			for i in range(3):
+				pwd=input("Enter your password: ")		
+				if sellers[user]==pwd:
+					return True
+				elif i==2:
+					print("Incorrect Password entered too many times! Redirecting to main menu...")
+				else:
+					print("Incorrect Password! Enter again! "+str(3-i-1)+" attempts left")
+			return False
+		else:
+			print("Seller not found! Please enter valid name!")
+
+def seller_sign_up():
+	while True:
+		name=input("Enter name: ")
+		pwd=input("Enter password: ")
+		if name not in sellers:
+			sellers[name]=pwd
+			print("Seller registered successfully!")
+		else:
+			print("Seller with same name already registered! Enter valid name! ")	
+
 def admin_menu():
 	print("Please choose any one of the following actions:\n" +
                 "1) Add category\n" +
@@ -83,16 +127,19 @@ def customer_menu():
 	print("Choose one of the following options:\n"+
        		"1) Browse products\n" +
             "2) Add a product to cart\n" +
-			"3) View coupons\n" +
-			"4) View cart\n" +
-			"5) Empty cart\n" +
-			"6) Checkout cart\n" +
-			"7) Back")
-
+	    	"3) Add a product to wishlist\n"+
+			"4) View coupons\n" +
+			"5) View cart\n" +
+			"6) Empty cart\n" +
+			"7) View wishlist\n"+
+			"8) Empty wishlist\n"+
+			"9) Checkout cart\n" +
+			"10) Back")
+	
 
 def checkout_cart(custid, delivery_address):
     # Get the cart items
-    mycursor.execute(f"SELECT productid, productname, productprice FROM cart JOIN product ON cart.productid=product.productid WHERE custid={custid}")
+    mycursor.execute(f"SELECT productid, productname, cost FROM cart WHERE custid={custid}")
     cart_items = mycursor.fetchall()
     
     # Check if cart is empty
@@ -136,7 +183,9 @@ def checkout_cart(custid, delivery_address):
     mydb.commit()
     
     print("Order placed successfully!")
-	
+
+
+
 
 while True:
 	print_outer_menu()
@@ -149,10 +198,12 @@ while True:
 				if ch==1:	#add category
 					cat_name=input("Enter category name: ")
 					mycursor.execute("insert into productcategory(categoryname) values("+cat_name+");")
+					mydb.commit()
 				elif ch==2:		#delete category
 					cat_name=input("Enter category name: ")
-					mycursor.execute(f"delete from product where productid in (select productid from product where categoryid in(select categoryid from productcategory where categoryname={cat_name}) )")
+					mycursor.execute(f"delete from product where productid in (select productid from product where categoryid in(select categortid from productcategory where categoryname={cat_name}) )")
 					mycursor.execute(f"delete from productcategory where categoryname={cat_name}")
+					mydb.commit()
 				elif ch==3:		#add product 
 					prod_name=input("Enter product name: ")
 					prod_brand=input("Enter brand name: ")
@@ -162,18 +213,22 @@ while True:
 					cat=int(input("Enter category id: "))
 					s_id=int(input("Enter seller id: "))
 					mycursor.execute(f"insert into product(productname,productbrand,availableqty,productreviews,productdescription,productprice,catefgoryid,sellerid) values({prod_name}{prod_brand},{quant},5,{desc},{cat},{s_id});")
+					mydb.commit()				
 				elif ch==4:		#delete product
 					prod_name=input("Enter product name: ")
 					mycursor.execute(f"delete from product where productid in (select product id from product where productname={prod_name})")
+					mydb.commit()
 				elif ch==5:		#add discount on product
 					prod_name=input("Enter product name: ")
 					disc=int(input("Enter discount percentage: "))
 					mycursor.execute(f"update product set productprice=((100-{disc})*productprice)/100;")
+					mydb.commit()
 				elif ch==6:
 					break
 				else:
-					# invalid_input_msg()
-
+					invalid_input_msg()
+		else:
+			continue
 	elif ch==2:		#login as customer
 		k,custid=authenticate_customer()
 		if k:
@@ -181,37 +236,51 @@ while True:
 				customer_menu()
 				ch=int(input())
 				if ch==1:	#browse products
-					mycursor.execute("Select productid,productname, productbrand, productprice from product limit 15;")
-					for i in mycursor:
-						print("Product id = "+i[0]+'\t'+"Product name: "+i[1]+'\t'+"Brand name: "+i[2]+'\t'+"Product price = ₹"+i[3])
-					print('\n')
+					print_catalog()
 				elif ch==2:		#add prod to cart
 					prod_id=int(input("Enter product id: "))
 					prod_name=input("Enter product name: ")
 					quant=int(input("Enter product quantity: "))
 					mycursor.execute(f"select min(productprice) from product where productid={prod_id};")
 					price=mycursor[0][0]
-					mycursor.execute(f"insert into cart(productid,custid,product_name,product_quantity,cost) values({prod_id},{custid},{prod_name},{quant},{price});")
-				elif ch==3:		#view coupons(CHECK THIS AFTER CHANGING DB)
+					mycursor.execute(f"insert into cart(productid,custid,product_name,product_quantity,cost) values({prod_id},{custid},{prod_name},{quant},{price*quant});")
+					mydb.commit()
+					print("Product added to cart successfully!\n")
+				elif ch==3:		#add prod to wishlist
+					prod_id=int(input("Enter product id: "))
+					prod_name=input("Enter product name: ")
+					mycursor.execute(f"insert into wishlist(productid,productname,customerid) values({prod_id},{prod_name},{custid})")
+					mydb.commit()
+					print("Product added to wishlist successfully!\n")
+				elif ch==4:		#view coupons(CHECK THIS AFTER CHANGING DB)
 					mycursor.execute("select coupon_id,coupon_discount,expiry_date from coupon LIMIT 10")
 					for i in mycursor:
 						print("Coupon id: "+i[0]+'\t'+"Coupon discount: "+i[1]+"%"+'\t'+"Expiry date: "+i[2])
-				elif ch==4:		#view cart
+				elif ch==5:		#view cart
 					mycursor.execute(f"Select productid, product_name,product_quantity,cost from cart where custid={custid};")
 					for i in mycursor:
 						print("Product id: "+i[0]+'\t'+"Product name: "+i[1]+'\t'+"Quantity: "+i[2]+'\t'+"Cost = "+i[3])
-				elif ch==5:		#empty cart
+				elif ch==6:		#empty cart
 					mycursor.execute(f"delete from cart where custid={custid};")
+					mydb.commit()
 					print("Cart emptied succesfully!\n")
-				elif ch==6:		#checkout cart
+				elif ch==7:		#view wishlist
+					mycursor.execute(f"Select productid, productname from wishlist where customerid={custid}")
+					for i in mycursor:
+						print("Product id: "+i[0]+'\t'+"Product name: "+i[1])
+				elif ch==8:		#empty wishlist
+					mycursor.execute(f"delete from wishlist where customerid={custid}")
+					mydb.commit()
+					print("Wishlist emptied successfully!\n")
+				elif ch==9:		#checkout cart
 					#place order
-					c_id = int(input("Enter the customer ID: "))
-					c_add = input("Enter the customer address: ")
-					checkout_cart(c_id,c_add)
-				elif ch==7:		#back
+					addr=input("Enter the delivery address: ")
+					checkout_cart(custid,addr)
+				elif ch==10:		#back
 					break
 				else:
 					invalid_input_msg()
+
 		else:
 			continue
 	elif ch==3:
