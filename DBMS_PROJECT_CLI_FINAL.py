@@ -1,5 +1,6 @@
 import mysql.connector as SQL
 import random,datetime
+from datetime import timedelta
 
 
 mydb = SQL.connect(
@@ -142,19 +143,33 @@ def customer_menu():
 	
 
 def checkout_cart(custid, delivery_address):
-    # Get the cart items
-    mycursor.execute(f"SELECT productid, productname, cost FROM cart WHERE custid={custid}")
+    # Getting the cart items
+    mycursor.execute(f"SELECT productid, productname, cost, product_quantity FROM cart WHERE custid={custid}")
     cart_items = mycursor.fetchall()
     
-    # Check if cart is empty
+    # Checking if cart is empty
     if not cart_items:
         print("Your cart is empty.")
         return
     
-    # Calculate total price
-    total_price = sum(item[2] for item in cart_items)
+    # Calculating total price and quantity
+    total_price = sum(item[2]*item[3] for item in cart_items)
+    total_qty = sum(item[3] for item in cart_items)
     
-    # Get coupon details (if applicable)
+	# Determine the customer membership and set expected delivery date
+	mycursor.execute(f"SELECT CustMembership FROM customer WHERE custid={custid}")
+	cust_m = mycursor.fetchone()[0]
+	if cust_m == "Gold":
+		exp_dd = datetime.now() + timedelta(days=2)
+	elif cust_m == "Platinum":
+		exp_dd = datetime.now() + timedelta(days=1)
+	elif cust_m == "Silver":
+		exp_dd = datetime.now() + timedelta(days=3)
+	else:
+		exp_dd = datetime.now() + timedelta(days=5)
+
+    
+    # Getting coupon details (if applicable)
     coupon_id = None
     coupon_discount = 0
     coupon_expiry = None
@@ -172,21 +187,31 @@ def checkout_cart(custid, delivery_address):
             print("Invalid coupon code.")
             return
     
-    # Calculate final price
+    # Calculating final price
     final_price = total_price - (total_price * (coupon_discount/100))
     
     # Insert order details into Orders table
     order_date_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     payment_mode = input("Enter payment mode (e.g. credit card, PayPal, etc.): ")
     tracking_id = random.randint(150,1000)
-    mycursor.execute(f"INSERT INTO Orders (order_date_time, delivery_address, order_status, order_amount, payment_mode, coupon_id, tracking_id) VALUES ('{order_date_time}', '{delivery_address}', 'pending', {final_price}, '{payment_mode}', {coupon_id}, '{tracking_id}')")
+    mycursor.execute(f"INSERT INTO Orders (order_date_time, delivery_address, order_status, order_amount, payment_mode, coupon_id, tracking_id) VALUES ('{order_date_time}', '{delivery_address}', 'Order Placed', {final_price}, '{payment_mode}', {coupon_id}, '{tracking_id}')")
     order_id = mycursor.lastrowid
     
-    mycursor.execute(f"INSERT INTO OrderHistory (CustomerID, Order_id) VALUES ({custid}, {order_id})")# Insert into OrderHistory table
-    mycursor.execute(f"DELETE FROM cart WHERE custid={custid}")# Empty the cart
+    # Insert into OrderHistory table
+    mycursor.execute(f"INSERT INTO OrderHistory (CustomerID, Order_id) VALUES ({custid}, {order_id})")
+    mycursor.execute(f"INSERT INTO order_details (shipper_name,location,expected_delivery_date) VALUES ({},{delivery_address},{exp_dd})")#randomised ya koi 3 shipper wala dekh le idhar
+    
+    # Update product quantities
+    for item in cart_items:
+        product_id, productname, cost, qty = item
+        mycursor.execute(f"UPDATE product SET AvailableQty = AvailableQty - {qty} WHERE id = {product_id}")
+    
+    # Empty the cart
+    mycursor.execute(f"DELETE FROM cart WHERE custid={custid}")
+    
     mydb.commit()
     
-    print("Order placed successfully!")
+    print(f"Order placed successfully! Total amount: {final_price}, Total quantity: {total_qty}")
 
 
 
