@@ -195,16 +195,17 @@ def checkout_cart(custid, delivery_address):
 		coupon = mycursor.fetchone()
 		if coupon:
 			coupon_id, coupon_discount, coupon_expiry = coupon
-			if coupon_expiry < datetime.now():
+			if coupon_expiry < date.today():
 				print("Coupon has expired.")
-				return
+			
+			else:
+				print("Coupon applied successfully!")
 				
 		else:
 			print("Invalid coupon code.")
-			return
 
 	# Calculating final price
-	final_price = total_price - (total_price * (coupon_discount/100))
+	final_price = total_price - ((total_price * coupon_discount)/100)
 
 	# Insert order details into Orders table
 	order_date_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
