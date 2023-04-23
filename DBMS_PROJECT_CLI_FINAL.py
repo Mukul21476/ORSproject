@@ -151,7 +151,16 @@ def checkout_cart(custid, delivery_address):
     if not cart_items:
         print("Your cart is empty.")
         return
-    
+
+    # Checking if items are out of stock
+    for item in cart_items:
+        product_id, productname, cost, qty = item
+        mycursor.execute(f"SELECT AvailableQty FROM product WHERE id = {product_id}")
+        available_qty = mycursor.fetchone()[0]
+        if qty > available_qty:
+            print(f"{item[1]} is out of stock. Only {available_qty} available.")
+            return
+	
     # Calculating total price and quantity
     total_price = sum(item[2]*item[3] for item in cart_items)
     total_qty = sum(item[3] for item in cart_items)
