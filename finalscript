@@ -508,20 +508,23 @@ VALUES
 ('31', '2023-10-25');
 
 ALTER TABLE coupons
-ADD COLUMN customerID INT,
-ADD CONSTRAINT fk_customer
-FOREIGN KEY (customerID)
-REFERENCES customer(CustID);
+ADD COLUMN c_membership VARCHAR(10);
 
-UPDATE coupons SET customerid = coupon_id;
+ALTER TABLE customer
+ADD INDEX cust_membership_idx (CustMembership);
 
+ALTER TABLE coupons
+ADD CONSTRAINT fk_membership
+FOREIGN KEY (c_membership)
+REFERENCES customer(CustMembership);
 
-CREATE TABLE Order_details(
-	tracking_id INT NOT NULL primary key auto_increment,
-    shipper_name varchar(80) NOT NULL,
-    location varchar(90) NOT NULL,
-    expected_delivery_date date NOT NULL
-    );
+UPDATE coupons
+SET c_membership = CASE
+	WHEN RAND() < 0.33 THEN 'Gold'
+	WHEN RAND() < 0.66 THEN 'Platinum'
+	ELSE 'Silver'
+END;
+
     
     
 INSERT INTO Order_details(shipper_name,location,expected_delivery_date)
