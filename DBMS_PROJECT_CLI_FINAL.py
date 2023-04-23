@@ -1,6 +1,6 @@
 import mysql.connector as SQL
 import random,datetime
-from datetime import timedelta
+from datetime import datetime,timedelta,date
 
 
 mydb = SQL.connect(
@@ -168,19 +168,20 @@ def checkout_cart(custid, delivery_address):
 	total_qty = sum(item[3] for item in cart_items)
 
 	# Determine the customer membership and set expected delivery date
+	today = date.today()
 	mycursor.execute(f"SELECT CustMembership FROM customer WHERE custid={custid}")
 	cust_m = mycursor.fetchone()[0]
 	if cust_m == "Gold":
-		exp_dd = datetime.now() + timedelta(days=2)
+		exp_dd = today + timedelta(days=2)
 		shipr = "Jason Stone"
 	elif cust_m == "Platinum":
-		exp_dd = datetime.now() + timedelta(days=1)
+		exp_dd = today + timedelta(days=1)
 		shipr = "Samantha Harrison"
 	elif cust_m == "Silver":
-		exp_dd = datetime.now() + timedelta(days=3)
+		exp_dd = today + timedelta(days=3)
 		shipr = "Angela Frazier"
 	else:
-		exp_dd = datetime.now() + timedelta(days=5)
+		exp_dd = today + timedelta(days=5)
 		shipr = "Regina Hall"
 
 
