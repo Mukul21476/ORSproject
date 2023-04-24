@@ -6,7 +6,7 @@ from datetime import datetime,timedelta,date
 mydb = SQL.connect(
     host="localhost",
     user="root",
-    password="$ql12345",
+    password="muk3itd",
     database="onlineretailstore"
 )
 
@@ -144,16 +144,18 @@ def customer_menu():
 			"10) Back")
 
 
-def checkout_cart(custid, delivery_address):
+def checkout_cart(custid):
+
 	# Getting the cart items
 	mycursor.execute(f"SELECT productid, product_name, cost, product_quantity FROM cart WHERE custid={custid}")
 	cart_items = mycursor.fetchall()
-
+	# print(cart_items)
 	# Checking if cart is empty
 	if not cart_items:
 		print("Your cart is empty.")
 		return
 
+	delivery_address=input("Enter the delivery address: ")
 	# Checking if items are out of stock
 	for item in cart_items:
 		product_id, productname, cost, qty = item
@@ -210,19 +212,23 @@ def checkout_cart(custid, delivery_address):
 	# Insert order details into Orders table
 	order_date_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 	payment_mode = input("Enter payment mode (e.g. credit card, PayPal, etc.): ")
+
 	tracking_id = random.randint(150,1000)
-	mycursor.execute(f"INSERT INTO Orders (order_date_time, delivery_address, order_status, order_amount, payment_mode, coupon_id, tracking_id) VALUES ('{order_date_time}', '{delivery_address}', 'Order Placed', {final_price}, '{payment_mode}', {coupon_id}, '{tracking_id}')")
+	# Insert into order_details table
+	mycursor.execute(f"INSERT INTO order_details (shipper_name,location,expected_delivery_date) VALUES ('{shipr}','{delivery_address}','{exp_dd}')")
+	mycursor.execute(f"SELECT tracking_id FROM order_details where shipper_name = '{shipr}' and expected_delivery_date = '{exp_dd}'")
+	t_id = mycursor.fetchone()[0]
+	mycursor.execute(f"INSERT INTO Orders (order_date_time, delivery_address, order_status, order_amount, payment_mode, coupon_id, tracking_id) VALUES ('{order_date_time}', '{delivery_address}', 'Order Placed', '{final_price}', '{payment_mode}',' {coupon_id}', '{t_id}')")
 	order_id = mycursor.lastrowid
 
 	# Insert into OrderHistory table
-	mycursor.execute(f"INSERT INTO OrderHistory (CustomerID, Order_id) VALUES ({custid}, {order_id})")
-	# Insert into order_details table
-	mycursor.execute(f"INSERT INTO order_details (shipper_name,location,expected_delivery_date) VALUES ({shipr},{delivery_address},{exp_dd})")
+	mycursor.execute(f"INSERT INTO OrderHistory (CustomerID, Order_id) VALUES ('{custid}', '{order_id}')")
+	
 
 	# Update product quantities
 	for item in cart_items:
 		product_id, productname, cost, qty = item
-		mycursor.execute(f"UPDATE product SET AvailableQty = AvailableQty - {qty} WHERE id = {product_id}")
+		mycursor.execute(f"UPDATE product SET AvailableQty = AvailableQty - {qty} WHERE ProductID = {product_id}")
 
 	# Empty the cart
 	mycursor.execute(f"DELETE FROM cart WHERE custid={custid}")
@@ -329,8 +335,7 @@ while True:
 					print("Wishlist emptied successfully!\n")
 				elif ch==9:		#checkout cart
 					#place order
-					addr=input("Enter the delivery address: ")
-					checkout_cart(custid,addr)
+					checkout_cart(custid)
 				elif ch==10:		#back
 					break
 				else:
