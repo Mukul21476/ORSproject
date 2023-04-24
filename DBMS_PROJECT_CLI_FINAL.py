@@ -186,7 +186,8 @@ def checkout_cart(custid):
 		exp_dd = today + timedelta(days=5)
 		shipr = "Regina Hall"
 
-
+	mycursor.execute(f"INSERT INTO order_details (shipper_name,location,expected_delivery_date) VALUES ('{shipr}','{delivery_address}','{exp_dd}');")
+	mydb.commit()
 	# Getting coupon details (if applicable)
 	coupon_id = None
 	coupon_discount = 0
@@ -197,6 +198,7 @@ def checkout_cart(custid):
 		coupon = mycursor.fetchone()
 		if coupon:
 			coupon_id, coupon_discount, coupon_expiry = coupon
+
 			if coupon_expiry < date.today():
 				print("Coupon has expired.")
 			
@@ -213,12 +215,13 @@ def checkout_cart(custid):
 	order_date_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 	payment_mode = input("Enter payment mode (e.g. credit card, PayPal, etc.): ")
 
-	tracking_id = random.randint(150,1000)
 	# Insert into order_details table
-	mycursor.execute(f"INSERT INTO order_details (shipper_name,location,expected_delivery_date) VALUES ('{shipr}','{delivery_address}','{exp_dd}')")
-	mycursor.execute(f"SELECT tracking_id FROM order_details where shipper_name = '{shipr}' and expected_delivery_date = '{exp_dd}'")
-	t_id = mycursor.fetchone()[0]
-	mycursor.execute(f"INSERT INTO Orders (order_date_time, delivery_address, order_status, order_amount, payment_mode, coupon_id, tracking_id) VALUES ('{order_date_time}', '{delivery_address}', 'Order Placed', '{final_price}', '{payment_mode}',' {coupon_id}', '{t_id}')")
+	mycursor.execute(f"SELECT tracking_id FROM order_details where shipper_name = '{shipr}' and location = '{delivery_address}' and expected_delivery_date = '{exp_dd}'")
+	t_id = mycursor.fetchall()[-1][0]
+	if coupon_code:
+		mycursor.execute(f"INSERT INTO Orders (order_date_time, delivery_address, order_status, order_amount, payment_mode, coupon_id, tracking_id) VALUES ('{order_date_time}', '{delivery_address}', 'Order Placed', '{final_price}', '{payment_mode}','{coupon_id}', '{t_id}')")
+	else:
+		mycursor.execute(f"INSERT INTO Orders (order_date_time, delivery_address, order_status, order_amount, payment_mode, tracking_id) VALUES ('{order_date_time}', '{delivery_address}', 'Order Placed', '{final_price}', '{payment_mode}','{t_id}')")
 	order_id = mycursor.lastrowid
 
 	# Insert into OrderHistory table
