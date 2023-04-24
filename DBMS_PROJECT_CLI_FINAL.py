@@ -243,7 +243,7 @@ def checkout_cart(custid):
 
 	mydb.commit()
 
-	print(f"Order placed successfully! Total amount: {final_price}, Total quantity: {total_qty}")
+	print(f"Order placed successfully! Total amount: {final_price}, Total quantity: {total_qty}\nOrder will be delivered by {exp_dd}\n")
 
 
 
